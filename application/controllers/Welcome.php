@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class Welcome extends CI_Controller {
-
+	class Welcome extends CI_Controller {		
 		public function __construct()
 		{
 			parent::__construct();
@@ -11,10 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		public function login_user()
 		{
-			if($this->session->userdata('isLogin') ==1 && $this->session->userdata('isManager') == 0 ){
+			if($this->session->userdata('isLogin') ==1 && $this->session->userdata('isManager') == 0 && $this->session->userdata('isAdmin') == 0){
 				redirect(base_url('user-dashboard'));
-			}elseif($this->session->userdata('isLogin') == 1 && $this->session->userdata('isManager') ==1 ){
+			}elseif($this->session->userdata('isLogin') == 1 && $this->session->userdata('isManager') ==1 && $this->session->userdata('isAdmin') ==0){
 				redirect(base_url('manager-dashboard'));
+			}elseif($this->session->userdata('isLogin') == 1 && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') ==1 ){
+				redirect(base_url('admin-dashboard'));
 			}
 			$this->load->view('login');
 		}
@@ -27,7 +28,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if($user && $user!= null){
 					$this->session->set_userdata([
 						"isLogin"=>'1',
-						"isManager"=>($user['users_group_id']==4 || $user['users_group_id']==13 || $user['users_group_id']==1 || $email == "hr@noorisys.com" || $email == "abrar@fasterchecks.org") ? "1" : "0",
+						"isManager"=>($user['users_group_id']== 1 || $user['users_group_id']==4 || $user['users_group_id']==13 || $email == "hr@noorisys.com" || $email == "abrar@fasterchecks.org") ? "1" : "0",
+						"isAdmin"=> $user['users_group_id']== 1 ? "1" : "0",
 						'id' => $user['id'],
 						'users_group_id' => ($email == "hr@noorisys.com" || $email == 'abrar@fasterchecks.org') ? "4" : $user['users_group_id'],
 						'tl_id' => $user['tl_id'],
@@ -53,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->session->set_userdata([
 				"isLogin"=>null,
 				"isManager"=>null,
+				"isAdmin"=>null,
 				'id' => null,
 				'users_group_id' => null,
 				'name' => null,

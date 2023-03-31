@@ -50,3 +50,8 @@ $route['accept-user-leave/(:any)'] = 'Manager_Leave/accept_user_leave/$1';
 $route['reject-user-leave/(:any)'] = 'Manager_Leave/reject_user_leave/$1';
 $route['manager-delete-leave/(:any)'] = 'Manager_Leave/manager_delete_leave/$1';;
 $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
+
+// Manage Reports
+
+// Admin
+$route['admin-dashboard'] = 'admin/dashboard';
