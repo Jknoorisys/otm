@@ -45,7 +45,7 @@
                         <li class="sidebar-item dropdown"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Duplicate-Window"></i><span class="hide-menu">Reports</span></a>
                                 <ul aria-expanded="false" class="collapse first-level">
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Latest Report</span></li>
-                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('rejected-ot') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Latest Report</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('latest-report') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Latest Report</span></a></li>
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Report History</span></li>
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('rejected-leave') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Report History</span></a></li>
                         </ul>

@@ -52,7 +52,8 @@ $route['manager-delete-leave/(:any)'] = 'Manager_Leave/manager_delete_leave/$1';
 $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
 
 // User Manage Reports
-
+$route['latest-report'] = 'User_Report/latestReport';
+$route['add-review'] = 'User_Report/AddReview';
 
 // Manager Manage Reports
 
