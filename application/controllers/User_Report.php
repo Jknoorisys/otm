@@ -18,8 +18,11 @@
 
         public function latestReport()
         {
+            $where = ['status' => 'publish'];
+            $data['questions'] = $this->Report->get_questions($where);
+            $data['question_group'] = $this->Report->get_question_group();
             $this->load->view('users/footer');
-			$this->load->view('user_report/report');
+			$this->load->view('user_report/report', $data);
         }
 
         public function AddReview()
