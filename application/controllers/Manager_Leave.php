@@ -7,7 +7,7 @@
 			$this->load->model('Manager_Leave_Model','Leave');
 			$this->load->model('manager_model');
 
-			if ($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 1) {
+			if ($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') == 0) {
 				$this->login_id = $this->session->userdata('id');
 				$this->group_id = $this->session->userdata('users_group_id');
 				$this->tl_id = $this->group_id == 13 ? $this->login_id : '';
