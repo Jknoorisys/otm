@@ -1,6 +1,6 @@
 $(function() {
 
-    $.fn.raty.defaults.path = '../../assets/images/rating/';
+    $.fn.raty.defaults.path = 'assets/libs/raty-js/lib/images';
 
     // Default
     $('#default-star-rating').raty();

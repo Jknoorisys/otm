@@ -19,8 +19,8 @@
     <link href="<?= base_url('dist/css/style.min.css') ?>" rel="stylesheet">
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
-    
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <link href="<?= base_url('assets/libs/raty-js/lib/jquery.raty.css') ?>" rel="stylesheet">   
 </head>
 
 <body>
