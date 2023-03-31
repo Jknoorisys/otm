@@ -29,7 +29,7 @@ $route['manager-rejected-ot'] = 'manager/rejected_ot';
 $route['accept-user-ot/(:any)'] = 'Manager/accept_user_ot/$1';
 $route['reject-user-ot/(:any)'] = 'manager/reject_user_ot/$1';
 $route['manager-change-password'] = 'manager/change_password';
-$route['manager-delete-ot/(:any)'] = 'manager/delete_ot/$1';;
+$route['manager-delete-ot/(:any)'] = 'manager/delete_ot/$1';
 
 // User Leave Routing
 $route['get-days'] = 'User_Leave/get_days';
@@ -51,8 +51,32 @@ $route['reject-user-leave/(:any)'] = 'Manager_Leave/reject_user_leave/$1';
 $route['manager-delete-leave/(:any)'] = 'Manager_Leave/manager_delete_leave/$1';;
 $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
 
-// Manage Reports
+// User Manage Reports
 
-// Admin
-$route['admin-dashboard'] = 'admin/dashboard';
+
+// Manager Manage Reports
+
+// Admin panel
 $route['admin-report'] = 'Admin_Report/add_questions';
+
+// Admin Manage OT
+$route['admin-dashboard'] = 'admin/dashboard';
+$route['admin-add-ot'] = 'admin/add_ot';
+$route['admin-requested-ot'] = 'admin/requested_ot';
+$route['admin-accepted-ot'] = 'admin/accepted_ot';
+$route['admin-rejected-ot'] = 'admin/rejected_ot';
+$route['accept-user-ot/(:any)'] = 'admin/accept_user_ot/$1';
+$route['reject-user-ot/(:any)'] = 'admin/reject_user_ot/$1';
+$route['admin-change-password'] = 'admin/change_password';
+$route['admin-delete-ot/(:any)'] = 'admin/delete_ot/$1';
+
+// Admin Leave Routing
+$route['admin-get-days'] = 'Admin_Leave/get_days';
+$route['admin-add-leave'] = 'Admin_Leave/add_leave';
+$route['admin-requested-leave'] = 'Admin_Leave/requested_leave';
+$route['admin-accepted-leave'] = 'Admin_Leave/accepted_leave';
+$route['admin-rejected-leave'] = 'Admin_Leave/rejected_leave';
+$route['accept-user-leave/(:any)'] = 'Admin_Leave/accept_user_leave/$1';
+$route['reject-user-leave/(:any)'] = 'Admin_Leave/reject_user_leave/$1';
+$route['admin-delete-leave/(:any)'] = 'Admin_Leave/admin_delete_leave/$1';;
+$route['admin-leave-dashboard'] = 'Admin_Leave/admin_leave_dashboard';
