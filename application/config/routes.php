@@ -55,3 +55,4 @@ $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
 
 // Admin
 $route['admin-dashboard'] = 'admin/dashboard';
+$route['admin-report'] = 'Admin_Report/add_questions';
