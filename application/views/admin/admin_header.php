@@ -39,7 +39,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header">
                     
-                    <a class="navbar-brand" href="<?= base_url('manager-dashboard') ?>">
+                    <a class="navbar-brand" href="<?= base_url('admin-dashboard') ?>">
                         <b class="logo-icon">
                             <img src="<?= base_url('assets/images/noorisys-logo.png') ?>" alt="homepage" width="170px" class="light-logo" />
                         </b>
@@ -73,13 +73,13 @@
                                         <p class=" m-b-0"><?= $this->session->userdata('email') ?></p>
                                     </div>
                                 </div>
-								<a class="dropdown-item" data-toggle="modal" data-target=".bs-example-modal-lg" href="<?= base_url('manager-add-ot') ?>">
+								<a class="dropdown-item" data-toggle="modal" data-target=".bs-example-modal-lg" href="<?= base_url('admin-add-ot') ?>">
                                     <i class="ti-wallet m-r-5 m-l-5"></i> Add OT</a>
 
-								<a class="dropdown-item" data-toggle="modal" data-target="#veticalleave" href="<?= base_url('manager-add-leave') ?>">
+								<a class="dropdown-item" data-toggle="modal" data-target="#veticalleave" href="<?= base_url('admin-add-leave') ?>">
                                     <i class="ti-notepad m-r-5 m-l-5"></i> Add Leave</a>
                                 
-								<a class="dropdown-item" data-toggle="modal" data-target="#verticalcenter" href="<?= base_url('manager-change-password') ?>">
+								<a class="dropdown-item" data-toggle="modal" data-target="#verticalcenter" href="<?= base_url('admin-change-password') ?>">
                                     <i class="ti-settings m-r-5 m-l-5"></i> Change Password</a>
                                 
                                 <a class="dropdown-item" href="<?= base_url('logout') ?>">
@@ -101,7 +101,7 @@
 					</div>
 					<div class="modal-body">
 													
-						<form class="mt-4" action="<?= base_url('manager-change-password') ?>" method="POST">
+						<form class="mt-4" action="<?= base_url('admin-change-password') ?>" method="POST">
 
 							<div class="row">
 								<div class="col-12">
@@ -137,7 +137,7 @@
 							</div>
 					</div>
 					<div class="modal-footer">
-							<a href="<?= base_url('manager-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
+							<a href="<?= base_url('admin-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
 							<button type="submit" class="btn btn-noori" name="change">Change</button>
 						</form>
 					</div>
@@ -155,7 +155,7 @@
 					</div>
 					<div class="modal-body">
 																
-						<form class="mt-4" action="<?= base_url('manager-add-ot') ?>" method="POST">
+						<form class="mt-4" action="<?= base_url('admin-add-ot') ?>" method="POST">
 
 						<div class="form-group m-b-30">
 							<label class="mr-sm-2" for="">Project Name</label>
@@ -230,7 +230,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<a href="<?= base_url('manager-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
+						<a href="<?= base_url('admin-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
 						<button type="submit" class="btn btn-noori" name="add">Add</button>
 					</form>
 					</div>
@@ -248,7 +248,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					</div>
 					<div class="modal-body">
-						<form class="mt-4" action="<?= base_url('manager-add-leave') ?>" method="POST">
+						<form class="mt-4" action="<?= base_url('admin-add-leave') ?>" method="POST">
 							<div class="row">
 								<div class="col-12">
 									<label class="mr-sm-2" for="">Select User</label>
@@ -319,7 +319,7 @@
 								</div>
 							</div>
 					<div class="modal-footer">
-						<a href="<?= base_url('manager-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
+						<a href="<?= base_url('admin-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
 						<button type="submit" class="btn btn-noori" disabled="true" id="qwertyuiop" name="add">Add</button>
 						</form>
 					</div>
@@ -356,7 +356,7 @@
 			$('.daterange').on('apply.daterangepicker', function(ev, picker) {
 			
 				$.ajax({
-					url: 'manager-get-days',
+					url: 'admin-get-days',
 					method: 'POST',
 					dataType: 'json',
 					data: {

@@ -190,7 +190,6 @@
 			$this->load->view('manager/manager_footer');
 		}
 
-
 		public function accept_user_ot()
 		{
 			$id = $this->uri->segment(2);
