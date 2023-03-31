@@ -57,6 +57,7 @@ $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
 // Manager Manage Reports
 
 // Admin panel
+$route['admin-report'] = 'Admin_Report/add_questions';
 
 // Admin Manage OT
 $route['admin-dashboard'] = 'admin/dashboard';
