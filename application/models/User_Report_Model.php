@@ -1,5 +1,7 @@
 <?php
     class User_Report_Model extends CI_Model{
+
+        // get all published questions
         public function get_questions($where)
         {
             return $this->db->where($where)
@@ -7,6 +9,7 @@
 								->result_array();	
         }
 
+        // get published questions group details
         public function get_question_group()
         {
             return $this->db->select('group.*')
@@ -16,9 +19,26 @@
                             ->row_array();
         }
 
-        public function add_review($data)
+        // add developer report
+        public function add_report($data)
         {
             return $this->db->insert('reports', $data);
+        }
+
+        // add developer review
+        public function add_review($data)
+        {
+            return $this->db->insert('reviews', $data);
+        }
+
+        // get developer report history
+        public function get_reports($where)
+        {
+            return $this->db->select('reports.*, group.month_start, group.month_end, group.year')
+                            ->join('question_groups as group','group.id=reports.question_group','left')
+                            ->where($where)
+                            ->get('reports')
+                            ->result_array();
         }
     }
 ?>

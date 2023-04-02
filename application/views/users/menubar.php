@@ -47,7 +47,7 @@
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Latest Report</span></li>
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('latest-report') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Latest Report</span></a></li>
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Report History</span></li>
-                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('rejected-leave') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Report History</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('report-history') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Report History</span></a></li>
                         </ul>
                     </ul>
                 </nav>

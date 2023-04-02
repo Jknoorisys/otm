@@ -33,37 +33,64 @@
            $developer_comment = $this->input->post('developer_comment');
            $question_group = $this->input->post('question_group');
 
-           if ($question_ids) {
-                foreach ($question_ids as $question_id) {
-                    $data = [
-                        'question_group' => $question_group,
-                        'user_id' => $this->login_id,
-                        'users_group_id' => $this->users_group_id,
-                        'question_id' => $question_id,
-                        'dev_comment' => $developer_comment[$question_id],
-                        'dev_rating' => $developer_rating[$question_id],
-                        'created_at' => date('Y-m-d H:i:s')
-                    ];
+           $report_data = [
+                'question_group' => $question_group,
+                'user_id' => $this->login_id,
+                'users_group_id' => $this->users_group_id,
+                'created_at' => date('Y-m-d H:i:s')
+           ];
 
-                    $insert = $this->Report->add_review($data);
-                }
+           $report_id = $this->Report->add_report($report_data);
 
-                if ($insert) {
-                    $this->session->set_tempdata('add', 'Review Submitted!', 2);
-                    redirect(base_url('latest-report'));
+           if ($report_id) {
+                if ($question_ids) {
+                    foreach ($question_ids as $question_id) {
+                        $data = [
+                            'report_id' => $report_id,
+                            'question_group' => $question_group,
+                            'user_id' => $this->login_id,
+                            'users_group_id' => $this->users_group_id,
+                            'question_id' => $question_id,
+                            'dev_comment' => $developer_comment[$question_id],
+                            'dev_rating' => $developer_rating[$question_id],
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+
+                        $insert = $this->Report->add_review($data);
+                    }
+
+                    if ($insert) {
+                        $this->session->set_tempdata('add', 'Review Submitted!', 2);
+                        redirect(base_url('latest-report'));
+                    } else {
+                        $this->session->set_tempdata('failure', 'Retry!', 2);
+                        redirect(base_url('latest-report'));
+                    }
                 } else {
                     $this->session->set_tempdata('failure', 'Retry!', 2);
                     redirect(base_url('latest-report'));
                 }
            } else {
                 $this->session->set_tempdata('failure', 'Retry!', 2);
-				redirect(base_url('latest-report'));
+                redirect(base_url('latest-report'));
            }
         }
 
-        public function viewDetails()
+        public function reportHistory()
         {
-            # code...
+            $where = [
+                'user_id' => $this->login_id,
+                'users_group_id' => $this->users_group_id,
+            ];
+
+            $data['reports'] = $this->Report->get_reports($where);
+            $this->load->view('users/footer');
+			$this->load->view('user_report/report_history', $data);
+        }
+
+        public function reviewDetails()
+        {
+            die(json_encode($this->input->post()));
         }
     }
 ?>
