@@ -60,3 +60,11 @@
 			</div>
 
 
+<script>
+	<?php if($this->session->tempdata('failure')){ ?> 
+		Swal.fire({
+		icon: 'error',
+		title: 'Something went wrong, Please try again!',
+		})
+	<?php } ?>
+</script>

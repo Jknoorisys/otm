@@ -90,7 +90,22 @@
 
         public function reviewDetails()
         {
-            die(json_encode($this->input->post()));
+            $report_id = $this->input->post('report_id');
+            if ($report_id) {
+                $where = [
+                    'user_id' => $this->login_id,
+                    'users_group_id' => $this->users_group_id,
+                    'report_id' => $report_id
+                ];
+
+                $data['reviews'] = $this->Report->get_reviews($where);
+
+                $this->load->view('users/footer');
+			    $this->load->view('user_report/report_details', $data);
+            } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('report-history'));
+            }
         }
     }
 ?>
