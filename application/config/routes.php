@@ -54,6 +54,8 @@ $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
 // User Manage Reports
 $route['latest-report'] = 'User_Report/latestReport';
 $route['add-review'] = 'User_Report/AddReview';
+$route['report-history'] = 'User_Report/reportHistory';
+$route['review-details'] = 'User_Report/reviewDetails';
 
 // Manager Manage Reports
 
