@@ -22,13 +22,22 @@
         // add developer report
         public function add_report($data)
         {
-            return $this->db->insert('reports', $data);
+            $this->db->insert('reports', $data);
+            return $this->db->insert_id();
+        }
+
+        // update developer report
+        public function update_report($update_data, $where)
+        {
+            return $this->db->where($where)
+                            ->update('reports', $update_data);
         }
 
         // add developer review
         public function add_review($data)
         {
-            return $this->db->insert('reviews', $data);
+            $this->db->insert('reviews', $data);
+            return $this->db->insert_id();
         }
 
         // get developer report history
