@@ -40,42 +40,47 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title text-center">Assessment Report ( <?= $question_group['month_start'] ?> - <?= $question_group['month_end'].', '. $question_group['year'] ?>) </h3>
-                        <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
-
-                            <?php foreach ($questions as $question) { ?>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row mb-2">
-                                            <h4><?= $question['question'] ?></h4>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <div class="form-group">
-                                                    <label>Developer Ratings</label>
-                                                    <input type="text" class="form-control" name="developer_comment[<?= $question['id'] ?>]" placeholder="Developer Comment" required>
+                        <?php if (!empty($questions)) { ?>
+                            <h3 class="card-title text-center">Assessment Report ( <?= $question_group['month_start'] ?> - <?= $question_group['month_end'].', '. $question_group['year'] ?>) </h3>
+                            <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
+                                
+                                <?php foreach ($questions as $question) { ?>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <h4><?= $question['question'] ?></h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="form-group">
+                                                        <label>Developer Ratings</label>
+                                                        <input type="text" class="form-control" name="developer_comment[<?= $question['id'] ?>]" placeholder="Developer Comment" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 mt-4">
+                                                    <div class="stars">
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"></label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4 mt-4">
-                                                <div class="stars">
-                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"></label>
-                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"></label>
-                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"></label>
-                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"></label>
-                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <input type="hidden" name="question_group" class="form-control" value="<?= $question_group['id'] ?>">
-                                        <input type="hidden" name="question_id[]" class="form-control" value="<?= $question['id'] ?>">
+                                            
+                                            <input type="hidden" name="question_group" class="form-control" value="<?= $question_group['id'] ?>">
+                                            <input type="hidden" name="question_id[]" class="form-control" value="<?= $question['id'] ?>">
 
+                                        </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                <?php } ?>
 
-                            <button type="submit" class="btn btn-noori">Submit</button>
-                        </form>
+                                <button type="submit" class="btn btn-noori">Submit</button>
+                            </form>
+
+                        <?php } else { ?>
+                            <h4 class="text-noori text-center v-middle">No Assessment Report Found</h4>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

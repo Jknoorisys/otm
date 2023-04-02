@@ -1,31 +1,6 @@
 <style>
-    .stars {
-        display: inline-block;
-        margin: 5px 0;
-        font-size: 24px;
-        direction: rtl;
-    }
-
-    .stars input[type="radio"] {
-        display: none;
-    }
-
-    .stars label {
-        display: inline-block;
-        cursor: pointer;
-        color: #ddd;
-        text-align: left; /* Align the labels to the left */
-        direction: ltr;
-    }
-
-    .stars label:before {
-        content: "\2605";
-        margin-left: 5px;
-    }
-
-    .stars input[type="radio"]:checked ~ label {
+    .text-noori {
         /* color: #ee076e; */
-        content: "\2605";
         color: transparent;
         background: linear-gradient(145deg, #f81f01, #ee076e);
         -webkit-background-clip: text;
@@ -39,28 +14,61 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title text-center">Assessment Report ( <?= $question_group['month_start'] ?> - <?= $question_group['month_end'].', '. $question_group['year'] ?>) </h3>
-                            <?php foreach ($questions as $question) { ?>
+                            <?php foreach ($reviews as $review) { ?>
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row mb-2">
-                                            <h4><?= $question['question'] ?></h4>
+                                            <h4><?= $review['question'] ?></h4>
                                         </div>
                                         <div class="row">
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label>Developer Ratings</label>
-                                                    <input type="text" class="form-control" name="dev_comment_.<?= $question['id'] ?>" placeholder="Developer Comment" required>
+                                                    <p><?= $review['dev_comment'] ?></p>
                                                 </div>
                                             </div>
                                             <div class="col-4 mt-4">
-                                            <?php for ($i = 1; $i <= 5; $i++) {
-                    if ($i <= $rating->developer_rating) {
-                        echo '<i class="fas fa-star"></i>';
-                    } else {
-                        echo '<i class="far fa-star"></i>';
-                    }
-                } ?>
+                                                <?php for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $review['dev_rating']) {
+                                                        echo '<i class="fas fa-star mr-1 text-noori"></i>';
+                                                    } else {
+                                                        echo '<i class="far fa-star mr-1"></i>';
+                                                    }
+                                                } ?>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label>TL Ratings</label>
+                                                    <p><?= $review['TL_comment'] ?  $review['TL_comment'] : '' ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mt-4">
+                                                <?php for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $review['TL_rating']) {
+                                                        echo '<i class="fas fa-star mr-1 text-noori"></i>';
+                                                    } else {
+                                                        echo '<i class="far fa-star mr-1"></i>';
+                                                    }
+                                                } ?>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label>Manager/CTO Ratings</label>
+                                                    <p><?= $review['manager_comment'] ? $review['manager_comment'] : '' ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mt-4">
+                                                <?php for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $review['manager_rating']) {
+                                                        echo '<i class="fas fa-star mr-1 text-noori"></i>';
+                                                    } else {
+                                                        echo '<i class="far fa-star mr-1"></i>';
+                                                    }
+                                                } ?>
                                             </div>
                                         </div>
 

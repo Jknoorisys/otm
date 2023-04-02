@@ -40,5 +40,16 @@
                             ->get('reports')
                             ->result_array();
         }
+
+        // get developer review details
+        public function get_reviews($where)
+        {
+            return $this->db->select('reviews.*, group.month_start, group.month_end, group.year,question.question')
+                            ->join('question_groups as group','group.id=reviews.question_group','left')
+                            ->join('questions as question','question.id=reviews.question_id','left')
+                            ->where($where)
+                            ->get('reviews')
+                            ->result_array();
+        }
     }
 ?>
