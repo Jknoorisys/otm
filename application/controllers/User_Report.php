@@ -32,6 +32,7 @@
            $developer_rating = $this->input->post('developer_rating');
            $developer_comment = $this->input->post('developer_comment');
            $question_group = $this->input->post('question_group');
+           $toatl = count($question_ids) * 5;
 
            $report_data = [
                 'question_group' => $question_group,
@@ -44,7 +45,9 @@
 
            if ($report_id) {
                 if ($question_ids) {
+                    $sum = 0;
                     foreach ($question_ids as $question_id) {
+                        $sum = $developer_rating[$question_id] + $sum;
                         $data = [
                             'report_id' => $report_id,
                             'question_group' => $question_group,
@@ -60,6 +63,13 @@
                     }
 
                     if ($insert) {
+                        $update_data = [
+                            'dev_total' => $sum,
+                            'dev_percentage' => ($sum * 100) / $toatl
+                        ];
+
+                        $where = ['id', $report_id];
+                        $update = $this->Report->update_report($update_data, $where);
                         $this->session->set_tempdata('add', 'Review Submitted!', 2);
                         redirect(base_url('latest-report'));
                     } else {
