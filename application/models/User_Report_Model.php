@@ -15,5 +15,10 @@
                             ->get('questions as sc')
                             ->row_array();
         }
+
+        public function add_review($data)
+        {
+            return $this->db->insert('reports', $data);
+        }
     }
 ?>

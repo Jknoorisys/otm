@@ -9,6 +9,7 @@
 
             if($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 0 && $this->session->userdata('isAdmin') == 0){
             	$this->login_id=$this->session->userdata('id');
+                $this->users_group_id=$this->session->userdata('users_group_id');
             	$this->load->view('users/header');
 				$this->load->view('users/menubar');
             }else{
@@ -27,7 +28,42 @@
 
         public function AddReview()
         {
-            echo json_encode($_POST['']);
+           $question_ids = $this->input->post('question_id');
+           $developer_rating = $this->input->post('developer_rating');
+           $developer_comment = $this->input->post('developer_comment');
+           $question_group = $this->input->post('question_group');
+
+           if ($question_ids) {
+                foreach ($question_ids as $question_id) {
+                    $data = [
+                        'question_group' => $question_group,
+                        'user_id' => $this->login_id,
+                        'users_group_id' => $this->users_group_id,
+                        'question_id' => $question_id,
+                        'dev_comment' => $developer_comment[$question_id],
+                        'dev_rating' => $developer_rating[$question_id],
+                        'created_at' => date('Y-m-d H:i:s')
+                    ];
+
+                    $insert = $this->Report->add_review($data);
+                }
+
+                if ($insert) {
+                    $this->session->set_tempdata('add', 'Review Submitted!', 2);
+                    redirect(base_url('latest-report'));
+                } else {
+                    $this->session->set_tempdata('failure', 'Retry!', 2);
+                    redirect(base_url('latest-report'));
+                }
+           } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+				redirect(base_url('latest-report'));
+           }
+        }
+
+        public function viewDetails()
+        {
+            # code...
         }
     }
 ?>

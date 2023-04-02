@@ -1,28 +1,38 @@
 <style>
-		.stars {
-			display: inline-block;
-			margin: 5px 0;
-		}
+    .stars {
+        display: inline-block;
+        margin: 5px 0;
+        font-size: 24px;
+        direction: rtl;
+    }
 
-		.stars input[type="radio"] {
-			display: none;
-		}
+    .stars input[type="radio"] {
+        display: none;
+    }
 
-		.stars label {
-			display: inline-block;
-			cursor: pointer;
-			color: #ddd;
-		}
+    .stars label {
+        display: inline-block;
+        cursor: pointer;
+        /* color: #ddd; */
+        color:grey;
+        text-align: left; 
+        direction: ltr;
+    }
 
-		.stars label:before {
-			content: "\2605";
-			margin-right: 5px;
-		}
+    .stars label:before {
+        content: "\2605";
+        margin-left: 5px;
+    }
 
-		.stars input[type="radio"]:checked ~ label {
-			color: #ffcc00;
-		}
-	</style>
+    .stars input[type="radio"]:checked ~ label {
+        /* color: #ee076e; */
+        content: "\2605";
+        color: transparent;
+        background: linear-gradient(145deg, #f81f01, #ee076e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
 
 <div class="page-wrapper">
     <div class="container-fluid">
@@ -30,11 +40,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Assessment Report ( <?= $question_group['month_start'] ?> - <?= $question_group['month_end'] ?>) </h3>
-                        <form class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
+                        <h3 class="card-title text-center">Assessment Report ( <?= $question_group['month_start'] ?> - <?= $question_group['month_end'].', '. $question_group['year'] ?>) </h3>
+                        <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
 
                             <?php foreach ($questions as $question) { ?>
-                                <!-- <div class="card">
+                                <div class="card">
                                     <div class="card-body">
                                         <div class="row mb-2">
                                             <h4><?= $question['question'] ?></h4>
@@ -43,60 +53,28 @@
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label>Developer Ratings</label>
-                                                    <input type="text" class="form-control" name="comment" placeholder="Developer Comment" required>
+                                                    <input type="text" class="form-control" name="developer_comment[<?= $question['id'] ?>]" placeholder="Developer Comment" required>
                                                 </div>
                                             </div>
                                             <div class="col-4 mt-4">
                                                 <div class="stars">
-                                                    <input type="radio" id="developer_1" name="developer_rating" value="1"><label for="developer_1"></label>
-                                                    <input type="radio" id="developer_2" name="developer_rating" value="2"><label for="developer_2"></label>
-                                                    <input type="radio" id="developer_3" name="developer_rating" value="3"><label for="developer_3"></label>
-                                                    <input type="radio" id="developer_4" name="developer_rating" value="4"><label for="developer_4"></label>
-                                                    <input type="radio" id="developer_5" name="developer_rating" value="5"><label for="developer_5"></label>
+                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"></label>
+                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"></label>
+                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"></label>
+                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"></label>
+                                                    <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"></label>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <input type="hidden" name="question_group" class="form-control" value="<?= $question_group['id'] ?>">
+                                        <input type="hidden" name="question_id[]" class="form-control" value="<?= $question['id'] ?>">
 
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <div class="form-group">
-                                                    <label>TL Ratings</label>
-                                                    <input type="text" class="form-control" name="comment" placeholder="TL Comment" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 mt-4">
-                                                <div class="stars">
-                                                    <input type="radio" id="team_lead_1" name="team_lead_rating" value="1"><label for="team_lead_1"></label>
-                                                    <input type="radio" id="team_lead_2" name="team_lead_rating" value="2"><label for="team_lead_2"></label>
-                                                    <input type="radio" id="team_lead_3" name="team_lead_rating" value="3"><label for="team_lead_3"></label>
-                                                    <input type="radio" id="team_lead_4" name="team_lead_rating" value="4"><label for="team_lead_4"></label>
-                                                    <input type="radio" id="team_lead_5" name="team_lead_rating" value="5"><label for="team_lead_5"></label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <div class="form-group">
-                                                    <label>Manager/CTO Ratings</label>
-                                                    <input type="text" class="form-control" name="comment" placeholder="Manager/CTO Comment" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 mt-4">
-                                                <div class="stars">
-                                                    <input type="radio" id="manager_1" name="manager_rating" value="1"><label for="manager_1"></label>
-                                                    <input type="radio" id="manager_2" name="manager_rating" value="2"><label for="manager_2"></label>
-                                                    <input type="radio" id="manager_3" name="manager_rating" value="3"><label for="manager_3"></label>
-                                                    <input type="radio" id="manager_4" name="manager_rating" value="4"><label for="manager_4"></label>
-                                                    <input type="radio" id="manager_5" name="manager_rating" value="5"><label for="manager_5"></label>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div> -->
+                                </div>
                             <?php } ?>
 
-                            <button type="submit" class="btn btn-noori" id="add_review">Submit</button>
+                            <button type="submit" class="btn btn-noori">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -119,3 +97,20 @@
 		})
 	<?php } ?>
 </script>
+
+<!-- <script>
+    $(document).ready(function() {
+        $('#add-review').submit(function() {
+            $('button[type="submit"]').prop('disabled', true);
+        });
+    });
+</script> -->
+
+<!-- <script>
+  // Disable the submit button after the form has been submitted
+  const form = document.querySelector('form');
+  form.addEventListener('submit', () => {
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+  });
+</script> -->
