@@ -27,9 +27,9 @@
         }
 
         // update developer report
-        public function update_report($update_data, $where)
+        public function update_report($update_data, $report_id)
         {
-            return $this->db->where($where)
+            return $this->db->where('id', $report_id)
                             ->update('reports', $update_data);
         }
 

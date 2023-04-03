@@ -14,19 +14,19 @@
         display: inline-block;
         cursor: pointer;
         /* color: #ddd; */
-        color:grey;
+        color:#a3a3a3;
         text-align: left; 
         direction: ltr;
     }
 
     .stars label:before {
-        content: "\2605";
+        /* content: "\2605"; */
         margin-left: 5px;
     }
 
     .stars input[type="radio"]:checked ~ label {
         /* color: #ee076e; */
-        content: "\2605";
+        /* content: "\2605"; */
         color: transparent;
         background: linear-gradient(145deg, #f81f01, #ee076e);
         -webkit-background-clip: text;
@@ -59,11 +59,11 @@
                                                 </div>
                                                 <div class="col-4 mt-4">
                                                     <div class="stars">
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"><i class="fas fa-star"></i></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,11 +75,12 @@
                                     </div>
                                 <?php } ?>
 
-                                <button type="submit" class="btn btn-noori">Submit</button>
+                                <button type="submit" class="btn btn-noori" <?= $this->session->userdata('isSubmitted') ? 'disabled' : '' ;?> >Submit</button>
                             </form>
 
                         <?php } else { ?>
                             <h4 class="text-noori text-center v-middle">No Assessment Report Found</h4>
+                            <?php $this->session->set_userdata('isSubmitted', 0); ?>
                         <?php } ?>
                     </div>
                 </div>
