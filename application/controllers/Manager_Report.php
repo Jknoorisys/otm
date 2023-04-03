@@ -10,8 +10,9 @@
 
 			if ($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') == 0) {
 				$this->login_id = $this->session->userdata('id');
-				$this->group_id = $this->session->userdata('users_group_id');
-				$this->tl_id = $this->group_id == 13 ? $this->login_id : '';
+				$this->users_group_id = $this->session->userdata('users_group_id');
+
+				$this->tl_id = $this->users_group_id == 13 ? $this->login_id : '';
 				$this->manager_email = $this->session->userdata('email');
 
 				$projects['login_id'] = $this->session->userdata('id');
@@ -21,6 +22,268 @@
 				$this->load->view('manager/manager_menubar');
 			} else {
 				redirect(base_url());
+			}
+		}
+
+		public function latestReport()
+        {
+            $where = ['sc.status' => 'active', 'sc.users_group_id' => $this->users_group_id];
+            $data['questions'] = $this->Report->get_questions($where);
+            $data['quarter'] = $this->Report->get_question_group();
+            $this->load->view('manager/manager_footer');
+			$this->load->view('manager_report/report', $data);
+        }
+
+        public function AddReview()
+        {
+           $question_ids = $this->input->post('question_id');
+           $rating = $this->input->post('rating');
+           $comment = $this->input->post('comment');
+           $quarter_id = $this->input->post('quarter_id');
+           $toatl = count($question_ids) * 5;
+
+           $report_data = [
+                'quarter_id' => $quarter_id,
+                'user_id' => $this->login_id,
+                'users_group_id' => $this->users_group_id,
+                'created_at' => date('Y-m-d H:i:s')
+           ];
+
+           $report_id = $this->Report->add_report($report_data);
+
+           if ($report_id) {
+                if ($question_ids) {
+                    $sum = 0;
+                    foreach ($question_ids as $question_id) {
+                        $sum = $rating[$question_id] + $sum;
+						if ($this->users_group_id == 13) {
+							$data = [
+								'report_id' => $report_id,
+								'quarter_id' => $quarter_id,
+								'user_id' => $this->login_id,
+								'users_group_id' => $this->users_group_id,
+								'question_id' => $question_id,
+								'tl_comment' => $comment[$question_id],
+								'tl_rating' => $rating[$question_id],
+								'created_at' => date('Y-m-d H:i:s')
+							];	
+						} else {
+							$data = [
+								'report_id' => $report_id,
+								'question_group' => $question_group,
+								'user_id' => $this->login_id,
+								'users_group_id' => $this->users_group_id,
+								'question_id' => $question_id,
+								'manager_comment' => $comment[$question_id],
+								'manager_rating' => $rating[$question_id],
+								'created_at' => date('Y-m-d H:i:s')
+							];	
+						}
+						
+                        $insert = $this->Report->add_review($data);
+                    }
+
+                    if ($insert) {
+						if ($this->users_group_id == 13) {
+							$update_data = [
+								'tl_total' => $sum,
+								'tl_percentage' => ($sum * 100) / $toatl
+							];
+						} else {
+							$update_data = [
+								'manager_total' => $sum,
+								'manager_percentage' => ($sum * 100) / $toatl
+							];
+						}
+                        
+                        $this->Report->update_report($update_data, $report_id);
+                        
+                        $this->session->set_userdata('isSubmitted', 1);
+                        $this->session->set_tempdata('add', 'Review Submitted!', 2);
+                        redirect(base_url('manager-latest-report'));
+                    } else {
+                        $this->session->set_tempdata('failure', 'Retry!', 2);
+                        redirect(base_url('manager-latest-report'));
+                    }
+                } else {
+                    $this->session->set_tempdata('failure', 'Retry!', 2);
+                    redirect(base_url('manager-latest-report'));
+                }
+           } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('manager-latest-report'));
+           }
+        }
+
+        public function reportHistory()
+        {
+			$filter = array(
+				"name"           => '',
+			);
+
+            $where = [
+                'reports.user_id' => $this->login_id,
+                'reports.users_group_id' => $this->users_group_id,
+            ];
+
+            $data['reports'] = $this->Report->get_reports($where, $filter);
+            $this->load->view('manager/manager_footer');
+			$this->load->view('manager_report/report_history', $data);
+        }
+
+        public function reviewDetails()
+        {
+            $report_id = $this->input->post('report_id');
+            if ($report_id) {
+                $where = [
+                    'sc.user_id' => $this->login_id,
+                    'sc.users_group_id' => $this->users_group_id,
+                    'sc.report_id' => $report_id
+                ];
+
+                $data['reviews'] = $this->Report->get_reviews($where);
+
+                $this->load->view('manager/manager_footer');
+			    $this->load->view('manager_report/report_details', $data);
+            } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('manager-report-history'));
+            }
+        }
+
+		public function developerReport()
+		{
+			$data['users'] = $this->Report->get_user_details($this->tl_id, $this->manager_email);
+
+			if ((is_array($_POST) && empty($_POST))) {
+				$filter = array(
+					"name"           => '',
+				);
+			} else {
+				$filter = array(
+					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
+				);
+			}
+
+			if ($this->users_group_id == 13) {
+				$where = [
+					'reports.users_group_id' => '2',
+					'reports.status' => 'pending',
+					'user.tl_id' => $this->tl_id,
+				];
+			} else {
+				$where = [
+					'reports.users_group_id' => '2',
+					'reports.status' => 'inprogress',
+				];
+			}
+
+			$data['filter'] = $filter;
+            $data['reports'] = $this->Report->get_reports($where, $filter);
+            $this->load->view('manager/manager_footer');
+			$this->load->view('manager_report/developer_reports', $data);
+		}
+
+		public function developerReviewDetails()
+		{
+			$report_id = $this->input->post('report_id');
+			$report_status = $this->input->post('report_status');
+			$user_id = $this->input->post('user_id');
+			
+
+            if ($report_id && $report_status) {
+                $where = [
+                    'sc.user_id' => $user_id,
+                    'sc.users_group_id' => '2',
+                    'sc.report_id' => $report_id
+                ];
+
+                $data['reviews'] = $this->Report->get_reviews($where);
+
+				if ($report_status == 'pending') {
+					$this->load->view('manager/manager_footer');
+			    	$this->load->view('manager_report/tl_developer_review', $data);
+				} elseif ($report_status == 'inprogress') {
+					$this->load->view('manager/manager_footer');
+			    	$this->load->view('manager_report/manager_developer_review', $data);
+				} else{
+					$this->load->view('manager/manager_footer');
+			    	$this->load->view('manager_report/developer_report_details', $data);
+				}
+                
+            } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('manager-developer-report'));
+            }
+		}
+
+		public function AddDeveloperReview()
+		{
+			$review_id = $this->input->post('review_id');
+			$question_ids = $this->input->post('question_id');
+			$rating = $this->input->post('rating');
+			$comment = $this->input->post('comment');
+			$quarter_id = $this->input->post('quarter_id');
+			$report_id = $this->input->post('report_id');
+			$toatl = count($question_ids) * 5;
+
+			if ($report_id && $review_id) {
+					if ($question_ids) {
+						$sum = 0;
+						foreach ($question_ids as $question_id) {
+							$sum = $rating[$question_id] + $sum;
+							if ($this->users_group_id == 13) {
+								$data = [
+									'tl_comment' => $comment[$question_id],
+									'tl_rating' => $rating[$question_id],
+									'status' => 'inprogress',
+									'updated_at' => date('Y-m-d H:i:s')
+								];	
+							} else {
+								$data = [
+									'manager_comment' => $comment[$question_id],
+									'manager_rating' => $rating[$question_id],
+									'status' => 'completed',
+									'updated_at' => date('Y-m-d H:i:s')
+								];	
+							}
+							
+							$update = $this->Report->update_review($data, $review_id[$question_id]);
+						}
+
+						if ($update) {
+							if ($this->users_group_id == 13) {
+								$update_data = [
+									'tl_total' => $sum,
+									'tl_percentage' => ($sum * 100) / $toatl,
+									'status' => 'inprogress',
+									'updated_at' => date('Y-m-d H:i:s')
+								];
+							} else {
+								$update_data = [
+									'manager_total' => $sum,
+									'manager_percentage' => ($sum * 100) / $toatl,
+									'status' => 'completed',
+									'updated_at' => date('Y-m-d H:i:s')
+								];
+							}
+							
+							$this->Report->update_report($update_data, $report_id);
+							
+							$this->session->set_userdata('isSubmitted', 1);
+							$this->session->set_tempdata('add', 'Review Submitted!', 2);
+							redirect(base_url('manager-add-developer-review'));
+						} else {
+							$this->session->set_tempdata('failure', 'Retry!', 2);
+							redirect(base_url('manager-developer-report'));
+						}
+					} else {
+						$this->session->set_tempdata('failure', 'Retry!', 2);
+						redirect(base_url('manager-developer-report'));
+					}
+			} else {
+					$this->session->set_tempdata('failure', 'Retry!', 2);
+					redirect(base_url('manager-developer-report'));
 			}
 		}
     }

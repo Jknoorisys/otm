@@ -19,9 +19,9 @@
 
         public function latestReport()
         {
-            $where = ['status' => 'publish'];
+            $where = ['sc.status' => 'active', 'sc.users_group_id' => $this->users_group_id];
             $data['questions'] = $this->Report->get_questions($where);
-            $data['question_group'] = $this->Report->get_question_group();
+            $data['quarter'] = $this->Report->get_question_group($this->users_group_id);
             $this->load->view('users/footer');
 			$this->load->view('user_report/report', $data);
         }
@@ -31,11 +31,11 @@
            $question_ids = $this->input->post('question_id');
            $developer_rating = $this->input->post('developer_rating');
            $developer_comment = $this->input->post('developer_comment');
-           $question_group = $this->input->post('question_group');
+           $quarter_id = $this->input->post('quarter_id');
            $toatl = count($question_ids) * 5;
 
            $report_data = [
-                'question_group' => $question_group,
+                'quarter_id' => $quarter_id,
                 'user_id' => $this->login_id,
                 'users_group_id' => $this->users_group_id,
                 'created_at' => date('Y-m-d H:i:s')
@@ -50,7 +50,7 @@
                         $sum = $developer_rating[$question_id] + $sum;
                         $data = [
                             'report_id' => $report_id,
-                            'question_group' => $question_group,
+                            'quarter_id' => $quarter_id,
                             'user_id' => $this->login_id,
                             'users_group_id' => $this->users_group_id,
                             'question_id' => $question_id,
@@ -104,9 +104,9 @@
             $report_id = $this->input->post('report_id');
             if ($report_id) {
                 $where = [
-                    'user_id' => $this->login_id,
-                    'users_group_id' => $this->users_group_id,
-                    'report_id' => $report_id
+                    'sc.user_id' => $this->login_id,
+                    'sc.users_group_id' => $this->users_group_id,
+                    'sc.report_id' => $report_id
                 ];
 
                 $data['reviews'] = $this->Report->get_reviews($where);
