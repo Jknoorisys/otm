@@ -117,9 +117,9 @@
                                         </div>
                                         <input type="text" class="form-control form-control-lg" required name="email" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" id="show_hide_password">
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon2" style="background-color: #EEF1F8;"><i class="mdi mdi-lock"></i></span>
+                                            <span class="input-group-text" id="basic-addon2" style="background-color: #EEF1F8;"><i class="mdi mdi-eye-off"></i></span>
                                         </div>
                                         <input type="password" class="form-control form-control-lg" required name="pass" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
                                     </div>
@@ -179,3 +179,19 @@
 	<?php } ?>
 </script>
 
+<script>
+	$(document).ready(function () {
+		$("#show_hide_password span").on('click', function (event) {
+			event.preventDefault();
+			if ($('#show_hide_password input').attr("type") == "text") {
+				$('#show_hide_password input').attr('type', 'password');
+				$('#show_hide_password i').addClass("mdi-eye-off");
+				$('#show_hide_password i').removeClass("mdi-eye");
+			} else if ($('#show_hide_password input').attr("type") == "password") {
+				$('#show_hide_password input').attr('type', 'text');
+				$('#show_hide_password i').removeClass("mdi-eye-off");
+				$('#show_hide_password i').addClass("mdi-eye");
+			}
+		});
+	});
+</script>

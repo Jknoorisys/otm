@@ -21,6 +21,7 @@ class Admin_Report extends CI_Controller
     public function add_que_func()
     {
         $question = array(
+
             'question' => $this->input->post('quet'),
             'user_group_id' => $this->input->post('user_group_id'),
             'created_at' => date('d-m-Y h:i:sa')

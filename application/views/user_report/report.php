@@ -1,85 +1,86 @@
+<style>
+    .stars {
+        display: inline-block;
+        margin: 5px 0;
+        font-size: 24px;
+        direction: rtl;
+    }
+
+    .stars input[type="radio"] {
+        display: none;
+    }
+
+    .stars label {
+        display: inline-block;
+        cursor: pointer;
+        /* color: #ddd; */
+        color:grey;
+        text-align: left; 
+        direction: ltr;
+    }
+
+    .stars label:before {
+        content: "\2605";
+        margin-left: 5px;
+    }
+
+    .stars input[type="radio"]:checked ~ label {
+        /* color: #ee076e; */
+        content: "\2605";
+        color: transparent;
+        background: linear-gradient(145deg, #f81f01, #ee076e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
 <div class="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Add Review</h4>
-                        <form class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
+                        <?php if (!empty($questions)) { ?>
+                            <h3 class="card-title text-center">Assessment Report ( <?= $question_group['month_start'] ?> - <?= $question_group['month_end'].', '. $question_group['year'] ?>) </h3>
+                            <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
+                                
+                                <?php foreach ($questions as $question) { ?>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <h4><?= $question['question'] ?></h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="form-group">
+                                                        <label>Developer Ratings</label>
+                                                        <input type="text" class="form-control" name="developer_comment[<?= $question['id'] ?>]" placeholder="Developer Comment" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 mt-4">
+                                                    <div class="stars">
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"></label>
+                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <input type="hidden" name="question_group" class="form-control" value="<?= $question_group['id'] ?>">
+                                            <input type="hidden" name="question_id[]" class="form-control" value="<?= $question['id'] ?>">
 
-							<div class="form-group m-b-30">
-								<label class="mr-sm-2" for="">Project Name</label>
-								<!-- <select class="custom-select mr-sm-2" name="project_name" required>
-									<option selected value="">Choose...</option>
-									<?php //foreach($fetch as $project){ ?>
-										<option value="<?= $project['id'] ?>"><?= $project['name'] ?></option>
-									<?php //} ?>
-								</select> -->
-								<input type="text" class="form-control" name="project_name" style="margin-top:4px;" placeholder="Enter Project Name" required>
-							</div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
 
-                            <div class="row">
-								<div class="col-6">
-									<div class="form-group m-b-30">
-										<label class="mr-sm-2" for="">OT Hours</label>
-										<select class="custom-select mr-sm-2" name="ot_hours" required>
-												<option selected>1.0</option>
-												<option>1.5</option>
-												<option>2.0</option>
-												<option>2.5</option>
-												<option>3.0</option>
-												<option>3.5</option>
-												<option>4.0</option>
-												<option>4.5</option>
-												<option>5.0</option>
-												<option>5.5</option>
-												<option>6.0</option>
-												<option>6.5</option>
-												<option>7.0</option>
-												<option>7.5</option>
-												<option>8.0</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="form-group m-b-30">
-										<label class="mr-sm-2" for="">Date of OT</label>
-										<select class="custom-select mr-sm-2" name="ot_date" required>
-												<option selected value="<?= date('Y-m-d'); ?>"><?= date('d-m-Y'); ?></option>
-												<option value="<?= date('Y-m-d',strtotime("-1 days")); ?>"><?= date('d-m-Y',strtotime("-1 days")); ?></option>
-												<option value="<?= date('Y-m-d',strtotime("-2 days")); ?>"><?= date('d-m-Y',strtotime("-2 days")); ?></option>
-										</select>
-									</div>
-								</div>
-							</div>
+                                <button type="submit" class="btn btn-noori">Submit</button>
+                            </form>
 
-							<div class="row">
-								<div class="col-6">
-									<div class="form-group m-b-30">
-										<label class="card-title" style="margin-top:4px;">Time of OT</lable>
-										<input type="text" class="form-control" name="ot_time" style="width:550px; margin-top:4px;" placeholder="Ex. 8 pm to 10 pm" required>
-									</div>
-								</div>
-
-								<div class="col-6">
-									<div class="form-group m-b-30">
-										<label class="mr-sm-2" for="">OT Location</label>
-										<select class="custom-select mr-sm-2" name="ot_location" required>
-											<option selected>Office</option>
-											<option>Home</option>
-											<option>Client Site</option>
-										</select>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="card-title">Description</label>
-								<textarea class="form-control" style="width:1120px;" rows="4" placeholder="Text Here..." name="description" required></textarea>
-							</div>
-
-                            <button type="submit" class="btn btn-noori" id="add_review">Submit</button>
-                        </form>
+                        <?php } else { ?>
+                            <h4 class="text-noori text-center v-middle">No Assessment Report Found</h4>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -101,3 +102,20 @@
 		})
 	<?php } ?>
 </script>
+
+<!-- <script>
+    $(document).ready(function() {
+        $('#add-review').submit(function() {
+            $('button[type="submit"]').prop('disabled', true);
+        });
+    });
+</script> -->
+
+<!-- <script>
+  // Disable the submit button after the form has been submitted
+  const form = document.querySelector('form');
+  form.addEventListener('submit', () => {
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+  });
+</script> -->
