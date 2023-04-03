@@ -1,83 +1,109 @@
-
 <div class="page-wrapper">
-                <div class="row">
-                    <div class="col-sm-12"><br>
-                        <div class="card">
-                            <div class="card-body">
-                                
-                                <div class="d-md-flex align-items-center">
-                                    <div class="container">
-                                        <h2 class="card-title" align="center">Add Questions <h3 align="center" style="margin-top: 5px;"></h3></span></h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+					<h4 class="card-title">Add Question</h4>
+                                <form class="m-t-20" action="<?= base_url('add_que_func') ?>" method="POST">
+                                    <div class="">
+									<div class="form-group m-b-30">
+									<label for="exampleFormControlSelect1">Select Group</label>
+									<select class="form-control" name="user_group_id" id="exampleFormControlSelect1">
+										<option selected value="">Select Group</option>
+										<option value="2">Developer</option>
+										<option value="4">Manager</option>
+										<option value="13">Team Lead</option>
+										
+
+									</select>
+								</div>
+							</div><br>
+                                        <div class="email-repeater form-group">
+                                            <div data-repeater-list="repeater-group">
+                                                <div data-repeater-item class="row m-b-15">
+                                                    <div class="col-md-10">
+                                                        <input type="text" name="qut" class="form-control" id="email" placeholder="question">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <button data-repeater-delete="" class="btn btn-danger waves-effect waves-light" type="button"><i class="ti-close"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" data-repeater-create="" class="btn btn-info waves-effect waves-light">Add Question
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <button class="btn btn-success waves-effect waves-light" type="submit">Submit
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>                                
-                            </div>
-							<div class="col-12">
-								<form class="mt-4" action="<?=base_url('manager-accepted-ot') ?>" method="POST">
-									<div class="row">
-
-										<div class="col-3">
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">Question 1</label>
-											<div class="form-group">
-                                        		<input type="text" class="form-control">
-                                    		</div>
-											</div>
-										</div><br>
-
-										<div class="col-3">
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">Question 2</label>
-											<div class="form-group">
-                                        		<input type="text" class="form-control">
-                                    		</div>
-											</div><br />
-
-										</div><div class="col-3">
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">Question 3</label>
-											<div class="form-group">
-                                        		<input type="text" class="form-control">
-                                    		</div>
-											</div><br />
-
-										</div><div class="col-3">
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">Question 4</label>
-											<div class="form-group">
-                                        		<input type="text" class="form-control">
-                                    		</div>
-											</div><br />
-
-										</div><div class="col-3">
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">Question 5</label>
-											<div class="form-group">
-                                        		<input type="text" class="form-control">
-                                    		</div>
-											</div><br />
-
-										<div class="col-2">
-											<div class="form-group m-b-30" style="margin-top: 30px;">
-												<button type="submit" class="btn btn-noori">Add</button>
-												
-											</div>
-										</div>
-
-									</div>
-                        		</form>
-                    		</div>
-                           
-                        </div>
-                    </div>
-                </div>
-       		 </div>
-    	</div> 
+                                </form>
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+	</div>
+</div>
 
 
-		<script>
-	 $(document).on("change", "#from", function () {
-        debugger
-        var date = $(this).val();
-        $('#to').attr('min', date);
-    });
+<script>
+	function myFunction() {
+		var checkBox = document.getElementById("customCheck1");
+		var radio = document.getElementById("radio");
+		if (checkBox.checked == true){
+			radio.style.display = "block";
+		} else {
+			radio.style.display = "none";
+		}
+	}
 </script>
+
+<script>
+<?php if($this->session->tempdata('add_leave')){ ?> 
+	Swal.fire({
+	icon: 'success',
+	title: 'Leave Request Sent Successfully!',
+	})
+<?php } ?>
+</script>
+
+<script>
+	$(function() {
+		$('.daterange').daterangepicker({
+		
+			minDate: new Date(),
+			
+			isInvalidDate: function(date) {
+			if (date.day() == 0 )
+			return true;
+				return false;
+			}
+		});
+		
+		$('.daterange').on('apply.daterangepicker', function(ev, picker) {
+		
+			$.ajax({
+				url: 'get-days',
+				method: 'POST',
+				dataType: 'json',
+				data: {
+				dates: $("#leave_date").val(),
+				},
+				error: function() { alert("An error occoured!!!!!"); },
+				success: function(response) {
+					$('#numberdays').val(response);
+					if(response != 0 && response > 0){
+						$("#add_leave").removeAttr('disabled');
+					}else{
+						$('#add_leave').attr("disabled","true");
+					}			
+				}
+			});     
+		});
+	});
+</script>
+
+</html>
