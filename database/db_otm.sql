@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 06:33 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Apr 03, 2023 at 01:26 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `projects` (
   `team` text DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `order_tasks_by` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `projects`
@@ -299,52 +299,62 @@ INSERT INTO `projects` (`id`, `projects_status_id`, `projects_types_id`, `create
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Table structure for table `quarters`
 --
 
-CREATE TABLE `questions` (
-  `id` int(50) NOT NULL,
-  `group_id` int(50) NOT NULL,
-  `question` varchar(255) NOT NULL,
-  `status` enum('active','inactive','publish') NOT NULL DEFAULT 'active',
-  `created_at` varchar(255) NOT NULL,
-  `updated_at` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `group_id`, `question`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Test Question 1', 'publish', '', ''),
-(2, 1, 'Test Question 2', 'publish', '', ''),
-(3, 1, 'Test Question 3', 'publish', '', ''),
-(4, 1, 'Test Question 4', 'publish', '', ''),
-(5, 1, 'Test Question 5', 'publish', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `question_groups`
---
-
-CREATE TABLE `question_groups` (
+CREATE TABLE `quarters` (
   `id` int(11) NOT NULL,
   `month_start` varchar(100) NOT NULL,
   `month_end` varchar(100) NOT NULL,
   `year` year(4) NOT NULL,
   `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `is_published` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` varchar(100) NOT NULL,
+  `updated_at` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quarters`
+--
+
+INSERT INTO `quarters` (`id`, `month_start`, `month_end`, `year`, `status`, `is_published`, `created_at`, `updated_at`) VALUES
+(1, 'January', 'March', 2023, 'active', '1', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `id` int(50) NOT NULL,
+  `users_group_id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
   `created_at` varchar(255) NOT NULL,
   `updated_at` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `question_groups`
+-- Dumping data for table `questions`
 --
 
-INSERT INTO `question_groups` (`id`, `month_start`, `month_end`, `year`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'January', 'March', 2023, 'active', '', ''),
-(2, 'April', 'June', 2023, 'active', '', '');
+INSERT INTO `questions` (`id`, `users_group_id`, `question`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Developer Question 1', 'active', '', ''),
+(2, 2, 'Developer Question 2', 'active', '', ''),
+(3, 2, 'Developer Question 3', 'active', '', ''),
+(4, 2, 'Developer Question 4', 'active', '', ''),
+(5, 2, 'Developer Question 5', 'active', '', ''),
+(6, 13, 'TL Question 1', 'active', '', ''),
+(7, 13, 'TL Question 2', 'active', '', ''),
+(8, 13, 'TL Question 3', 'active', '', ''),
+(9, 13, 'TL Question 4', 'active', '', ''),
+(10, 13, 'TL Question 5', 'active', '', ''),
+(11, 4, 'Manager Question 1', 'active', '', ''),
+(12, 4, 'Manager Question 2', 'active', '', ''),
+(13, 4, 'Manager Question 3', 'active', '', ''),
+(14, 4, 'Manager Question 4', 'active', '', ''),
+(15, 4, 'Manager Question 5', 'active', '', '');
 
 -- --------------------------------------------------------
 
@@ -356,7 +366,7 @@ CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `users_group_id` int(11) NOT NULL,
-  `question_group` int(11) NOT NULL,
+  `quarter_id` int(11) NOT NULL,
   `dev_total` int(11) NOT NULL,
   `dev_percentage` float NOT NULL,
   `tl_total` int(11) NOT NULL,
@@ -369,15 +379,14 @@ CREATE TABLE `reports` (
   `status` enum('pending','inprogress','completed') NOT NULL DEFAULT 'pending',
   `created_at` varchar(100) NOT NULL,
   `updated_at` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reports`
 --
 
-INSERT INTO `reports` (`id`, `user_id`, `users_group_id`, `question_group`, `dev_total`, `dev_percentage`, `tl_total`, `tl_percentage`, `manager_total`, `manager_percentage`, `ceo_total`, `ceo_percentage`, `score`, `status`, `created_at`, `updated_at`) VALUES
-(1, 93, 2, 1, 20, 80, 0, 0, 0, 0, 0, 0, 0, 'pending', '2023-04-02 18:29:14', ''),
-(2, 90, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'pending', '2023-04-02 18:31:58', '');
+INSERT INTO `reports` (`id`, `user_id`, `users_group_id`, `quarter_id`, `dev_total`, `dev_percentage`, `tl_total`, `tl_percentage`, `manager_total`, `manager_percentage`, `ceo_total`, `ceo_percentage`, `score`, `status`, `created_at`, `updated_at`) VALUES
+(1, 93, 2, 1, 20, 80, 20, 80, 20, 80, 0, 0, 0, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53');
 
 -- --------------------------------------------------------
 
@@ -388,14 +397,14 @@ INSERT INTO `reports` (`id`, `user_id`, `users_group_id`, `question_group`, `dev
 CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
   `report_id` int(11) NOT NULL,
-  `question_group` int(11) NOT NULL,
+  `quarter_id` int(11) NOT NULL,
   `user_id` int(50) NOT NULL,
   `users_group_id` int(50) NOT NULL,
   `question_id` int(11) NOT NULL,
   `dev_comment` text NOT NULL,
   `dev_rating` enum('1','2','3','4','5') DEFAULT NULL,
-  `TL_comment` text NOT NULL,
-  `TL_rating` enum('1','2','3','4','5') DEFAULT NULL,
+  `tl_comment` text NOT NULL,
+  `tl_rating` enum('1','2','3','4','5') DEFAULT NULL,
   `manager_comment` text NOT NULL,
   `manager_rating` enum('1','2','3','4','5') DEFAULT NULL,
   `ceo_comment` text NOT NULL,
@@ -403,23 +412,18 @@ CREATE TABLE `reviews` (
   `status` enum('pending','inprogress','completed') NOT NULL DEFAULT 'pending',
   `created_at` varchar(255) NOT NULL,
   `updated_at` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reviews`
 --
 
-INSERT INTO `reviews` (`id`, `report_id`, `question_group`, `user_id`, `users_group_id`, `question_id`, `dev_comment`, `dev_rating`, `TL_comment`, `TL_rating`, `manager_comment`, `manager_rating`, `ceo_comment`, `ceo_rating`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 93, 2, 1, 'Javeriya Comment 1', '5', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:29:14', ''),
-(2, 1, 1, 93, 2, 2, 'Javeriya Comment 2', '5', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:29:14', ''),
-(3, 1, 1, 93, 2, 3, 'Javeriya Comment 3', '4', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:29:14', ''),
-(4, 1, 1, 93, 2, 4, 'Javeriya Comment 4', '4', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:29:14', ''),
-(5, 1, 1, 93, 2, 5, 'Javeriya Comment 5', '2', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:29:14', ''),
-(6, 2, 1, 90, 2, 1, 'Zubiya Comment 1', '3', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:31:58', ''),
-(7, 2, 1, 90, 2, 2, 'Zubiya Comment 2', '3', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:31:58', ''),
-(8, 2, 1, 90, 2, 3, 'Zubiya Comment 3', '3', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:31:58', ''),
-(9, 2, 1, 90, 2, 4, 'Zubiya Comment 4', '3', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:31:58', ''),
-(10, 2, 1, 90, 2, 5, 'Zubiya Comment 5', '3', '', NULL, '', NULL, '', NULL, 'pending', '2023-04-02 18:31:59', '');
+INSERT INTO `reviews` (`id`, `report_id`, `quarter_id`, `user_id`, `users_group_id`, `question_id`, `dev_comment`, `dev_rating`, `tl_comment`, `tl_rating`, `manager_comment`, `manager_rating`, `ceo_comment`, `ceo_rating`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 93, 2, 1, 'Javeriya Comment 1', '4', 'TL Comment 1', '4', 'Manager Comment 1', '4', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
+(2, 1, 1, 93, 2, 2, 'Javeriya Comment 2', '3', 'TL Comment 2', '3', 'Manager Comment 2', '3', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
+(3, 1, 1, 93, 2, 3, 'Javeriya Comment 3', '3', 'TL Comment 3', '3', 'Manager Comment 3', '3', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
+(4, 1, 1, 93, 2, 4, 'Javeriya Comment 4', '5', 'TL Comment 4', '5', 'Manager Comment 4', '5', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
+(5, 1, 1, 93, 2, 5, 'Javeriya Comment 5', '5', 'TL Comment 5', '5', 'Manager Comment 5', '5', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53');
 
 -- --------------------------------------------------------
 
@@ -440,7 +444,7 @@ CREATE TABLE `users` (
   `skin` varchar(64) DEFAULT NULL,
   `hashed_pass` varchar(120) DEFAULT NULL,
   `pass` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -551,7 +555,7 @@ CREATE TABLE `users_groups` (
   `allow_manage_tasks_viewonly` tinyint(1) DEFAULT NULL,
   `allow_manage_discussions` tinyint(1) DEFAULT NULL,
   `allow_manage_discussions_viewonly` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users_groups`
@@ -594,7 +598,7 @@ CREATE TABLE `user_leave` (
   `action_by` varchar(255) NOT NULL,
   `created_datetime` varchar(255) NOT NULL,
   `str_leave_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user_leave`
@@ -1009,7 +1013,7 @@ CREATE TABLE `user_ot` (
   `rejected_description` varchar(255) NOT NULL,
   `action_by` varchar(255) NOT NULL,
   `created_datetime` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_ot`
@@ -1254,7 +1258,16 @@ CREATE TABLE `weightage` (
   `weightage` int(80) NOT NULL,
   `created_at` varchar(255) NOT NULL,
   `updated_at` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `weightage`
+--
+
+INSERT INTO `weightage` (`id`, `users_group_id`, `weightage`, `created_at`, `updated_at`) VALUES
+(1, 2, 40, '', ''),
+(2, 13, 40, '', ''),
+(3, 4, 20, '', '');
 
 --
 -- Indexes for dumped tables
@@ -1270,15 +1283,15 @@ ALTER TABLE `projects`
   ADD KEY `fk_projects_pople` (`created_by`);
 
 --
--- Indexes for table `questions`
+-- Indexes for table `quarters`
 --
-ALTER TABLE `questions`
+ALTER TABLE `quarters`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question_groups`
+-- Indexes for table `questions`
 --
-ALTER TABLE `question_groups`
+ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1335,28 +1348,28 @@ ALTER TABLE `projects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
 
 --
+-- AUTO_INCREMENT for table `quarters`
+--
+ALTER TABLE `quarters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `question_groups`
---
-ALTER TABLE `question_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1386,7 +1399,7 @@ ALTER TABLE `user_ot`
 -- AUTO_INCREMENT for table `weightage`
 --
 ALTER TABLE `weightage`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
