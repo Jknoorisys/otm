@@ -58,8 +58,12 @@ $route['add-review'] = 'User_Report/AddReview';
 // Manager Manage Reports
 
 // Admin panel
-$route['admin-report'] = 'Admin_Report/add_questions';
+$route['admin-add-quest'] = 'Admin_Report/add_questions';
 $route['add_que_func'] = 'Admin_Report/add_que_func';
+$route['admin-weightage'] = 'Admin_Report/add_weightage';
+$route['admin-question_list'] = 'Admin_Report/question_list';
+$route['admin-edit_question'] = 'Admin_Report/edit_question';
+
 // Admin Manage OT
 $route['admin-dashboard'] = 'admin/dashboard';
 $route['admin-add-ot'] = 'admin/add_ot';

@@ -4,12 +4,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+					
 					<h4 class="card-title">Add Question</h4>
                                 <form class="m-t-20" action="<?= base_url('add_que_func') ?>" method="POST">
                                     <div class="">
 									<div class="form-group m-b-30">
 									<label for="exampleFormControlSelect1">Select Group</label>
-									<select class="form-control" name="user_group_id" id="exampleFormControlSelect1">
+									<select class="form-control" name="users_group_id" id="exampleFormControlSelect1">
 										<option selected value="">Select Group</option>
 										<option value="2">Developer</option>
 										<option value="4">Manager</option>
@@ -18,6 +19,19 @@
 
 									</select>
 								</div>
+								<!-- <div class="">
+									<div class="form-group m-b-30">
+									<label for="exampleFormControlSelect1">Select Quarter</label>
+									<select class="form-control" name="question_group_id" id="exampleFormControlSelect1">
+										<option selected value="">Select Quarter Group</option>
+									<?php foreach($grp as $grps){ ?>
+
+										<option value="<?= $grps['id'] ?>"><?= $grps['month_start'].'-'.$grps['month_end'].'-'.$grps['year']?></option>
+										
+										<?php } ?>
+
+									</select>
+								</div> -->
 							</div><br>
                                         <div class="email-repeater form-group">
                                             <div data-repeater-list="repeater-group">
