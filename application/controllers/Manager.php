@@ -73,17 +73,6 @@
 				$this->session->set_tempdata('failure', 'Retry!', 2);
 				redirect('manager-requested-ot');
 			}
-			// $ot_data = array(
-			// 	'user_id' => $this->session->userdata('id'),
-			// 	'project_id' => $this->input->post('project_name'),
-			// 	'ot_hours' => $this->input->post('ot_hours'),
-			// 	'ot_date' => $this->input->post('ot_date'),
-			// 	'str_ot_date' => strtotime($this->input->post('ot_date')),
-			// 	'ot_time' => $this->input->post('ot_time'),
-			// 	'ot_location' => $this->input->post('ot_location'),
-			// 	'requested_description' => $this->input->post('description'),
-			// 	'created_datetime' => date('d-m-Y h:i:sa')
-			// );
 
 			if ($ot_data) {
 				$this->manager_model->add_ot($ot_data);

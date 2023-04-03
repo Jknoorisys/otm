@@ -54,8 +54,26 @@ $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
 // User Manage Reports
 $route['latest-report'] = 'User_Report/latestReport';
 $route['add-review'] = 'User_Report/AddReview';
+$route['report-history'] = 'User_Report/reportHistory';
+$route['review-details'] = 'User_Report/reviewDetails';
 
 // Manager Manage Reports
+$route['manager-latest-report'] = 'Manager_Report/latestReport';
+$route['manager-add-review'] = 'Manager_Report/AddReview';
+$route['manager-report-history'] = 'Manager_Report/reportHistory';
+$route['manager-review-details'] = 'Manager_Report/reviewDetails';
+
+$route['manager-add-developer-review'] = 'Manager_Report/AddDeveloperReview';
+$route['manager-add-tl-review'] = 'Manager_Report/AddTlReview';
+
+$route['manager-developer-report'] = 'Manager_Report/developerReport';
+$route['manager-developer-review-details'] = 'Manager_Report/developerReviewDetails';
+
+$route['manager-tl-report'] = 'Manager_Report/tlReport';
+$route['manager-tl-review-details'] = 'Manager_Report/tlReviewDetails';
+
+
+
 
 // Admin panel
 $route['admin-add-quest'] = 'Admin_Report/add_questions';
@@ -85,3 +103,7 @@ $route['accept-user-leave/(:any)'] = 'Admin_Leave/accept_user_leave/$1';
 $route['reject-user-leave/(:any)'] = 'Admin_Leave/reject_user_leave/$1';
 $route['admin-delete-leave/(:any)'] = 'Admin_Leave/admin_delete_leave/$1';;
 $route['admin-leave-dashboard'] = 'Admin_Leave/admin_leave_dashboard';
+
+// Admin panel
+$route['admin-report'] = 'Admin_Report/add_questions';
+$route['add_que_func'] = 'Admin_Report/add_que_func';

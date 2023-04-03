@@ -22,6 +22,10 @@
 	<script src="<?=base_url('assets/libs/daterangepicker/daterangepicker.js')?>"></script>
 	<script src="<?= base_url('assets/extra-libs/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 	<script src="<?= base_url('dist/js/pages/datatable/datatable-advanced.init.js') ?>"></script>
+    <!-- Ratings -->
+    <script src="<?= base_url('dist/js/custom.min.js') ?>"></script>
+    <script src="<?= base_url('assets/libs/raty-js/lib/jquery.raty.js') ?>"></script>
+    <script src="<?= base_url('assets/extra-libs/raty/rating-init.js') ?>"></script>
 </body>
 
 </html>
