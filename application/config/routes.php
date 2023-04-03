@@ -59,6 +59,7 @@ $route['add-review'] = 'User_Report/AddReview';
 
 // Admin panel
 $route['admin-report'] = 'Admin_Report/add_questions';
+$route['add_que_func'] = 'Admin_Report/add_que_func';
 
 // Admin Manage OT
 $route['admin-dashboard'] = 'admin/dashboard';

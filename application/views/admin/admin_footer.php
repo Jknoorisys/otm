@@ -29,6 +29,10 @@
 	<script src="<?= base_url('dist/js/pages/datatable/html5.min.js') ?>"></script>
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 	<script src="<?= base_url('dist/js/pages/datatable/datatable-advanced.init.js') ?>"></script>
+
+    <script src="<?= base_url('assets/libs/jquery.repeater/jquery.repeater.min.js')?>"></script>
+    <script src="<?= base_url('assets/extra-libs/jquery.repeater/repeater-init.js')?>"></script>
+    <script src="<?= base_url('assets/extra-libs/jquery.repeater/dff.js')?>"></script>
 </body>
 
 </html>
