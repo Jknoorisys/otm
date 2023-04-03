@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2023 at 09:46 AM
+-- Generation Time: Apr 03, 2023 at 09:41 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -24,34 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `weightage`
+-- Table structure for table `quarters`
 --
 
-CREATE TABLE `weightage` (
-  `id` int(50) NOT NULL,
-  `users_group_id` int(50) NOT NULL,
-  `weightage` int(80) NOT NULL,
-  `created_at` varchar(255) NOT NULL,
-  `updated_at` varchar(255) NOT NULL
+CREATE TABLE `quarters` (
+  `id` int(11) NOT NULL,
+  `month_start` varchar(100) NOT NULL,
+  `month_end` varchar(100) NOT NULL,
+  `year` year(4) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `is_published` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` varchar(100) NOT NULL,
+  `updated_at` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `weightage`
+-- Dumping data for table `quarters`
 --
 
-INSERT INTO `weightage` (`id`, `users_group_id`, `weightage`, `created_at`, `updated_at`) VALUES
-(1, 2, 40, '', ''),
-(2, 13, 40, '', ''),
-(3, 4, 20, '', '');
+INSERT INTO `quarters` (`id`, `month_start`, `month_end`, `year`, `status`, `is_published`, `created_at`, `updated_at`) VALUES
+(1, 'January', 'March', 2023, 'active', '0', '', '');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `weightage`
+-- Indexes for table `quarters`
 --
-ALTER TABLE `weightage`
+ALTER TABLE `quarters`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -59,10 +60,10 @@ ALTER TABLE `weightage`
 --
 
 --
--- AUTO_INCREMENT for table `weightage`
+-- AUTO_INCREMENT for table `quarters`
 --
-ALTER TABLE `weightage`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `quarters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
