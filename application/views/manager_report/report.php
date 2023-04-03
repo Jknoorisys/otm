@@ -42,7 +42,7 @@
                     <div class="card-body">
                         <?php if (!empty($questions)) { ?>
                             <h5 class="card-title text-center">Assessment Report ( <?= $quarter['month_start'] ?> - <?= $quarter['month_end'].', '. $quarter['year'] ?>) </h5>
-                            <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
+                            <form id="add-review" class="mt-4" action="<?= base_url('manager-add-review') ?>" method="POST">
                                 
                                 <?php foreach ($questions as $question) { ?>
                                     <div class="card">
@@ -53,17 +53,17 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="form-group">
-                                                        <label>Developer Ratings</label>
-                                                        <input type="text" class="form-control" name="developer_comment[<?= $question['id'] ?>]" placeholder="Developer Comment" required>
+                                                        <label><?= $this->session->userdata('users_group_id') == 13 ? 'TL Ratings' : 'Manager Ratings' ?></label>
+                                                        <input type="text" class="form-control" name="comment[<?= $question['id'] ?>]" placeholder="<?= $this->session->userdata('users_group_id') == 13 ? 'TL Comment' : 'Manager Comment' ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 mt-4">
                                                     <div class="stars">
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_5" name="developer_rating[<?= $question['id'] ?>]" value="5" required><label for="developer_rating_<?= $question['id'] ?>_5"><i class="fas fa-star"></i></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_4" name="developer_rating[<?= $question['id'] ?>]" value="4" required><label for="developer_rating_<?= $question['id'] ?>_4"><i class="fas fa-star"></i></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_3" name="developer_rating[<?= $question['id'] ?>]" value="3" required><label for="developer_rating_<?= $question['id'] ?>_3"><i class="fas fa-star"></i></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_2" name="developer_rating[<?= $question['id'] ?>]" value="2" required><label for="developer_rating_<?= $question['id'] ?>_2"><i class="fas fa-star"></i></label>
-                                                        <input type="radio" id="developer_rating_<?= $question['id'] ?>_1" name="developer_rating[<?= $question['id'] ?>]" value="1" required><label for="developer_rating_<?= $question['id'] ?>_1"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $question['id'] ?>_5" name="rating[<?= $question['id'] ?>]" value="5" required><label for="rating_<?= $question['id'] ?>_5"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $question['id'] ?>_4" name="rating[<?= $question['id'] ?>]" value="4" required><label for="rating_<?= $question['id'] ?>_4"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $question['id'] ?>_3" name="rating[<?= $question['id'] ?>]" value="3" required><label for="rating_<?= $question['id'] ?>_3"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $question['id'] ?>_2" name="rating[<?= $question['id'] ?>]" value="2" required><label for="rating_<?= $question['id'] ?>_2"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $question['id'] ?>_1" name="rating[<?= $question['id'] ?>]" value="1" required><label for="rating_<?= $question['id'] ?>_1"><i class="fas fa-star"></i></label>
                                                     </div>
                                                 </div>
                                             </div>

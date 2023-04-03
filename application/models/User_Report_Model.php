@@ -4,18 +4,19 @@
         // get all published questions
         public function get_questions($where)
         {
-            return $this->db->where($where)
-								->get('questions')
+            return $this->db->select('sc.*')
+                                ->where($where)
+								->get('questions as sc')
 								->result_array();	
         }
 
-        // get published questions group details
+        // get published questions quarter details
         public function get_question_group()
         {
-            return $this->db->select('group.*')
-                            ->where('sc.status', 'publish')
-                            ->join('question_groups as group','group.id=sc.group_id','left')
-                            ->get('questions as sc')
+            return $this->db->select('sc.*')
+                            ->where('sc.status', 'active')
+                            ->where('sc.is_published', '1')
+                            ->get('quarters as sc')
                             ->row_array();
         }
 
@@ -43,8 +44,8 @@
         // get developer report history
         public function get_reports($where)
         {
-            return $this->db->select('reports.*, group.month_start, group.month_end, group.year')
-                            ->join('question_groups as group','group.id=reports.question_group','left')
+            return $this->db->select('reports.*, quarter.month_start, quarter.month_end, quarter.year')
+                            ->join('quarters as quarter','quarter.id=reports.quarter_id','left')
                             ->where($where)
                             ->get('reports')
                             ->result_array();
@@ -53,11 +54,11 @@
         // get developer review details
         public function get_reviews($where)
         {
-            return $this->db->select('reviews.*, group.month_start, group.month_end, group.year,question.question')
-                            ->join('question_groups as group','group.id=reviews.question_group','left')
-                            ->join('questions as question','question.id=reviews.question_id','left')
+            return $this->db->select('sc.*, quarter.month_start, quarter.month_end, quarter.year,question.question')
+                            ->join('quarters as quarter','quarter.id=sc.quarter_id','left')
+                            ->join('questions as question','question.id=sc.question_id','left')
                             ->where($where)
-                            ->get('reviews')
+                            ->get('reviews as sc')
                             ->result_array();
         }
     }
