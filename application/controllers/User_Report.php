@@ -68,8 +68,9 @@
                             'dev_percentage' => ($sum * 100) / $toatl
                         ];
 
-                        $where = ['id', $report_id];
-                        $update = $this->Report->update_report($update_data, $where);
+                        $this->Report->update_report($update_data, $report_id);
+                        
+                        $this->session->set_userdata('isSubmitted', 1);
                         $this->session->set_tempdata('add', 'Review Submitted!', 2);
                         redirect(base_url('latest-report'));
                     } else {
