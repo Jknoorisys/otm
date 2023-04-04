@@ -77,7 +77,7 @@
 											<tbody>
 												<?php foreach($question as $question){?>
 													<tr>
-														<td><?=$question['question']?></td>
+														<td class="text-center"><?=$question['question']?></td>
 														<td class="text-center"><?= $question['name']?></td>
 														<td class="text-center"><span class="label label-<?= $question['status'] == 'active' ? 'success' : 'danger' ?> font-weight-100"><?= $question['status'] ?></td>
 														<td>
