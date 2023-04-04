@@ -81,6 +81,10 @@ $route['add_que_func'] = 'Admin_Report/add_que_func';
 $route['admin-weightage'] = 'Admin_Report/add_weightage';
 $route['admin-question_list'] = 'Admin_Report/question_list';
 $route['admin-edit_question'] = 'Admin_Report/edit_question';
+$route['admin-update_question/(:any)'] = 'Admin_Report/update_question/$1';
+$route['admin-change-status/(:any)'] = 'Admin_Report/change_status/$1';
+$route['admin-report-list'] = 'Admin_Report/report_list';
+$route['admin-search-report'] = 'Admin_Report/filter_report';
 
 // Admin Manage OT
 $route['admin-dashboard'] = 'admin/dashboard';
