@@ -95,7 +95,7 @@ class Admin_Report extends CI_Controller
     public function filter_report()
     {
         $date = $this->input->post();
-        // echo json_encode($date);exit;
+        echo json_encode($date);exit;
     }
 
 
