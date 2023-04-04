@@ -57,13 +57,45 @@ class Admin_Report extends CI_Controller
     }
     public function edit_question($id)
     {
+        // echo json_encode($this->input->post());exit;
         
-        $data['question'] = $this->Admin_Model->edit_question($id);
-        // echo json_encode($data['question']);exit;
+        $info['q'] = $this->Admin_Model->edit_question($id);
+        // echo json_encode($info['q']);exit;
         $this->load->view('admin/admin_header');
         $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin_question_list',$data);
+        $this->load->view('admin-report/admin_question_list',$info);
         $this->load->view('admin/admin_footer');
+    }
+    public function update_question($id)
+    {
+        $question = $this->input->post();
+        // echo json_encode($data);exit;
+        $update['question'] = $this->Admin_Model->update_question($id,$question);
+        $data['question'] = $this->Admin_Model->get_questions();
+        // echo json_encode($update['question']);exit;
+        redirect(base_url('admin-question_list'));
+    }
+    public function change_status($id)
+    {
+        $status = $this->input->post();
+        
+            $change = $this->Admin_Model->change_status($id,$status);
+      
+        redirect(base_url('admin-question_list'));
+    }
+    public function report_list()
+    {
+        $data['report'] = $this->Admin_Model->get_report();
+        $data['username'] = $this->Admin_Model->get_username();
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/admin_menubar');
+        $this->load->view('admin-report/admin-report-list',$data);
+        $this->load->view('admin/admin_footer');
+    }
+    public function filter_report()
+    {
+        $date = $this->input->post();
+        // echo json_encode($date);exit;
     }
 
 
