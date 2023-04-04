@@ -1,129 +1,167 @@
-<div class="page-breadcrumb">
-    <div class="row">
-        <div class="col-5 align-self-center">
-            <h4 class="page-title">Questions</h4>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-            <div class="d-flex align-items-center">
-            </div>
-        </div>
-        <a style="margin-left: 450px; margin-bottom: 10px;" href="admin-add-quest" type="button" class="btn waves-effect waves-light btn-warning">Add Questions</a>
+<style>
+    input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    }
 
-        <div class="col-7 align-self-center">
-            <div class="d-flex no-block justify-content-end align-items-center">
+    .noori-lable {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 40px;
+    height: 17px;
+    background: rgb(145, 143, 143);
+    /* display: block; */
+    border-radius: 100px;
+    position: relative;
+    }
 
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ============================================================== -->
-<!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- Container fluid  -->
-<!-- ============================================================== -->
-<div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <div class="row">
-        <!-- Column -->
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table product-overview" id="zero_config">
-                            <thead>
-                                <tr>
-                                    <th>Questions</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($question as $q) { ?>
+    .noori-lable:after {
+    content: '';
+    position: absolute;
+    top: 2.2px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 100px;
+    transition: 0.2s;
+    }
 
-                                    <tr>
-                                        <td><?= $q['question'] ?></td>
-                                        <td><?= $q['name'] ?></td>
-                                        <?php if($q['status'] == 'active') { ?>
+    input:checked + label {
+        background: linear-gradient(145deg,#f81f01,#ee076e);
+        color: #fff;
+    }
 
-                                        <td><span class="label label-success font-weight-100"><?= $q['status'] ?></span></td>
-                                        <?php }else{?>
-                                       
-                                            <td><span class="label label-danger font-weight-100"><?= $q['status'] ?></span></td>
-                                           <?php } ?>
-                                        <td>
-                                            <a href="<?= base_url('admin-edit_question/') . $q['id'] ?>" data-toggle="modal" data-target="#exampleModal<?= $q['id'] ?>" class="label label-success font-weight-100" data-whatever="@mdo">Edit</a><br><br>
-                                            <form action="<?= base_url('') ?>" method="POST">
-                                                <input name="status" type="hidden" value="<?= $q['status']?>" >
-                                                <button id="status" type="submit" class="btn btn-<?= $q['status'] == 'active' ? 'success' : 'danger' ?> font-weight-100" ><?= $q['status'] == 'active' ? 'Active' : 'Inactive'?></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <div class="modal fade" id="exampleModal<?= $q['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="exampleModalLabel1">Edit Question</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="<?= base_url('admin-update_question/').$q['id'] ?>" method="POST">
+    input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+    }
 
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="control-label">Question</label>
-                                                            <textarea class="form-control" name="question" id="message-text1"><?= set_value('question', $q['question']) ?></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
-                                                </div>
-                                                    </form>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
+    .noori-lable:active:after {
+    width: 100px;
+    }
+</style>
+<style>
+	td.wrappable,
+	table.data_table td.wrappable {
+		white-space: normal;
+	} 
+</style>
+<div class="page-wrapper">
+                <div class="row">
+                    <div class="col-sm-12"><br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="container">
+										<h2 class="card-title " align="center">Manage Questions</h2>
                                     </div>
-                                <?php  } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Column -->
-    </div>
+                                </div>
+                            </div>
+							
+							<div class="table-responsive">
+                                <div class="col-12">
+									<?php if(!empty($question)){ ?> 
+										<table class="table table-hover v-middle display wrap" data-order="[]" id="file_export">
+											<thead>
+												<tr class="bg-light text-center">
+													<th class="border-top-0">Question</th>
+													<th class="border-top-0">User Role</th>
+													<th class="border-top-0">Status</th>
+													<th class="border-top-0">Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach($question as $question){?>
+													<tr>
+														<td><?=$question['question']?></td>
+														<td class="text-center"><?= $question['name']?></td>
+														<td class="text-center"><span class="label label-<?= $question['status'] == 'active' ? 'success' : 'danger' ?> font-weight-100"><?= $question['status'] ?></td>
+														<td>
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-2">
+                                                                    <a href="<?= base_url('admin-edit_question/') . $question['id'] ?>" data-toggle="modal" data-target="#exampleModal<?= $question['id'] ?>" class="text-noori btn-lg" data-whatever="@mdo"><i class="fa-solid fa-pen-to-square"></i></a>
 
-    <script>
-    $(document).on('click', '#status', function() {
-        var id = $(this).data('id');
-        var status = $(this).data('status');
-        Swal.fire({
-			title: 'Are you sure?',
-			text: "You want to Change Status?",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, change it!'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				$.ajax({
-					type: "POST",
-					url: "<?= base_url('') ?>"+id,
-					success: function (response) {
-						<?php if($this->session->tempdata('')){ ?> 
-							Swal.fire({
-							icon: 'success',
-							title: 'Changed!',
-							})
-						<?php } ?>
-							location.reload();
-						}
-					}
-				)}
-			})
-    	});
+                                                                    <div class="modal fade" id="exampleModal<?= $question['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h4 class="modal-title" id="exampleModalLabel1">Edit Question</h4>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form action="<?= base_url('admin-update_question/').$question['id'] ?>" method="POST">
+
+                                                                                        <div class="form-group">
+                                                                                            <label for="message-text" class="control-label">Question</label>
+                                                                                            <textarea class="form-control" name="question" id="message-text1"><?= set_value('question', $question['question']) ?></textarea>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-noori">Save</button>
+                                                                                </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <form action="<?= base_url('admin-change-status') ?>" method="POST">
+                                                                        <input type="hidden" name="id" value="<?= $question['id'] ?>">
+                                                                        <input type="hidden" name="status" value="<?= $question['status'] == 'active' ? 'inactive' : 'active' ?>">
+                                                                        <button type="submit" data-status="<?= $question['status'] == 'active' ? 'active' : 'inactive' ?>" data-id="<?= $question['id'] ?>" data-name="<?= $question['question'] ?>" class="btn block_confirm btn-sm"><input type="checkbox" id="switch" <?= $question['status'] == 'inactive' ? 'checked' : '' ?> /><label class="noori-lable" for="switch">Toggle</label></button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+													</tr>
+												<?php  } ?>
+											</tbody>
+										</table>
+									<?php } else{ ?>
+										<table class="table v-middle">
+											<thead>
+												<tr class="bg-light">
+                                                    <th class="border-top-0">Question</th>
+													<th class="border-top-0">User Role</th>
+													<th class="border-top-0">Status</th>
+													<th class="border-top-0">Action</th>
+												</tr>
+											</thead>
+										</table>
+										<h4 class="text-noori" align="center">No Question Found!</h4>
+									<?php } ?>
+								</div>
+                        	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<script>
+    $('.block_confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        let status = $(this).data('status');
+        let id = $(this).data('id');
+        event.preventDefault();
+        swal({
+            title: "Are You Sure",
+            text: (status == 'inactive') ? "You want to Activate this Qustion ?" : "You want to Inactivate this Qustion ?",
+            icon: "warning",
+            buttons: ["Cancel", "Yes"],
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+        });
+    });
 </script>
