@@ -29,15 +29,13 @@
                             <div class="col-3">
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search By Month Start</label>
-                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_start" value="" placeholder="Enter Project Name">
-
-
+                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_start" value="<?php echo set_value('myMonthInput'); ?>">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search By Month End</label>
-                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_end" value="" placeholder="Enter Project Name">
+                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_end" value="<?php echo set_value('myMonthInput'); ?>">
                                 </div>
                             </div>
 
@@ -115,14 +113,4 @@
         $('#to').attr('min', date);
     });
 </script>
-<script>
-  const monthInput = document.getElementById("myMonthInput");
-  monthInput.addEventListener("change", function() {
-    const selectedMonth = moment(monthInput.value + "-01", "YYYY-MM-DD");
-    const formattedMonth = selectedMonth.format("MMMM-YYYY"); // to format as "MMMM-YYYY" or "YYYY-MMMM"
-    monthInput.value = formattedMonth;
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
