@@ -69,20 +69,23 @@ class Admin_Report extends CI_Controller
     public function update_question($id)
     {
         $question = $this->input->post();
-        // echo json_encode($data);exit;
+
         $update['question'] = $this->Admin_Model->update_question($id,$question);
         $data['question'] = $this->Admin_Model->get_questions();
-        // echo json_encode($update['question']);exit;
+
         redirect(base_url('admin-question_list'));
     }
-    public function change_status($id)
+
+    public function change_status()
     {
-        $status = $this->input->post();
+        $status = $this->input->post('status');
+        $id = $this->input->post('id');
         
-            $change = $this->Admin_Model->change_status($id,$status);
+        $change = $this->Admin_Model->change_status($id,$status);
       
         redirect(base_url('admin-question_list'));
     }
+
     public function report_list()
     {
         $data['report'] = $this->Admin_Model->get_report();
@@ -92,13 +95,12 @@ class Admin_Report extends CI_Controller
         $this->load->view('admin-report/admin-report-list',$data);
         $this->load->view('admin/admin_footer');
     }
+
     public function filter_report()
     {
         $date = $this->input->post();
         echo json_encode($date);exit;
     }
-
-
 
 }
 ?>

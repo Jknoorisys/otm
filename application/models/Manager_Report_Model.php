@@ -74,7 +74,6 @@
                             ->join('quarters as quarter','quarter.id=reports.quarter_id','left')
                             ->join('users as user','user.id=reports.user_id','left')
                             ->where($where)
-                            ->or_where('reports.status', 'completed')
                             ->get('reports')
                             ->result_array();
         }

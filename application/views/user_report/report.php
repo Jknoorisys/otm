@@ -40,7 +40,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <?php if (!empty($questions)) { ?>
+                        <?php if (!empty($questions) && !empty($quarter)) { ?>
                             <h5 class="card-title text-center">Assessment Report ( <?= $quarter['month_start'] ?> - <?= $quarter['month_end'].', '. $quarter['year'] ?>) </h5>
                             <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
                                 
