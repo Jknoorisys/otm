@@ -127,6 +127,7 @@
             ];
 
             $data['reports'] = $this->Report->get_reports($where, $filter);
+
             $this->load->view('manager/manager_footer');
 			$this->load->view('manager_report/report_history', $data);
         }
@@ -168,19 +169,24 @@
 			if ($this->users_group_id == 13) {
 				$where = [
 					'reports.users_group_id' => '2',
-					'reports.status' => 'pending',
 					'user.tl_id' => $this->tl_id,
+					'reports.status IN ("pending", "completed")' => NULL,
 				];
+
+				// $where = "reports.users_group_id='2' AND user.tl_id=$this->tl_id AND (reports.status = 'inprogress' OR reports.status = 'completed')";
 			} else {
 				$where = [
 					'reports.users_group_id' => '2',
-					'reports.status' => 'inprogress',
+					'reports.status IN ("inprogress", "completed")' => NULL,
 				];
+				
+				// $where = "reports.users_group_id='2' AND (reports.status = 'inprogress' OR reports.status = 'completed')";
 			}
 
 			$data['filter'] = $filter;
             $data['reports'] = $this->Report->get_reports($where, $filter);
-            $this->load->view('manager/manager_footer');
+
+			$this->load->view('manager/manager_footer');
 			$this->load->view('manager_report/developer_reports', $data);
 		}
 

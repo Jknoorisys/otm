@@ -28,7 +28,7 @@
 														<td><?= $report['month_start'] ?></td>
                                                         <td><?= $report['month_end'] ?></td>
                                                         <td><?= $report['year'] ?></td>
-                                                        <td><?= $report['score'] == 0 ? $report['status'] : $report['score'] ?></td>
+                                                        <td><label class="label label-<?= $report['status'] == 'completed' ? 'success' : 'warning' ?>"><?= $report['score'] == 0 ? $report['status'] : $report['score'] ?></label></td>
 														<td>
                                                             <form action="<?= base_url('review-details') ?>" method="POST">
                                                                 <input type="hidden" name="report_id" value="<?= $report['id'] ?>">
