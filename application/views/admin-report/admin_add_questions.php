@@ -7,48 +7,35 @@
 					
 					<h4 class="card-title">Add Question</h4>
                                 <form class="m-t-20" action="<?= base_url('add_que_func') ?>" method="POST">
-                                    <div class="">
-									<div class="form-group m-b-30">
-									<label for="exampleFormControlSelect1">Select Group</label>
-									<select class="form-control" name="users_group_id" id="exampleFormControlSelect1">
-										<option selected value="">Select Group</option>
-										<option value="2">Developer</option>
-										<option value="4">Manager</option>
-										<option value="13">Team Lead</option>
-										
-
-									</select>
-								</div>
-								<!-- <div class="">
-									<div class="form-group m-b-30">
-									<label for="exampleFormControlSelect1">Select Quarter</label>
-									<select class="form-control" name="question_group_id" id="exampleFormControlSelect1">
-										<option selected value="">Select Quarter Group</option>
-									<?php foreach($grp as $grps){ ?>
-
-										<option value="<?= $grps['id'] ?>"><?= $grps['month_start'].'-'.$grps['month_end'].'-'.$grps['year']?></option>
-										
-										<?php } ?>
-
-									</select>
-								</div> -->
-							</div><br>
+									<div class="row">
+										<div class="col-8">
+											<div class="form-group m-b-30">
+												<label for="exampleFormControlSelect1">Select User Group</label>
+												<select class="form-control" name="users_group_id" id="exampleFormControlSelect1" required>
+													<option selected value="">Select Group</option>
+													<option value="4">Manager</option>
+													<option value="13">Team Lead</option>
+													<option value="2">Developer</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<br>
                                         <div class="email-repeater form-group">
                                             <div data-repeater-list="repeater-group">
                                                 <div data-repeater-item class="row m-b-15">
-                                                    <div class="col-md-10">
-
-                                                        <input type="text" name="quet" class="form-control" id="email" placeholder="question">
-                         
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="quet" class="form-control" id="email" placeholder="Enter Question">
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <button data-repeater-delete="" class="btn btn-danger waves-effect waves-light" type="button"><i class="ti-close"></i>
+                                                        <button data-repeater-delete="" class="btn btn-noori
+														 waves-effect waves-light" type="button"><i class="ti-close"></i>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" data-repeater-create="" class="btn btn-info waves-effect waves-light">Add Question
-                                            </button>
+										
+                                            <button type="button" data-repeater-create="" class="btn btn-noori waves-effect waves-light"><i class="ti-plus"></i></button>
                                         </div>
                                         
                                         <div class="form-group">
