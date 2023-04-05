@@ -70,7 +70,7 @@
 						} else {
 							$data = [
 								'report_id' => $report_id,
-								'question_group' => $question_group,
+								'quarter_id' => $quarter_id,
 								'user_id' => $this->login_id,
 								'users_group_id' => $this->users_group_id,
 								'question_id' => $question_id,
@@ -223,6 +223,66 @@
             }
 		}
 
+		public function tlReport()
+		{
+			$data['users'] = $this->Report->get_user_details($this->tl_id, $this->manager_email);
+
+			if ((is_array($_POST) && empty($_POST))) {
+				$filter = array(
+					"name"           => '',
+				);
+			} else {
+				$filter = array(
+					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
+				);
+			}
+
+			
+			$where = [
+				'reports.users_group_id' => '13',
+				'reports.status IN ("pending", "completed")' => NULL,
+			];
+
+			$data['filter'] = $filter;
+            $data['reports'] = $this->Report->get_reports($where, $filter);
+
+			$this->load->view('manager/manager_footer');
+			$this->load->view('manager_report/tl_reports', $data);
+		}
+
+		public function tlReviewDetails()
+		{
+			$report_id = $this->input->post('report_id');
+			$report_status = $this->input->post('report_status');
+			$user_id = $this->input->post('user_id');
+			
+
+            if ($report_id && $report_status) {
+                $where = [
+                    'sc.user_id' => $user_id,
+                    'sc.users_group_id' => '13',
+                    'sc.report_id' => $report_id
+                ];
+
+                $data['reviews'] = $this->Report->get_reviews($where);
+
+				if ($report_status == 'pending') {
+					$this->load->view('manager/manager_footer');
+			    	$this->load->view('manager_report/manager_tl_review', $data);
+				} elseif ($report_status == 'inprogress') {
+					$this->load->view('manager/manager_footer');
+			    	$this->load->view('manager_report/ceo_tl_review', $data);
+				} else{
+					$this->load->view('manager/manager_footer');
+			    	$this->load->view('manager_report/tl_report_details', $data);
+				}
+                
+            } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('manager-developer-report'));
+            }
+		}
+
 		public function AddDeveloperReview()
 		{
 			$review_id = $this->input->post('review_id');
@@ -290,6 +350,59 @@
 			} else {
 					$this->session->set_tempdata('failure', 'Retry!', 2);
 					redirect(base_url('manager-developer-report'));
+			}
+		}
+
+		public function AddTlReview()
+		{
+			$review_id = $this->input->post('review_id');
+			$question_ids = $this->input->post('question_id');
+			$rating = $this->input->post('rating');
+			$comment = $this->input->post('comment');
+			$quarter_id = $this->input->post('quarter_id');
+			$report_id = $this->input->post('report_id');
+			$toatl = count($question_ids) * 5;
+
+			if ($report_id && $review_id) {
+					if ($question_ids) {
+						$sum = 0;
+						foreach ($question_ids as $question_id) {
+							$sum = $rating[$question_id] + $sum;
+							$data = [
+								'manager_comment' => $comment[$question_id],
+								'manager_rating' => $rating[$question_id],
+								'status' => 'inprogress',
+								'updated_at' => date('Y-m-d H:i:s')
+							];	
+							
+							$update = $this->Report->update_review($data, $review_id[$question_id]);
+						}
+
+						if ($update) {
+							
+							$update_data = [
+								'manager_total' => $sum,
+								'manager_percentage' => ($sum * 100) / $toatl,
+								'status' => 'inprogress',
+								'updated_at' => date('Y-m-d H:i:s')
+							];
+							
+							$this->Report->update_report($update_data, $report_id);
+							
+							$this->session->set_userdata('isSubmitted', 1);
+							$this->session->set_tempdata('add', 'Review Submitted!', 2);
+							redirect(base_url('manager-add-tl-review'));
+						} else {
+							$this->session->set_tempdata('failure', 'Retry!', 2);
+							redirect(base_url('manager-tl-report'));
+						}
+					} else {
+						$this->session->set_tempdata('failure', 'Retry!', 2);
+						redirect(base_url('manager-tl-report'));
+					}
+			} else {
+					$this->session->set_tempdata('failure', 'Retry!', 2);
+					redirect(base_url('manager-tl-report'));
 			}
 		}
     }

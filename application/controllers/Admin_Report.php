@@ -4,20 +4,34 @@ class Admin_Report extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-			$this->load->model('Admin_Model');
-			// $this->load->model('manager_model');
+        $this->load->model('manager_model');
+        $this->load->model('Admin_Model');
+        $this->load->model('Manager_Report_Model', 'Report');
 
+        if ($this->session->userdata('isLogin') == 1 && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') == 1) {
+            $this->login_id = $this->session->userdata('id');
+            $this->group_id = $this->session->userdata('users_group_id');
+            $this->tl_id = $this->group_id == 13 ? $this->login_id : '';
+            $this->manager_email = $this->session->userdata('email');
+
+            $projects['login_id'] = $this->session->userdata('id');
+            $projects['fetch'] = $this->manager_model->get_project_details();
+            $projects['users'] = $this->manager_model->get_user_details($this->tl_id, $this->manager_email);
+            $this->load->view('admin/admin_header', $projects);
+            $this->load->view('admin/admin_menubar');
+        } else {
+            redirect(base_url());
+        }
     }
+
     public function add_questions()
     {
         $data['grp'] = $this->Admin_Model->group_id();
-        // echo json_encode($data['grp']);exit;
-        $this->load->view('admin/admin_header');
-	    $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin_add_questions',$data);
-	    $this->load->view('admin/admin_footer');
-
+        
+        $this->load->view('admin_report/admin_add_questions',$data);
+        $this->load->view('admin/admin_footer');
     }
+
     public function add_que_func()
     {
         // echo json_encode($this->input->post());exit;
@@ -36,36 +50,31 @@ class Admin_Report extends CI_Controller
                 );
                 $ids = $this->Admin_Model->add_que_func($grp);//$Ids is array of returned id
                }
-            //    echo json_encode($grp);exit;
-            $this->load->view('admin/admin_header');
-            $this->load->view('admin/admin_menubar');
-            $this->load->view('admin-report/admin_add_questions',$data);
+
             $this->load->view('admin/admin_footer');
+            $this->load->view('admin_report/admin_add_questions',$data);
         }
         
     
         
     }
+
     public function question_list()
     {
             $data['question'] = $this->Admin_Model->get_questions();
-            // echo json_encode($data['question']);exit;
-            $this->load->view('admin/admin_header');
-            $this->load->view('admin/admin_menubar');
-            $this->load->view('admin-report/admin_question_list',$data);
+            
+            $this->load->view('admin_report/admin_question_list',$data);
             $this->load->view('admin/admin_footer');
     }
+
     public function edit_question($id)
     {
-        // echo json_encode($this->input->post());exit;
-        
         $info['q'] = $this->Admin_Model->edit_question($id);
-        // echo json_encode($info['q']);exit;
-        $this->load->view('admin/admin_header');
-        $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin_question_list',$info);
+
+        $this->load->view('admin_report/admin_question_list',$info);
         $this->load->view('admin/admin_footer');
     }
+
     public function update_question($id)
     {
         $question = $this->input->post();
@@ -90,9 +99,8 @@ class Admin_Report extends CI_Controller
     {
         $data['report'] = $this->Admin_Model->get_report();
         $data['username'] = $this->Admin_Model->get_username();
-        $this->load->view('admin/admin_header');
-        $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin-report-list',$data);
+
+        $this->load->view('admin_report/admin-report-list',$data);
         $this->load->view('admin/admin_footer');
     }
 
@@ -104,5 +112,124 @@ class Admin_Report extends CI_Controller
 
     }
 
+    public function tlReport()
+    {
+       
+            $filter = array(
+                "name"           => '',
+            );
+			
+			$where = [
+				'reports.users_group_id' => '13',
+				'reports.status IN ("inprogress", "completed")' => NULL,
+			];
+
+			$data['filter'] = $filter;
+            $data['reports'] = $this->Report->get_reports($where, $filter);
+
+			$this->load->view('admin/admin_footer');
+			$this->load->view('admin_report/tl_reports', $data);
+    }
+
+    public function tlReviewDetails()
+    {
+        $report_id = $this->input->post('report_id');
+			$report_status = $this->input->post('report_status');
+			$user_id = $this->input->post('user_id');
+			
+
+            if ($report_id && $report_status) {
+                $where = [
+                    'sc.user_id' => $user_id,
+                    'sc.users_group_id' => '13',
+                    'sc.report_id' => $report_id
+                ];
+
+                $data['reviews'] = $this->Report->get_reviews($where);
+
+				if ($report_status == 'inprogress') {
+					$this->load->view('admin/admin_footer');
+			    	$this->load->view('admin_report/admin_tl_review', $data);
+				} elseif ($report_status == 'completed') {
+					$this->load->view('admin/admin_footer');
+			    	$this->load->view('admin_report/tl_report_details', $data);
+				}
+            } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('admin-tl-report'));
+            }
+    }
+
+    public function AddTlReview()
+    {
+        $review_id = $this->input->post('review_id');
+        $question_ids = $this->input->post('question_id');
+        $rating = $this->input->post('rating');
+        $comment = $this->input->post('comment');
+        $quarter_id = $this->input->post('quarter_id');
+        $report_id = $this->input->post('report_id');
+        $toatl = count($question_ids) * 5;
+
+        if ($report_id && $review_id) {
+                if ($question_ids) {
+                    $sum = 0;
+                    foreach ($question_ids as $question_id) {
+                        $sum = $rating[$question_id] + $sum;
+                        $data = [
+                            'ceo_comment' => $comment[$question_id],
+                            'ceo_rating' => $rating[$question_id],
+                            'status' => 'completed',
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];	
+                        
+                        $update = $this->Report->update_review($data, $review_id[$question_id]);
+                    }
+
+                    if ($update) {
+                        
+                        $update_data = [
+                            'ceo_total' => $sum,
+                            'ceo_percentage' => ($sum * 100) / $toatl,
+                            'status' => 'completed',
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];
+                        
+                        $this->Report->update_report($update_data, $report_id);
+                        
+                        $this->session->set_userdata('isSubmitted', 1);
+                        $this->session->set_tempdata('add', 'Review Submitted!', 2);
+                        redirect(base_url('admin-add-tl-review'));
+                    } else {
+                        $this->session->set_tempdata('failure', 'Retry!', 2);
+                        redirect(base_url('admin-tl-report'));
+                    }
+                } else {
+                    $this->session->set_tempdata('failure', 'Retry!', 2);
+                    redirect(base_url('admin-tl-report'));
+                }
+        } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('admin-tl-report'));
+        }
+    }
+
+    public function managerReport()
+    {
+    
+            $filter = array(
+                "name"           => '',
+            );
+			
+			$where = [
+				'reports.users_group_id' => '4',
+				'reports.status IN ("inprogress", "completed")' => NULL,
+			];
+
+			$data['filter'] = $filter;
+            $data['reports'] = $this->Report->get_reports($where, $filter);
+
+			$this->load->view('admin/admin_footer');
+			$this->load->view('admin_report/maanger_reports', $data);
+    }
 }
 ?>

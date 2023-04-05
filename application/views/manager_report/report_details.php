@@ -33,12 +33,12 @@
                                                 <div class="col-8">
                                                     <div class="form-group">
                                                         <label>TL Ratings</label>
-                                                        <p><?= $review['TL_comment'] ?  $review['TL_comment'] : '' ?></p>
+                                                        <p><?= $review['tl_comment'] ?  $review['tl_comment'] : '' ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 mt-4">
                                                     <?php for ($i = 1; $i <= 5; $i++) {
-                                                        if ($i <= $review['TL_rating']) {
+                                                        if ($i <= $review['tl_rating']) {
                                                             echo '<i class="fas fa-star mr-1 text-noori"></i>';
                                                         } else {
                                                             echo '<i class="fas fa-star mr-1 text-grey"></i>';

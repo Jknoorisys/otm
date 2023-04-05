@@ -73,8 +73,6 @@ $route['manager-tl-report'] = 'Manager_Report/tlReport';
 $route['manager-tl-review-details'] = 'Manager_Report/tlReviewDetails';
 
 
-
-
 // Admin panel
 $route['admin-add-quest'] = 'Admin_Report/add_questions';
 $route['add_que_func'] = 'Admin_Report/add_que_func';
@@ -109,5 +107,14 @@ $route['admin-delete-leave/(:any)'] = 'Admin_Leave/admin_delete_leave/$1';;
 $route['admin-leave-dashboard'] = 'Admin_Leave/admin_leave_dashboard';
 
 // Admin panel
-$route['admin-report'] = 'Admin_Report/add_questions';
+$route['admin-question'] = 'Admin_Report/add_questions';
 $route['add_que_func'] = 'Admin_Report/add_que_func';
+
+$route['admin-add-manager-review'] = 'Admin_Report/AddManagerReview';
+$route['admin-add-tl-review'] = 'Admin_Report/AddTlReview';
+
+$route['admin-manager-report'] = 'Admin_Report/managerReport';
+$route['admin-manager-review-details'] = 'Admin_Report/managerReviewDetails';
+
+$route['admin-tl-report'] = 'Admin_Report/tlReport';
+$route['admin-tl-review-details'] = 'Admin_Report/tlReviewDetails';
