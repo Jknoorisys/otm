@@ -293,6 +293,7 @@
 
 			if ($report_id && $review_id) {
 					if (!empty($question_ids)) {
+						$total = count($question_ids) * 5;
 						$sum = 0;
 						foreach ($question_ids as $question_id) {
 							$sum = $rating[$question_id] + $sum;
@@ -317,16 +318,23 @@
 
 						if ($update) {
 							if ($this->users_group_id == 13) {
+								$wtg = $this->Report->get_tl_wtg();
+
 								$update_data = [
-									'tl_total' => $sum,
-									'tl_percentage' => ($sum * 100) / (count($question_ids) * 5),
+									'tl_total' => $total - ($total * $wtg['weightage']),
+									'tl_percentage' => $sum - ($sum * $wtg['weightage']),
 									'status' => 'inprogress',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
 							} else {
+								$wtg = $this->Report->get_manager_wtg();
+								$report = $this->Report->get_report($report_id);
+								$score = $report['dev_percentage'] + $report['tl_percentage'] + ($sum - ($sum * $wtg['weightage']));
+								$score_percent = ( $score * 100 ) / ($report['dev_total'] + $report['tl_total'] + ($total - ($total * $wtg['weightage'])));
 								$update_data = [
-									'manager_total' => $sum,
-									'manager_percentage' => ($sum * 100) / (count($question_ids) * 5),
+									'manager_total' => $total - ($total * $wtg['weightage']),
+									'manager_percentage' => $sum - ($sum * $wtg['weightage']),
+									'score' => $score_percent,
 									'status' => 'completed',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
@@ -362,6 +370,7 @@
 
 			if ($report_id && $review_id) {
 					if ($question_ids) {
+						$total = count($question_ids) * 5;
 						$sum = 0;
 						foreach ($question_ids as $question_id) {
 							$sum = $rating[$question_id] + $sum;
@@ -377,9 +386,10 @@
 
 						if ($update) {
 							
+							$wtg = $this->Report->get_tl_wtg();
 							$update_data = [
-								'manager_total' => $sum,
-								'manager_percentage' => ($sum * 100) / (count($question_ids) * 5),
+								'manager_total' => $total - ($total * $wtg['weightage']),
+								'manager_percentage' => $sum - ($sum * $wtg['weightage']),
 								'status' => 'inprogress',
 								'updated_at' => date('Y-m-d H:i:s')
 							];

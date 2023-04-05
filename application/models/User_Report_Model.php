@@ -61,5 +61,28 @@
                             ->get('reviews as sc')
                             ->result_array();
         }
+
+        // get report by id
+        public function get_report($report_id)
+        {
+            return $this->db->where('id', $report_id)
+                            ->get('reports')
+                            ->row_array();
+        }
+        
+        // get wtgs
+        public function get_dev_wtg()
+        {
+            return $this->db->where('users_group_id', '2')
+                            ->get('weightage')
+                            ->row_array();
+        }
+
+        public function get_tl_wtg()
+        {
+            return $this->db->where('users_group_id', '13')
+                            ->get('weightage')
+                            ->row_array();
+        }
     }
 ?>

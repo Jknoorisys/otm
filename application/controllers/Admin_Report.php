@@ -215,9 +215,11 @@ class Admin_Report extends CI_Controller
 
         if ($report_id && $review_id) {
                 if ($question_ids) {
+                    $total = count($question_ids) * 5;
                     $sum = 0;
                     foreach ($question_ids as $question_id) {
                         $sum = $rating[$question_id] + $sum;
+                        
                         $data = [
                             'ceo_comment' => $comment[$question_id],
                             'ceo_rating' => $rating[$question_id],
@@ -229,10 +231,16 @@ class Admin_Report extends CI_Controller
                     }
 
                     if ($update) {
+                        $wtg = $this->Report->get_ceo_wtg();
                         
+                        $report = $this->Report->get_report($report_id);
+                        $score = $report['tl_percentage'] + $report['manager_percentage'] + ($sum - ($sum * $wtg['weightage']));
+                        $score_percent = ( $score * 100 ) / ($report['tl_total'] + $report['manager_total'] + ($total - ($total * $wtg['weightage'])));
+                       
                         $update_data = [
-                            'ceo_total' => $sum,
-                            'ceo_percentage' => ($sum * 100) / (count($question_ids) * 5),
+                            'ceo_total' => $total - ($total * $wtg['weightage']) ,
+                            'ceo_percentage' => $sum - ($sum * $wtg['weightage']),
+                            'score' => $score_percent,
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
@@ -309,12 +317,11 @@ class Admin_Report extends CI_Controller
         $question_ids = $this->input->post('question_id');
         $rating = $this->input->post('rating');
         $comment = $this->input->post('comment');
-        $quarter_id = $this->input->post('quarter_id');
         $report_id = $this->input->post('report_id');
-        // $toatl = count($question_ids) * 5;
 
         if ($report_id && $review_id) {
                 if ($question_ids) {
+                    $total = count($question_ids) * 5;
                     $sum = 0;
                     foreach ($question_ids as $question_id) {
                         $sum = $rating[$question_id] + $sum;
@@ -329,10 +336,16 @@ class Admin_Report extends CI_Controller
                     }
 
                     if ($update) {
+                        $wtg = $this->Report->get_ceo_wtg();
+
+                        $report = $this->Report->get_report($report_id);
+                        $score = $report['manager_percentage'] + ($sum - ($sum * $wtg['weightage']));
+                        $score_percent = ( $score * 100 ) / ($report['manager_total'] + ($total - ($total * $wtg['weightage'])));
                         
                         $update_data = [
-                            'ceo_total' => $sum,
-                            'ceo_percentage' => ($sum * 100) / (count($question_ids) * 5),
+                            'ceo_total' => $total - ($total * $wtg['weightage']) ,
+                            'ceo_percentage' => $sum - ($sum * $wtg['weightage']),
+                            'score' => $score_percent,
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
@@ -358,6 +371,7 @@ class Admin_Report extends CI_Controller
     public function reportDetails()
     {
         $report_id = $this->input->post('report_id');
+
         $report_status = $this->input->post('report_status');
         $user_id = $this->input->post('user_id');
         
