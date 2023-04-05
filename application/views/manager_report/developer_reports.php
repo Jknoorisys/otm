@@ -5,7 +5,7 @@
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
                                     <div class="container">
-										<h2 class="card-title " align="center">Developer Review History</h2>
+										<h2 class="card-title " align="center">Developer Report History</h2>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,15 @@
 	<?php if($this->session->tempdata('failure')){ ?> 
 		Swal.fire({
 		icon: 'error',
-		title: 'Something went wrong, Please try again!',
+		title: 'Failed to Submit Review!',
+		})
+	<?php } ?>
+</script>
+<script>
+	<?php if($this->session->tempdata('add')){ ?> 
+		Swal.fire({
+		icon: 'success',
+		title: 'Review SSubmited!',
 		})
 	<?php } ?>
 </script>

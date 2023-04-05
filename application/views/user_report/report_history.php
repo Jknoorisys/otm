@@ -5,7 +5,7 @@
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
                                     <div class="container">
-										<h2 class="card-title " align="center">Review History</h2>
+										<h2 class="card-title " align="center">Report History</h2>
                                     </div>
                                 </div>
                             </div>
