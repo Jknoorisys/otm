@@ -122,7 +122,7 @@
                                                             <form action="<?= base_url('admin-report-publish') ?>" method="POST">
                                                                 <input type="hidden" name="id" value="<?= $quarter['id'] ?>">
                                                                 <input type="hidden" name="is_published" value="<?= $quarter['is_published'] == '0' ? '1' : '0' ?>">
-                                                                <button id="publish<?= $quarter['id'] ?>" type="submit" data-publish="<?= $quarter['is_published'] == '0' ? '0' : '1' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn btn-<?= $quarter['is_published'] == '1' ? 'secondary' : 'warning' ?> btn-circle"><i class="fa fa-<?= $quarter['is_published']== '1' ? 'check' : 'times'?>"></i></button>
+                                                                <button type="submit" data-publish="<?= $quarter['is_published'] == '0' ? '0' : '1' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn btn-<?= $quarter['is_published'] == '1' ? 'secondary' : 'warning' ?> btn-circle"><i class="fa fa-<?= $quarter['is_published']== '1' ? 'check' : 'times'?>"></i></button>
                                                             </form>
                                                     </div>
                                                     
@@ -168,6 +168,7 @@
         var name = $(this).data("name");
         let status = $(this).data('status');
         let id = $(this).data('id');
+        console.log(id);
         event.preventDefault();
         swal({
                 title: "Are You Sure",
@@ -184,7 +185,7 @@
     });
 </script>
 <script>
-    $('#publish').click(function(event) {
+    $('.btn-circle').click(function(event) {
         var form = $(this).closest("form");
         var name = $(this).data("name");
         let publish = $(this).data('publish');
@@ -192,7 +193,7 @@
         event.preventDefault();
         swal({
                 title: "Are You Sure",
-                text: (publish == '0') ? "You want to Publish the Report ?" : "You want to Hide the report ?",
+                text: (publish == '0') ? "You want to Publish this Report ?" : "You want to Hide this report ?",
                 icon: "warning",
                 buttons: ["Cancel", "Yes"],
                 dangerMode: true,
