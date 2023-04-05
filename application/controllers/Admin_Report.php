@@ -141,7 +141,7 @@ class Admin_Report extends CI_Controller
         $month['month_start'] = $dateObj1 ? $dateObj1->format('F') : '';
         // echo json_encode($mstart);exit;
 
-        $end_month = $this->input->post('month_end');
+        $end_month = $this->input->post('month_end') ? explode('-',($this->input->post('month_end'))) : '';
         $dateObj2   = $end_month ? DateTime::createFromFormat('!m', $end_month[1]) : '';
         $month['month_end'] = $dateObj2 ? $dateObj2->format('F') : '';
         $month['year'] = $this->input->post('year');

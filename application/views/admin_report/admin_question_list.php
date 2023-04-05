@@ -120,7 +120,7 @@
                                                                     <form action="<?= base_url('admin-change-status') ?>" method="POST">
                                                                         <input type="hidden" name="id" value="<?= $question['id'] ?>">
                                                                         <input type="hidden" name="status" value="<?= $question['status'] == 'active' ? 'inactive' : 'active' ?>">
-                                                                        <button type="submit" data-status="<?= $question['status'] == 'active' ? 'active' : 'inactive' ?>" data-id="<?= $question['id'] ?>" data-name="<?= $question['question'] ?>" class="btn block_confirm btn-sm"><input type="checkbox" id="switch" <?= $question['status'] == 'inactive' ? 'checked' : '' ?> /><label class="noori-lable" for="switch">Toggle</label></button>
+                                                                        <button type="submit" data-status="<?= $question['status'] == 'active' ? 'active' : 'inactive' ?>" data-id="<?= $question['id'] ?>" data-name="<?= $question['question'] ?>" class="btn block_confirm btn-sm"><input type="checkbox" id="switch" <?= $question['status'] == 'active' ? 'checked' : '' ?> /><label class="noori-lable" for="switch">Toggle</label></button>
                                                                     </form>
                                                                 </div>
                                                             </div>
