@@ -289,12 +289,10 @@
 			$question_ids = $this->input->post('question_id');
 			$rating = $this->input->post('rating');
 			$comment = $this->input->post('comment');
-			$quarter_id = $this->input->post('quarter_id');
 			$report_id = $this->input->post('report_id');
-			$toatl = count($question_ids) * 5;
 
 			if ($report_id && $review_id) {
-					if ($question_ids) {
+					if (!empty($question_ids)) {
 						$sum = 0;
 						foreach ($question_ids as $question_id) {
 							$sum = $rating[$question_id] + $sum;
@@ -321,14 +319,14 @@
 							if ($this->users_group_id == 13) {
 								$update_data = [
 									'tl_total' => $sum,
-									'tl_percentage' => ($sum * 100) / $toatl,
+									'tl_percentage' => ($sum * 100) / (count($question_ids) * 5),
 									'status' => 'inprogress',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
 							} else {
 								$update_data = [
 									'manager_total' => $sum,
-									'manager_percentage' => ($sum * 100) / $toatl,
+									'manager_percentage' => ($sum * 100) / (count($question_ids) * 5),
 									'status' => 'completed',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
@@ -336,7 +334,6 @@
 							
 							$this->Report->update_report($update_data, $report_id);
 							
-							$this->session->set_userdata('isSubmitted', 1);
 							$this->session->set_tempdata('add', 'Review Submitted!', 2);
 							redirect(base_url('manager-add-developer-review'));
 						} else {
@@ -348,8 +345,8 @@
 						redirect(base_url('manager-developer-report'));
 					}
 			} else {
-					$this->session->set_tempdata('failure', 'Retry!', 2);
-					redirect(base_url('manager-developer-report'));
+				$this->session->set_tempdata('failure', 'Retry!', 2);
+				redirect(base_url('manager-developer-report'));
 			}
 		}
 
@@ -361,7 +358,7 @@
 			$comment = $this->input->post('comment');
 			$quarter_id = $this->input->post('quarter_id');
 			$report_id = $this->input->post('report_id');
-			$toatl = count($question_ids) * 5;
+			// $toatl = count($question_ids) * 5;
 
 			if ($report_id && $review_id) {
 					if ($question_ids) {
@@ -382,14 +379,13 @@
 							
 							$update_data = [
 								'manager_total' => $sum,
-								'manager_percentage' => ($sum * 100) / $toatl,
+								'manager_percentage' => ($sum * 100) / (count($question_ids) * 5),
 								'status' => 'inprogress',
 								'updated_at' => date('Y-m-d H:i:s')
 							];
 							
 							$this->Report->update_report($update_data, $report_id);
 							
-							$this->session->set_userdata('isSubmitted', 1);
 							$this->session->set_tempdata('add', 'Review Submitted!', 2);
 							redirect(base_url('manager-add-tl-review'));
 						} else {

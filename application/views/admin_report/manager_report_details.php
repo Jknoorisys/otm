@@ -28,39 +28,6 @@
                                         <div class="row mb-2">
                                             <h6><?= $review['question'] ?></h6>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <div class="form-group">
-                                                    <label>Developer Ratings</label>
-                                                    <p><?= $review['dev_comment'] ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 mt-4">
-                                                <?php for ($i = 1; $i <= 5; $i++) {
-                                                    if ($i <= $review['dev_rating']) {
-                                                        echo '<i class="fas fa-star mr-1 text-noori"></i>';
-                                                    } else {
-                                                        echo '<i class="fas fa-star mr-1 text-grey"></i>';
-                                                    }
-                                                } ?>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <div class="form-group">
-                                                    <label>TL Ratings</label>
-                                                    <p><?= $review['tl_comment'] ?  $review['tl_comment'] : '' ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 mt-4">
-                                                <?php for ($i = 1; $i <= 5; $i++) {
-                                                    if ($i <= $review['tl_rating']) {
-                                                        echo '<i class="fas fa-star mr-1 text-noori"></i>';
-                                                    } else {
-                                                        echo '<i class="fas fa-star mr-1 text-grey"></i>';
-                                                    }
-                                                } ?>
-                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-8">
@@ -72,6 +39,24 @@
                                             <div class="col-4 mt-4">
                                                 <?php for ($i = 1; $i <= 5; $i++) {
                                                     if ($i <= $review['manager_rating']) {
+                                                        echo '<i class="fas fa-star mr-1 text-noori"></i>';
+                                                    } else {
+                                                        echo '<i class="fas fa-star mr-1 text-grey"></i>';
+                                                    }
+                                                } ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label>CEO Ratings</label>
+                                                    <p><?= $review['ceo_comment'] ? $review['ceo_comment'] : '' ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mt-4">
+                                                <?php for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $review['ceo_rating']) {
                                                         echo '<i class="fas fa-star mr-1 text-noori"></i>';
                                                     } else {
                                                         echo '<i class="fas fa-star mr-1 text-grey"></i>';
@@ -100,7 +85,7 @@
 	<?php if($this->session->tempdata('failure')){ ?> 
 		Swal.fire({
 		icon: 'error',
-		title: 'Failed to Submit Review!',
+		title: 'Unable to Submit Review, Please Try Again!',
 		})
 	<?php } ?>
 </script>

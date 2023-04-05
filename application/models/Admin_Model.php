@@ -44,33 +44,40 @@
 
         public function get_report()
         {
-            
-
             return $this->db->select('r.*,q.month_start as smonth,q.month_end as emonth,q.year as qyear,u.name as uname')
                     ->join('quarters as q','q.id=r.quarter_id','left')
                     ->join('users as u','u.id=r.user_id','left')
                     ->get('reports as r')
                     ->result_array();
         }
+
+        public function get_filtered_report($filter)
+        {
+            $this->db->select('r.*,q.month_start as smonth,q.month_end as emonth,q.year as qyear,users.name as uname')
+            ->join('quarters as q','q.id=r.quarter_id','left')
+            ->join('users','users.id=r.user_id','left');
+
+            if(!empty($filter['name'])) {
+				$this->db->where("r.user_id",$filter['name']);
+			}
+
+            if(!empty($filter['month_start'])) {
+				$this->db->where("q.month_start",$filter['month_start']);
+			}
+
+            if(!empty($filter['month_end'])) {
+				$this->db->where("q.month_end",$filter['month_end']);
+			}
+            
+            return $this->db->get('reports as r')
+                    ->result_array();
+        }
         
         public function get_username()
         {
-            return $this->db->get('users')
+            return $this->db->where_in('users_group_id',['2','4','13'])
+                    ->get('users')
                     ->result_array();
-        }
-
-        public function get_month()
-        {
-           
-        }
-        public function save_quarter($data)
-        {
-            $this->db->insert('quarters',$data);
-            return  $this->db->insert_id();
-        }
-        public function list_quarter()
-        {
-            return $this->db->get('quarters')->result_array();
         }
         public function change_quarter_status($id,$status)
         {

@@ -5,7 +5,7 @@
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
                                     <div class="container">
-										<h2 class="card-title " align="center">TL Review History</h2>
+										<h2 class="card-title " align="center">TL Report History</h2>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
 												</tr>
 											</thead>
 										</table>
-										<h4 class="text-noori" align="center">No Developer Report Found!</h4>
+										<h4 class="text-noori" align="center">No TL Report Found!</h4>
 									<?php } ?>
 								</div>
                         	</div>
@@ -95,7 +95,15 @@
 	<?php if($this->session->tempdata('failure')){ ?> 
 		Swal.fire({
 		icon: 'error',
-		title: 'Something went wrong, Please try again!',
+		title: 'Failed to Submit Review!',
+		})
+	<?php } ?>
+</script>
+<script>
+	<?php if($this->session->tempdata('add')){ ?> 
+		Swal.fire({
+		icon: 'success',
+		title: 'Review Submited!',
 		})
 	<?php } ?>
 </script>

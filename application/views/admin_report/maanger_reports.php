@@ -5,7 +5,7 @@
                             <div class="card-body">
                                 <div class="d-md-flex align-items-center">
                                     <div class="container">
-										<h2 class="card-title " align="center">TL Report History</h2>
+										<h2 class="card-title " align="center">Manager Report History</h2>
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                                         <td><?= $report['year'] ?></td>
                                                         <td><label class="label label-<?= $report['status'] == 'completed' ? 'success' : 'warning' ?>"><?= $report['score'] == 0 ? $report['status'] : $report['score'] ?></label></td>
 														<td>
-                                                            <form action="<?= base_url('admin-tl-review-details') ?>" method="POST">
+                                                            <form action="<?= base_url('admin-manager-review-details') ?>" method="POST">
                                                                 <input type="hidden" name="report_id" value="<?= $report['id'] ?>">
 																<input type="hidden" name="report_status" value="<?= $report['status'] ?>">
 																<input type="hidden" name="user_id" value="<?= $report['user_id'] ?>">
@@ -56,7 +56,7 @@
 												</tr>
 											</thead>
 										</table>
-										<h4 class="text-noori" align="center">No TL Report Found!</h4>
+										<h4 class="text-noori" align="center">No Manager Report Found!</h4>
 									<?php } ?>
 								</div>
                         	</div>

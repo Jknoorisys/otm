@@ -125,11 +125,10 @@
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <button type="submit" class="btn btn-noori" <?= $this->session->userdata('isSubmitted') ? 'disabled' : '' ;?> >Submit</button>
+                                <button type="submit" class="btn btn-noori" >Submit</button>
                             </form>
                         <?php } else { ?>
                             <h4 class="text-noori text-center v-middle">No Developer Review Found</h4>
-                            <?php $this->session->set_userdata('isSubmitted', 0); ?>
                         <?php } ?>
                     </div>
                 </div>
@@ -148,7 +147,7 @@
 	<?php if($this->session->tempdata('failure')){ ?> 
 		Swal.fire({
 		icon: 'error',
-		title: 'Unable to Submit Review, Please Try Again!',
+		title: 'Failed to Submit Review!',
 		})
 	<?php } ?>
 </script>

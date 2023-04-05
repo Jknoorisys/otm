@@ -50,7 +50,7 @@
 												</tr>
 											</thead>
 										</table>
-										<h4 class="text-noori" align="center">No Review Found!</h4>
+										<h4 class="text-noori" align="center">No Report Found!</h4>
 									<?php } ?>
 								</div>
                         	</div>
