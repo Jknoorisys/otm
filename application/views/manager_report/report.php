@@ -75,7 +75,7 @@
                                     </div>
                                 <?php } ?>
 
-                                <button type="submit" class="btn btn-noori" <?= $this->session->userdata('isSubmitted') ? 'disabled' : '' ;?> >Submit</button>
+                                <button type="submit" class="btn btn-noori" <?= $this->session->userdata('isSubmitted') == 1 ? 'disabled' : '' ;?> >Submit</button>
                             </form>
 
                         <?php } else { ?>
