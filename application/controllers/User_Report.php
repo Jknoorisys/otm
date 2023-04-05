@@ -32,7 +32,6 @@
            $developer_rating = $this->input->post('developer_rating');
            $developer_comment = $this->input->post('developer_comment');
            $quarter_id = $this->input->post('quarter_id');
-           $toatl = count($question_ids) * 5;
 
            $report_data = [
                 'quarter_id' => $quarter_id,
@@ -45,6 +44,7 @@
 
            if ($report_id) {
                 if ($question_ids) {
+                    $total = count($question_ids) * 5;
                     $sum = 0;
                     foreach ($question_ids as $question_id) {
                         $sum = $developer_rating[$question_id] + $sum;
@@ -63,9 +63,10 @@
                     }
 
                     if ($insert) {
+                        $wtg = $this->Report->get_dev_wtg();
                         $update_data = [
-                            'dev_total' => $sum,
-                            'dev_percentage' => ($sum * 100) / $toatl
+                            'dev_total' => $total - ($total * $wtg['weightage']) ,
+                            'dev_percentage' => $sum - ($sum * $wtg['weightage'])
                         ];
 
                         $this->Report->update_report($update_data, $report_id);

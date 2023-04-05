@@ -95,5 +95,42 @@
             return $this->db->where('id', $review_id)
                             ->update('reviews', $data);
         }
+
+        // get report by id
+        public function get_report($report_id)
+        {
+            return $this->db->where('id', $report_id)
+                            ->get('reports')
+                            ->row_array();
+        }
+
+        // get wtgs
+        public function get_dev_wtg()
+        {
+            return $this->db->where('users_group_id', '2')
+                            ->get('weightage')
+                            ->row_array();
+        }
+
+        public function get_tl_wtg()
+        {
+            return $this->db->where('users_group_id', '13')
+                            ->get('weightage')
+                            ->row_array();
+        }
+
+        public function get_manager_wtg()
+        {
+            return $this->db->where('users_group_id', '4')
+                            ->get('weightage')
+                            ->row_array();
+        }
+
+        public function get_ceo_wtg()
+        {
+            return $this->db->where('users_group_id', '1')
+                            ->get('weightage')
+                            ->row_array();
+        }
     }
 ?>
