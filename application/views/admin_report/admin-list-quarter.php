@@ -213,3 +213,23 @@
 	})
 <?php } ?>
 </script>
+<script>
+    <?php if($this->session->tempdata('success')){ ?> 
+	Swal.fire({
+	icon: 'success',
+	title: 'Quarter Published!',
+	})
+<?php } ?>
+<?php if($this->session->tempdata('unpublish')){ ?> 
+	Swal.fire({
+	icon: 'success',
+	title: 'Quarter Unpublished!',
+	})
+<?php } ?>
+<?php if($this->session->tempdata('failure')){ ?> 
+	Swal.fire({
+	icon: 'error',
+	title: 'Quarter Already Published!',
+	})
+<?php } ?>
+</script>

@@ -395,11 +395,27 @@ class Admin_Report extends CI_Controller
         $change = $this->Admin_Model->change_quarter_status($id,$status);
       
         redirect(base_url('admin-list-quarter'));
-    }public function report_publish()
+    }
+    
+    public function report_publish()
     {
         $publish = $this->input->post('is_published');
+        $is_published = $this->Admin_Model->is_published();
+        // echo count($is_published);exit;
+        if($publish == 1 && !empty($is_published) && (count($is_published) >= 1))
+        {
+            $this->session->set_tempdata('failure', 'Retry!', 2);
+            redirect(base_url('admin-list-quarter'));
+        }
+
         $id = $this->input->post('id');
         $change_key = $this->Admin_Model->change_publish_key($id,$publish);
+        if ($publish == 0) {
+            $this->session->set_tempdata('unpublish', 'Retry!', 2);
+        } else {
+            $this->session->set_tempdata('success', 'Retry!', 2);
+        }
+        
         redirect(base_url('admin-list-quarter'));
 
     }
