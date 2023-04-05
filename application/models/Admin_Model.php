@@ -94,9 +94,9 @@
             $query = $this->db->get('quarters')->result_array();
             return $query;
         }
-        public function save_quarter($quarter)
+        public function save_quarter($month)
         {
-            $this->db->insert('quarters',$quarter);
+            $this->db->insert('quarters',$month);
             return  $this->db->insert_id();
         }
         public function is_published()

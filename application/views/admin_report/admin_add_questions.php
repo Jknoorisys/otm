@@ -25,7 +25,7 @@
                                             <div data-repeater-list="repeater-group">
                                                 <div data-repeater-item class="row m-b-15">
                                                     <div class="col-md-8">
-                                                        <input type="text" name="quet" class="form-control" id="email" placeholder="Enter Question">
+                                                        <input type="text" name="quet" class="form-control" id="email" placeholder="Enter Question" required>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <button data-repeater-delete="" class="btn btn-noori
