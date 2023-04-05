@@ -99,6 +99,10 @@
             $this->db->insert('quarters',$quarter);
             return  $this->db->insert_id();
         }
+        public function is_published()
+        {
+            return $this->db->where('is_published','1')->get('quarters')->result_array();
+        }
     }
     
 ?>
