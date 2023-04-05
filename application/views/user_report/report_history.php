@@ -61,6 +61,12 @@
 
 
 <script>
+	<?php if($this->session->tempdata('add')){ ?> 
+		Swal.fire({
+		icon: 'success',
+		title: 'Review Submitted!',
+		})
+	<?php } ?>
 	<?php if($this->session->tempdata('failure')){ ?> 
 		Swal.fire({
 		icon: 'error',
