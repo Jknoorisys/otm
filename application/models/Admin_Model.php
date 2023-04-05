@@ -86,6 +86,9 @@
         }
         public function change_publish_key($id,$publish)
         {
+            if ($publish == 1) {
+                $this->db->set('already_published', 'yes');
+            }
             $query = $this->db->set('is_published', $publish)->where('id',$id)->update('quarters');
             return $query;
         }
@@ -102,6 +105,11 @@
         public function is_published()
         {
             return $this->db->where('is_published','1')->get('quarters')->result_array();
+        }
+
+        public function is_already_published($id)
+        {
+            return $this->db->where('already_published','yes')->where('id', $id)->get('quarters')->row_array();
         }
     }
     

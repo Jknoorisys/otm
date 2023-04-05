@@ -40,7 +40,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <?php if (!empty($questions) && !empty($quarter)) { ?>
+                        <?php if (!empty($questions) && !empty($quarter) && $this->session->userdata('isSubmitted') == 0) { ?>
                             <h5 class="card-title text-center">Assessment Report ( <?= $quarter['month_start'] ?> - <?= $quarter['month_end'].', '. $quarter['year'] ?>) </h5>
                             <form id="add-review" class="mt-4" action="<?= base_url('add-review') ?>" method="POST">
                                 
@@ -78,6 +78,8 @@
                                 <button type="submit" class="btn btn-noori" <?= $this->session->userdata('isSubmitted') == 1 ? 'disabled' : '' ;?> >Submit</button>
                             </form>
 
+                        <?php } elseif(!empty($questions) && !empty($quarter) && $this->session->userdata('isSubmitted') == 1) { ?>
+                            <h4 class="text-noori text-center v-middle">Report Already Submitted</h4>
                         <?php } else { ?>
                             <h4 class="text-noori text-center v-middle">No Assessment Report Found</h4>
                             <?php $this->session->set_userdata('isSubmitted', 0); ?>
