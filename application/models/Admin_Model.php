@@ -89,6 +89,16 @@
             $query = $this->db->set('is_published', $publish)->where('id',$id)->update('quarters');
             return $query;
         }
+        public function list_quarter()
+        {
+            $query = $this->db->get('quarters')->result_array();
+            return $query;
+        }
+        public function save_quarter($quarter)
+        {
+            $this->db->insert('quarters',$quarter);
+            return  $this->db->insert_id();
+        }
     }
     
 ?>

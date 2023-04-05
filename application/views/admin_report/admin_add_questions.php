@@ -35,11 +35,11 @@
                                                 </div>
                                             </div>
 										
-                                            <button type="button" data-repeater-create="" class="btn btn-noori waves-effect waves-light"><i class="ti-plus"></i></button>
+                                            <button type="button" data-repeater-create="" class="btn btn-noori"><i class="ti-plus"></i></button>
                                         </div>
                                         
                                         <div class="form-group">
-                                            <button class="btn btn-noori waves-effect waves-light block_confirm" type="submit">Submit
+                                            <button class="btn btn-noori" type="submit">Submit
                                             </button>
                                         </div>
                                     </div>
@@ -73,23 +73,5 @@
 <?php } ?>
 </script>
 
-<script>
-    $('.block_confirm').click(function(event) {
-        var form =  $(this).closest("form");
-        var name = $(this).data("name");
-        let status = $(this).data('status');
-        let id = $(this).data('id');
-        event.preventDefault();
-        Swal.fire({
-		    icon: 'success',
-		    title: 'Question Added!',
-		})
-        .then((willDelete) => {
-        if (willDelete) {
-            form.submit();
-        }
-        });
-    });
-</script>
 
 </html>
