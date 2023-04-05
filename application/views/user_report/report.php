@@ -103,20 +103,3 @@
 		})
 	<?php } ?>
 </script>
-
-<!-- <script>
-    $(document).ready(function() {
-        $('#add-review').submit(function() {
-            $('button[type="submit"]').prop('disabled', true);
-        });
-    });
-</script> -->
-
-<!-- <script>
-  // Disable the submit button after the form has been submitted
-  const form = document.querySelector('form');
-  form.addEventListener('submit', () => {
-    const submitButton = form.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-  });
-</script> -->

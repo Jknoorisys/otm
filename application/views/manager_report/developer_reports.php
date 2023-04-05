@@ -103,7 +103,7 @@
 	<?php if($this->session->tempdata('add')){ ?> 
 		Swal.fire({
 		icon: 'success',
-		title: 'Review SSubmited!',
+		title: 'Review Submited!',
 		})
 	<?php } ?>
 </script>
