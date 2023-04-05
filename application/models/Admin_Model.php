@@ -63,6 +63,15 @@
         {
            
         }
+        public function save_quarter($data)
+        {
+            $this->db->insert('quarters',$data);
+            return  $this->db->insert_id();
+        }
+        public function list_quarter()
+        {
+            return $this->db->get('quarters')->result_array();
+        }
     }
     
 ?>

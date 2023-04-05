@@ -103,6 +103,31 @@ class Admin_Report extends CI_Controller
         echo json_encode($explode);exit;
 
     }
+    public function add_quarter()
+    {
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/admin_menubar');
+        $this->load->view('admin-report/admin-add-quarter');
+        $this->load->view('admin/admin_footer');
+    }
+    public function save_quarter()
+    {
+        $quarter = $this->input->post();
+        // echo json_encode($quarter);exit;
+        $data = $this->Admin_Model->save_quarter($quarter);
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/admin_menubar');
+        $this->load->view('admin-report/admin-add-quarter');
+        $this->load->view('admin/admin_footer');
+    }
+    public function list_quarter()
+    {
+        $quarter['month'] = $this->Admin_Model->list_quarter();
+        // echo json_encode($quarter);exit;
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/admin_menubar');
+        $this->load->view('admin-report/admin-list-quarter',$quarter);
+        $this->load->view('admin/admin_footer');
+    }
 
 }
-?>

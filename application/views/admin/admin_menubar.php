@@ -15,8 +15,8 @@
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Manage Questions</span></li>
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-question_list') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Manage Questions</span></a></li>
-                                <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Publish Report</span></li>
-                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Publish Report</span></a></li>
+                                <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Manage Report</span></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-list-quarter') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Manage Report</span></a></li>
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Report History</span></li>
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-report-list') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Report History</span></a></li>
                             </ul> 
