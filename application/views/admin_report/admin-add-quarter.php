@@ -8,27 +8,27 @@
 					<h4 class="card-title">Add Quarter</h4>
                                 <form class="m-t-20" action="<?= base_url('admin-save-quarter') ?>" method="POST">
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="text" name="month_start" class="form-control" placeholder="Enter Start Month">
+                                            <input type="month" name="month_start" class="form-control" placeholder="Enter Start Month" required>
                                         </div>
 										</div>
-									</div>
-									<br>
-                                    <div class="row">
-										<div class="col-md-12">
+									
+									
+                                    
+										<div class="col-md-4">
 											<div class="form-group m-b-30">
-												<input type="text" name="month_end" class="form-control" placeholder="Enter End Month">
+												<input type="month" name="month_end" class="form-control" placeholder="Enter End Month" required>
 											</div>
 										</div>
-									</div>
-                                    <div class="row">
-										<div class="col-md-12">
+                                    
+										<div class="col-md-4">
 											<div class="form-group m-b-30">
-												<input type="text" name="year" class="form-control" placeholder="Enter Year">
+												<input type="text" id="txtWeight" maxlength="4" onkeyup="this.value = minmax(this.value, , 10000)" name="year" class="form-control" placeholder="Enter Year" required>
 											</div>
 										</div>
-									</div>
+										</div>
+									
                                         
                                         <div class="form-group">
                                             <button class="btn btn-noori" type="submit">Submit
@@ -100,5 +100,15 @@
 		});
 	});
 </script>
-
-</html>>
+<script type="text/javascript">
+function minmax(value, min, max) 
+{
+    if(parseInt(value) < min || isNaN(parseInt(value))) 
+        return min; 
+    else if(parseInt(value) > max) 
+        return max; 
+    else return value;
+}
+</script>
+<!-- <input type="text" name="textWeight" id="txtWeight" maxlength="5" onkeyup="this.value = minmax(this.value, 0, 100)"/> -->
+</html>

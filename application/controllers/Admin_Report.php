@@ -136,17 +136,22 @@ class Admin_Report extends CI_Controller
     }
     public function save_quarter()
     {
-        $quarter = $this->input->post();
-        // echo json_encode($quarter);exit;
-        $data = $this->Admin_Model->save_quarter($quarter);
+        $start_month = $this->input->post('month_start') ? explode('-',($this->input->post('month_start'))) : '';
+        $dateObj1   = $start_month ? DateTime::createFromFormat('!m', $start_month[1]) : '';
+        $month['month_start'] = $dateObj1 ? $dateObj1->format('F') : '';
+        // echo json_encode($mstart);exit;
+
+        $end_month = $this->input->post('month_end');
+        $dateObj2   = $end_month ? DateTime::createFromFormat('!m', $end_month[1]) : '';
+        $month['month_end'] = $dateObj2 ? $dateObj2->format('F') : '';
+        $month['year'] = $this->input->post('year');
+        $data = $this->Admin_Model->save_quarter($month);
         $this->session->set_tempdata('add_quarter', 'Quarter Added', 2);
         redirect(base_url('admin-list-quarter'));
     }
     public function list_quarter()
     {
         $quarter['month'] = $this->Admin_Model->list_quarter();
-        // echo json_encode($quarter);exit;
-        
         $this->load->view('admin_report/admin-list-quarter',$quarter);
         $this->load->view('admin/admin_footer');
     }
