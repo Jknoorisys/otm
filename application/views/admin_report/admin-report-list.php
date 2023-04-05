@@ -70,7 +70,7 @@
                                             <td><?= $r['smonth'] ?></td>
                                             <td><?= $r['emonth'] ?></td>
                                             <td><?= $r['qyear'] ?></td>
-                                            <td><?= $r['score'] ?></td>
+                                            <td><label class="label label-<?= $r['status'] == 'completed' ? 'success' : 'warning' ?>"><?= $r['score'] == 0 ? $r['status'] : $r['score'] ?></label></td>
                                             <td>
                                                 <form action="<?= base_url('admin-review-details') ?>" method="POST">
                                                     <input type="hidden" name="report_id" value="<?= $r['id'] ?>">
