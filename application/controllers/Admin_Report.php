@@ -354,4 +354,27 @@ class Admin_Report extends CI_Controller
                 redirect(base_url('admin-manager-report'));
         }
     }
+
+    public function reportDetails()
+    {
+        $report_id = $this->input->post('report_id');
+        $report_status = $this->input->post('report_status');
+        $user_id = $this->input->post('user_id');
+        
+
+        if ($report_id && $report_status) {
+            $where = [
+                'sc.user_id' => $user_id,
+                'sc.report_id' => $report_id
+            ];
+
+            $data['reviews'] = $this->Report->get_reviews($where);
+
+            $this->load->view('admin/admin_footer');
+            $this->load->view('admin_report/report_details', $data);
+        } else {
+            $this->session->set_tempdata('failure', 'Retry!', 2);
+            redirect(base_url('admin-report-list'));
+        }
+    }
 }

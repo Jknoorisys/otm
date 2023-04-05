@@ -74,6 +74,9 @@
                                             <td>
                                                 <form action="<?= base_url('admin-review-details') ?>" method="POST">
                                                     <input type="hidden" name="report_id" value="<?= $r['id'] ?>">
+                                                    <input type="hidden" name="report_status" value="<?= $r['status'] ?>">
+                                                    <input type="hidden" name="user_id" value="<?= $r['user_id'] ?>">
+                                                    
                                                     <button type="submit" class="text-noori btn-lg" style="border:none; background:transparent;"><i class="mdi mdi-eye"></i></button>
                                                 </form>
                                             </td>
