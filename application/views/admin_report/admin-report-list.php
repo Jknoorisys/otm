@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <form class="mt-4" action="<?= base_url('admin-search-report') ?>" method="POST">
+                    <form class="mt-4" action="<?= base_url('admin-report-list') ?>" method="POST">
                         <div class="row">
 
                             <div class="col-3">
@@ -19,8 +19,8 @@
                                     <label class="mr-sm-2" for="">Search By Name</label>
                                     <select class="custom-select mr-sm-2" name="by_user">
                                         <option selected value="">Choose...</option>
-                                            <?php foreach($username as $name) { ?>
-                                        <option value="<?=$name['id']?>"><?=$name['name']?></option>
+                                            <?php foreach($user as $name) { ?>
+                                        <option value="<?=$name['id']?>"  <?=($filter['name']==$name['id'])?"Selected":""?> ><?=$name['name']?></option>
                                             <?php }?>
                                     </select>
                                 </div>
@@ -29,20 +29,20 @@
                             <div class="col-3">
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search By Month Start</label>
-                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_start" value="<?php echo set_value('myMonthInput'); ?>">
+                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_start" value="<?= $filter['month_start'] ?>">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search By Month End</label>
-                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_end" value="<?php echo set_value('myMonthInput'); ?>">
+                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_end" value="<?= $filter['month_end'] ?>">
                                 </div>
                             </div>
 
                             <div class="col-2">
                                 <div class="form-group m-b-30" style="margin-top: 30px;">
                                     <button type="submit" class="btn btn-noori">search</button>
-                                    <a href="<?= base_url('admin-search-report') ?>" class="btn btn-secondary">Reset</a>
+                                    <a href="<?= base_url('admin-report-list') ?>" class="btn btn-secondary">Reset</a>
                                 </div>
                             </div>
 

@@ -97,19 +97,35 @@ class Admin_Report extends CI_Controller
 
     public function report_list()
     {
-        $data['report'] = $this->Admin_Model->get_report();
-        $data['username'] = $this->Admin_Model->get_username();
+        if ((is_array($_POST) && empty($_POST))) {
+            
+            $filter = array(
+                "name"           => '',
+                'month_start'    => '',
+                'month_end'      => ''
+            );
+        } else {
+            $by_month_start = $this->input->post('by_month_start') ? explode('-',($this->input->post('by_month_start'))) : '';
+            $dateObj1   = $by_month_start ? DateTime::createFromFormat('!m', $by_month_start[1]) : '';
+            $month_start = $dateObj1 ? $dateObj1->format('F') : '';
+    
+            $by_month_end = $this->input->post('by_month_end') ? explode('-',$this->input->post('by_month_end')) : '';
+            $dateObj1   = $by_month_end ? DateTime::createFromFormat('!m', $by_month_end[1]) : '';
+            $month_end = $dateObj1 ? $dateObj1->format('F') : '';
+
+            $filter = array(
+                "name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
+                'month_start'    => $month_start ? $month_start : '',
+                'month_end'      => $month_end ? $month_end : ''
+            );
+        }
+       
+        $data['filter'] = $filter;
+        $data['report'] = $this->Admin_Model->get_filtered_report($filter);
+        $data['user'] = $this->Admin_Model->get_username();
 
         $this->load->view('admin_report/admin-report-list',$data);
         $this->load->view('admin/admin_footer');
-    }
-
-    public function filter_report()
-    {
-        $date = $this->input->post('by_month_start');
-        $explode = explode($date,'-');
-        echo json_encode($explode);exit;
-
     }
 
     public function tlReport()
