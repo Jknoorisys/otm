@@ -1,20 +1,12 @@
 <?php 
     class Manager_Report_Model extends CI_Model{
         // get user details 
-        public function get_user_details($tl_id, $manager_email){
+        public function get_user_details($tl_id, $group_id){
 			if(!empty($tl_id)) {
 				$this->db->where("users.tl_id",$tl_id);
-			}
-
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
-			}
-
-			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
-				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
-			}
+			}else{
+                $this->db->where("users.users_group_id", $group_id);
+            }
 
 			return $this->db->select('*')
 							->order_by('name')
