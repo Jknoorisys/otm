@@ -31,7 +31,7 @@
 									</div>
                                         
                                         <div class="form-group">
-                                            <button class="btn btn-success waves-effect waves-light" type="submit">Submit
+                                            <button class="btn btn-noori" type="submit">Submit
                                             </button>
                                         </div>
                                     </div>

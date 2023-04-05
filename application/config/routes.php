@@ -86,6 +86,8 @@ $route['admin-search-report'] = 'Admin_Report/filter_report';
 $route['admin-add-quarter'] = 'Admin_Report/add_quarter';
 $route['admin-save-quarter'] = 'Admin_Report/save_quarter';
 $route['admin-list-quarter'] = 'Admin_Report/list_quarter';
+$route['admin-change-quarter-status'] = 'Admin_Report/change_quarter_status';
+$route['admin-report-publish'] = 'Admin_Report/report_publish';
 
 // Admin Manage OT
 $route['admin-dashboard'] = 'admin/dashboard';

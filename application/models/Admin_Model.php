@@ -72,6 +72,16 @@
         {
             return $this->db->get('quarters')->result_array();
         }
+        public function change_quarter_status($id,$status)
+        {
+            $query = $this->db->set('status', $status)->where('id',$id)->update('quarters');
+            return $query;
+        }
+        public function change_publish_key($id,$publish)
+        {
+            $query = $this->db->set('is_published', $publish)->where('id',$id)->update('quarters');
+            return $query;
+        }
     }
     
 ?>
