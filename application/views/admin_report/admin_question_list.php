@@ -61,8 +61,13 @@
                                     </div>
                                 </div>
                             </div>
-							
-							<div class="table-responsive">
+                            <div class="row justify-content-end">
+                                <div class="col-2">
+                                    <a href="<?= base_url('admin-question') ?>" class="btn btn-noori">Add Question</a>
+                                </div>
+                            </div><br>
+
+                            <div class="table-responsive">
                                 <div class="col-12">
 									<?php if(!empty($question)){ ?> 
 										<table class="table table-hover v-middle display wrap" data-order="[]" id="file_export">

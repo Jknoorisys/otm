@@ -19,6 +19,10 @@
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-rejected-ot') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Publish Report</span></a></li>
                                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Report History</span></li>
                                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-rejected-leave') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Report History</span></a></li>
+                                <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">TL Reports</span></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-tl-report') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">TL Reports</span></a></li>
+                                <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Manager Reports</span></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-manager-report') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Manager Reports</span></a></li>
                             </ul> 
 
                           <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Requested</span></li>
