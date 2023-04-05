@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2023 at 01:26 PM
+-- Generation Time: Apr 05, 2023 at 09:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -335,27 +335,6 @@ CREATE TABLE `questions` (
   `updated_at` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `users_group_id`, `question`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Developer Question 1', 'active', '', ''),
-(2, 2, 'Developer Question 2', 'active', '', ''),
-(3, 2, 'Developer Question 3', 'active', '', ''),
-(4, 2, 'Developer Question 4', 'active', '', ''),
-(5, 2, 'Developer Question 5', 'active', '', ''),
-(6, 13, 'TL Question 1', 'active', '', ''),
-(7, 13, 'TL Question 2', 'active', '', ''),
-(8, 13, 'TL Question 3', 'active', '', ''),
-(9, 13, 'TL Question 4', 'active', '', ''),
-(10, 13, 'TL Question 5', 'active', '', ''),
-(11, 4, 'Manager Question 1', 'active', '', ''),
-(12, 4, 'Manager Question 2', 'active', '', ''),
-(13, 4, 'Manager Question 3', 'active', '', ''),
-(14, 4, 'Manager Question 4', 'active', '', ''),
-(15, 4, 'Manager Question 5', 'active', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -367,26 +346,19 @@ CREATE TABLE `reports` (
   `user_id` int(11) NOT NULL,
   `users_group_id` int(11) NOT NULL,
   `quarter_id` int(11) NOT NULL,
-  `dev_total` int(11) NOT NULL,
+  `dev_total` float NOT NULL,
   `dev_percentage` float NOT NULL,
-  `tl_total` int(11) NOT NULL,
+  `tl_total` float NOT NULL,
   `tl_percentage` float NOT NULL,
-  `manager_total` int(11) NOT NULL,
+  `manager_total` float NOT NULL,
   `manager_percentage` float NOT NULL,
-  `ceo_total` int(11) NOT NULL,
+  `ceo_total` float NOT NULL,
   `ceo_percentage` int(11) NOT NULL,
   `score` float NOT NULL,
   `status` enum('pending','inprogress','completed') NOT NULL DEFAULT 'pending',
   `created_at` varchar(100) NOT NULL,
   `updated_at` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reports`
---
-
-INSERT INTO `reports` (`id`, `user_id`, `users_group_id`, `quarter_id`, `dev_total`, `dev_percentage`, `tl_total`, `tl_percentage`, `manager_total`, `manager_percentage`, `ceo_total`, `ceo_percentage`, `score`, `status`, `created_at`, `updated_at`) VALUES
-(1, 93, 2, 1, 20, 80, 20, 80, 20, 80, 0, 0, 0, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53');
 
 -- --------------------------------------------------------
 
@@ -413,17 +385,6 @@ CREATE TABLE `reviews` (
   `created_at` varchar(255) NOT NULL,
   `updated_at` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reviews`
---
-
-INSERT INTO `reviews` (`id`, `report_id`, `quarter_id`, `user_id`, `users_group_id`, `question_id`, `dev_comment`, `dev_rating`, `tl_comment`, `tl_rating`, `manager_comment`, `manager_rating`, `ceo_comment`, `ceo_rating`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 93, 2, 1, 'Javeriya Comment 1', '4', 'TL Comment 1', '4', 'Manager Comment 1', '4', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
-(2, 1, 1, 93, 2, 2, 'Javeriya Comment 2', '3', 'TL Comment 2', '3', 'Manager Comment 2', '3', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
-(3, 1, 1, 93, 2, 3, 'Javeriya Comment 3', '3', 'TL Comment 3', '3', 'Manager Comment 3', '3', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
-(4, 1, 1, 93, 2, 4, 'Javeriya Comment 4', '5', 'TL Comment 4', '5', 'Manager Comment 4', '5', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53'),
-(5, 1, 1, 93, 2, 5, 'Javeriya Comment 5', '5', 'TL Comment 5', '5', 'Manager Comment 5', '5', '', NULL, 'completed', '2023-04-03 11:49:16', '2023-04-03 13:11:53');
 
 -- --------------------------------------------------------
 
@@ -605,7 +566,7 @@ CREATE TABLE `user_leave` (
 --
 
 INSERT INTO `user_leave` (`id`, `user_id`, `manager_id`, `leave_status`, `leave_date`, `from_date`, `to_date`, `leave_days`, `half_day`, `first_half`, `leave_type`, `leave_reason`, `leave_accepted_reason`, `leave_rejected_reason`, `action_by`, `created_datetime`, `str_leave_date`) VALUES
-(1, 30, 0, 1, '2022-05-06', '05/06/2022', '05/06/2022', '1', 0, 0, 0, 'Assalamualaikum,\r\n\r\n   I need one day leave on Friday, 06 May 2022, because I will be out of\r\nstation.\r\nIt\'s an adjustment leave but as I don\'t have a workload then, please\r\napprove my leave.\r\n\r\nThanks.', 'Leave approved.', '', 'Zaid', '02-05-2022 05:03:49pm', '1651775400-1651775400'),
+(1, 30, 0, 1, '2022-05-06', '05/06/2022', '05/06/2022', '1', 0, 0, 0, 'Assalamualaikum,\n\n   I need one day leave on Friday, 06 May 2022, because I will be out of\nstation.\nIt\'s an adjustment leave but as I don\'t have a workload then, please\napprove my leave.\n\nThanks.', 'Leave approved.', '', 'Zaid', '02-05-2022 05:03:49pm', '1651775400-1651775400'),
 (2, 27, 0, 1, '2022-05-06', '05/06/2022', '05/06/2022', '1', 0, 0, 0, 'Reason for Leave:\r\n\r\nI request one day leave to travel out of the station. We have planned a\r\nfamily trip after a long time, and I am looking for your kind approval.\r\n\r\nWaiting for a positive response from you.\r\n\r\nThank you', 'Leave approved.', '', 'Zaid', '02-05-2022 05:09:59pm', '1651775400-1651775400'),
 (3, 83, 0, 1, '2022-05-06', '05/06/2022', '05/06/2022', '1', 0, 0, 0, 'I will be not available in the town.', 'Leave approved.', '', 'Zaid', '02-05-2022 05:19:53pm', '1651775400-1651775400'),
 (5, 87, 0, 2, '2022-05-06', '05/06/2022', '05/06/2022', '1', 0, 0, 0, 'I will go to Mumbai', 'Approved.', 'Rejected.', 'Zaid', '02-05-2022 05:37:33pm', '1651775400-1651775400'),
@@ -834,9 +795,9 @@ INSERT INTO `user_leave` (`id`, `user_id`, `manager_id`, `leave_status`, `leave_
 (264, 94, 0, 1, '2022-10-21', '10/21/2022', '10/21/2022', '1', 0, 0, 0, 'Medical leave', 'Approved', '', 'Zaid', '21-10-2022 08:11:43am', '1666290600-1666290600'),
 (265, 80, 0, 1, '2022-10-22', '10/22/2022', '10/22/2022', '1', 0, 0, 0, 'Out of station', 'Approved', '', 'Zaid', '21-10-2022 07:05:44pm', '1666377000-1666377000'),
 (266, 89, 0, 1, '2022-10-22', '10/22/2022', '10/22/2022', '1', 0, 0, 0, 'Medical Leave\r\n', 'Approved', '', 'Zaid', '22-10-2022 08:20:54am', '1666377000-1666377000'),
-(267, 78, 0, 1, '2022-10-22', '10/22/2022', '10/22/2022', '0.5', 1, 2, 0, 'Personal work  Leave Half day\r\n ', 'Accepted', '', 'Shahid Ahmed', '22-10-2022 01:51:56pm', '1666377000-1666377000');
+(267, 78, 0, 1, '2022-10-22', '10/22/2022', '10/22/2022', '0.5', 1, 2, 0, 'Personal work  Leave Half day\r\n ', 'Accepted', '', 'Shahid Ahmed', '22-10-2022 01:51:56pm', '1666377000-1666377000'),
+(268, 80, 0, 1, '2022-11-01 To 2022-11-30', '11/01/2022', '11/30/2022', '24', 0, 0, 0, 'wedding', 'Imran Tabani', '', 'Zaid', '24-10-2022 09:38:17am', '1667241000-1669746600');
 INSERT INTO `user_leave` (`id`, `user_id`, `manager_id`, `leave_status`, `leave_date`, `from_date`, `to_date`, `leave_days`, `half_day`, `first_half`, `leave_type`, `leave_reason`, `leave_accepted_reason`, `leave_rejected_reason`, `action_by`, `created_datetime`, `str_leave_date`) VALUES
-(268, 80, 0, 1, '2022-11-01 To 2022-11-30', '11/01/2022', '11/30/2022', '24', 0, 0, 0, 'wedding', 'Imran Tabani', '', 'Zaid', '24-10-2022 09:38:17am', '1667241000-1669746600'),
 (269, 85, 0, 2, '2022-10-25', '10/25/2022', '10/25/2022', '0.5', 1, 1, 0, 'medical', '', 'Imran tabani', 'Zaid', '25-10-2022 03:25:46pm', '1666636200-1666636200'),
 (270, 95, 0, 1, '2022-10-28', '10/28/2022', '10/28/2022', '0.5', 1, 2, 0, 'Upcoming wedding event of a sibling. (preparation at home)', 'Imran Tabani', '', 'Zaid', '26-10-2022 08:30:31pm', '1666895400-1666895400'),
 (271, 90, 0, 1, '2022-10-27', '10/27/2022', '10/27/2022', '0.5', 1, 1, 0, 'Medical Emergency', 'Imran Tabani', '', 'Zaid', '27-10-2022 10:07:42am', '1666809000-1666809000'),
@@ -989,7 +950,8 @@ INSERT INTO `user_leave` (`id`, `user_id`, `manager_id`, `leave_status`, `leave_
 (438, 89, 0, 0, '2023-02-16', '02/16/2023', '02/16/2023', '0.5', 1, 1, 0, 'Not Feeling Well', '', '', '', '16-02-2023 09:11:22am', '1676485800-1676485800'),
 (439, 115, 0, 0, '2023-02-17', '02/17/2023', '02/17/2023', '1', 0, 0, 0, 'Out of Town', '', '', '', '16-02-2023 09:56:52am', '1676572200-1676572200'),
 (440, 101, 0, 0, '2023-02-15', '02/15/2023', '02/15/2023', '0.5', 1, 1, 0, 'Falimy Function ', '', '', '', '16-02-2023 12:04:45pm', '1676399400-1676399400'),
-(441, 76, 0, 0, '2023-02-20', '02/20/2023', '02/20/2023', '1', 0, 0, 0, 'I have to go outside Malegaon', '', '', '', '16-02-2023 04:22:40pm', '1676831400-1676831400');
+(441, 76, 0, 0, '2023-02-20', '02/20/2023', '02/20/2023', '1', 0, 0, 0, 'I have to go outside Malegaon', '', '', '', '16-02-2023 04:22:40pm', '1676831400-1676831400'),
+(442, 93, 0, 0, '2023-04-04 To 2023-04-05', '04/04/2023', '04/05/2023', '2', 0, 0, 0, 'Testing', '', '', '', '04-04-2023 03:30:17pm', '1680546600-1680633000');
 
 -- --------------------------------------------------------
 
@@ -1244,7 +1206,9 @@ INSERT INTO `user_ot` (`id`, `user_id`, `manager_id`, `project_id`, `project_nam
 (231, 36, 0, 264, 'Matness App', 1, 1, '2023-02-13', '1676226600', '8:35 PM to 9:35 PM', 'Home', '13-02-2023 \r\n- Change UI of Death by Training\r\n- change in Update score API', '', 'Shahid Ahmed', '13-02-2023 09:34:46pm'),
 (232, 24, 0, 243, 'Janam', 0, 2, '2023-02-14', '1676313000', '7.45pm to 9.45pm', 'Office', 'Janam backend server troubleshooting. Deployment issue fixing', '', '', '15-02-2023 04:42:44pm'),
 (233, 36, 0, 264, 'Matness App', 0, 1, '2023-02-15', '1676399400', '7:30 PM to 8:30 PM', 'Office', '15-02-2023\r\n- Meeting with iOS developer \r\n- Resolved issue on Challenge Detail Data shuffling ', '', '', '16-02-2023 08:00:47pm'),
-(234, 24, 0, 81, 'Noorisys Internal', 0, 2, '2023-02-16', '1676485800', '6pm to 8pm', 'Office', 'Internal meeting with CEO and management team\r\nDr. Blog M1 demo call', '', '', '17-02-2023 10:40:12am');
+(234, 24, 0, 81, 'Noorisys Internal', 0, 2, '2023-02-16', '1676485800', '6pm to 8pm', 'Office', 'Internal meeting with CEO and management team\r\nDr. Blog M1 demo call', '', '', '17-02-2023 10:40:12am'),
+(235, 20, 0, 0, 'Qysmat', 0, 1, '2023-04-04', '1680546600', '6pm to 7pm', 'Office', 'xcvbn', '', '', '04-04-2023 02:04:12pm'),
+(236, 93, 0, 0, 'Qysmat', 0, 1, '2023-04-04', '1680546600', '6pm to 7pm', 'Office', 'Testing', '', '', '04-04-2023 03:48:30pm');
 
 -- --------------------------------------------------------
 
@@ -1255,7 +1219,7 @@ INSERT INTO `user_ot` (`id`, `user_id`, `manager_id`, `project_id`, `project_nam
 CREATE TABLE `weightage` (
   `id` int(50) NOT NULL,
   `users_group_id` int(50) NOT NULL,
-  `weightage` int(80) NOT NULL,
+  `weightage` float NOT NULL,
   `created_at` varchar(255) NOT NULL,
   `updated_at` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1265,9 +1229,10 @@ CREATE TABLE `weightage` (
 --
 
 INSERT INTO `weightage` (`id`, `users_group_id`, `weightage`, `created_at`, `updated_at`) VALUES
-(1, 2, 40, '', ''),
-(2, 13, 40, '', ''),
-(3, 4, 20, '', '');
+(1, 2, 0.4, '', ''),
+(2, 13, 0.3, '', ''),
+(3, 4, 0.3, '', ''),
+(4, 1, 0.7, '', '');
 
 --
 -- Indexes for dumped tables
@@ -1357,19 +1322,19 @@ ALTER TABLE `quarters`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1387,19 +1352,19 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `user_leave`
 --
 ALTER TABLE `user_leave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=442;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=443;
 
 --
 -- AUTO_INCREMENT for table `user_ot`
 --
 ALTER TABLE `user_ot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `weightage`
 --
 ALTER TABLE `weightage`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
