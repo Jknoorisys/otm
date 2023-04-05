@@ -122,7 +122,7 @@
                                                             <form action="<?= base_url('admin-report-publish') ?>" method="POST">
                                                                 <input type="hidden" name="id" value="<?= $quarter['id'] ?>">
                                                                 <input type="hidden" name="is_published" value="<?= $quarter['is_published'] == '0' ? '1' : '0' ?>">
-                                                                <button type="submit" data-publish="<?= $quarter['is_published'] == '0' ? '0' : '1' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn btn-<?= $quarter['is_published'] == '1' ? 'secondary' : 'warning' ?> btn-circle"><i class="fa fa-<?= $quarter['is_published']== '1' ? 'check' : 'times'?>"></i></button>
+                                                                <button type="submit" data-publish="<?= $quarter['is_published'] == '0' ? '0' : '1' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn btn-<?= $quarter['is_published'] == '1' ? 'noori' : 'warning' ?> btn-circle"><i class="fa fa-<?= $quarter['is_published']== '1' ? 'check' : 'times'?>"></i></button>
                                                             </form>
                                                     </div>
                                                     
