@@ -57,23 +57,24 @@
                 <div class="card">
                     <div class="card-body">
                         <?php if (!empty($reviews)) { ?>
-                            <form action="<?= base_url('manager-add-developer-review') ?>" method="POST">
+                            <form action="<?= base_url('admin-add-tl-review') ?>" method="POST">
                                 <?php foreach ($reviews as $review) { ?>
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row mb-2">
                                                 <h6><?= $review['question'] ?></h6>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="form-group">
-                                                        <label>Developer Ratings</label>
-                                                        <p><?= $review['dev_comment'] ?></p>
+                                                        <label>Manager Ratings</label>
+                                                        <p><?= $review['manager_comment'] ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 mt-4">
                                                     <?php for ($i = 1; $i <= 5; $i++) {
-                                                        if ($i <= $review['dev_rating']) {
+                                                        if ($i <= $review['manager_rating']) {
                                                             echo '<i class="fas fa-star mr-1 text-noori"></i>';
                                                         } else {
                                                             echo '<i class="fas fa-star mr-1 text-grey"></i>';
@@ -82,35 +83,35 @@
                                                 </div>
                                             </div>
                                         
-                                                <div class="row">
-                                                    <div class="col-8">
-                                                        <div class="form-group">
-                                                            <label><?= $this->session->userdata('users_group_id') == 13 ? 'TL Ratings' : 'Manager Ratings' ?></label>
-                                                            <input type="text" class="form-control" name="comment[<?= $review['question_id'] ?>]" placeholder="<?= $this->session->userdata('users_group_id') == 13 ? 'TL Comment' : 'Manager Comment' ?>" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4 mt-4">
-                                                        <div class="stars">
-                                                            <input type="radio" id="rating_<?= $review['question_id'] ?>_5" name="rating[<?= $review['question_id'] ?>]" value="5" required><label for="rating_<?= $review['question_id'] ?>_5"><i class="fas fa-star"></i></label>
-                                                            <input type="radio" id="rating_<?= $review['question_id'] ?>_4" name="rating[<?= $review['question_id'] ?>]" value="4" required><label for="rating_<?= $review['question_id'] ?>_4"><i class="fas fa-star"></i></label>
-                                                            <input type="radio" id="rating_<?= $review['question_id'] ?>_3" name="rating[<?= $review['question_id'] ?>]" value="3" required><label for="rating_<?= $review['question_id'] ?>_3"><i class="fas fa-star"></i></label>
-                                                            <input type="radio" id="rating_<?= $review['question_id'] ?>_2" name="rating[<?= $review['question_id'] ?>]" value="2" required><label for="rating_<?= $review['question_id'] ?>_2"><i class="fas fa-star"></i></label>
-                                                            <input type="radio" id="rating_<?= $review['question_id'] ?>_1" name="rating[<?= $review['question_id'] ?>]" value="1" required><label for="rating_<?= $review['question_id'] ?>_1"><i class="fas fa-star"></i></label>
-                                                        </div>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="form-group">
+                                                        <label>CEO Ratings</label>
+                                                        <input type="text" class="form-control" name="comment[<?= $review['question_id'] ?>]" placeholder="<?= $this->session->userdata('users_group_id') == 13 ? 'TL Comment' : 'CEO Comment' ?>" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-4 mt-4">
+                                                    <div class="stars">
+                                                        <input type="radio" id="rating_<?= $review['question_id'] ?>_5" name="rating[<?= $review['question_id'] ?>]" value="5" required><label for="rating_<?= $review['question_id'] ?>_5"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $review['question_id'] ?>_4" name="rating[<?= $review['question_id'] ?>]" value="4" required><label for="rating_<?= $review['question_id'] ?>_4"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $review['question_id'] ?>_3" name="rating[<?= $review['question_id'] ?>]" value="3" required><label for="rating_<?= $review['question_id'] ?>_3"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $review['question_id'] ?>_2" name="rating[<?= $review['question_id'] ?>]" value="2" required><label for="rating_<?= $review['question_id'] ?>_2"><i class="fas fa-star"></i></label>
+                                                        <input type="radio" id="rating_<?= $review['question_id'] ?>_1" name="rating[<?= $review['question_id'] ?>]" value="1" required><label for="rating_<?= $review['question_id'] ?>_1"><i class="fas fa-star"></i></label>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                                <input type="hidden" name="review_id[<?= $review['question_id'] ?>]" class="form-control" value="<?= $review['id'] ?>">
-                                                <input type="hidden" name="report_id" class="form-control" value="<?= $review['report_id'] ?>">
-                                                <input type="hidden" name="quarter_id" class="form-control" value="<?= $review['quarter_id'] ?>">
-                                                <input type="hidden" name="question_id[]" class="form-control" value="<?= $review['question_id'] ?>">
+                                            <input type="hidden" name="review_id[<?= $review['question_id'] ?>]" class="form-control" value="<?= $review['id'] ?>">
+                                            <input type="hidden" name="report_id" class="form-control" value="<?= $review['report_id'] ?>">
+                                            <input type="hidden" name="quarter_id" class="form-control" value="<?= $review['quarter_id'] ?>">
+                                            <input type="hidden" name="question_id[]" class="form-control" value="<?= $review['question_id'] ?>">
                                         </div>
                                     </div>
                                 <?php } ?>
                                 <button type="submit" class="btn btn-noori" >Submit</button>
                             </form>
                         <?php } else { ?>
-                            <h4 class="text-noori text-center v-middle">No Developer Review Found</h4>
+                            <h4 class="text-noori text-center v-middle">No Manager Review Found</h4>
                         <?php } ?>
                     </div>
                 </div>

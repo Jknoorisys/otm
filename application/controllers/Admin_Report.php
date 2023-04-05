@@ -194,7 +194,7 @@ class Admin_Report extends CI_Controller
         $comment = $this->input->post('comment');
         $quarter_id = $this->input->post('quarter_id');
         $report_id = $this->input->post('report_id');
-        $toatl = count($question_ids) * 5;
+        // $toatl = count($question_ids) * 5;
 
         if ($report_id && $review_id) {
                 if ($question_ids) {
@@ -215,14 +215,13 @@ class Admin_Report extends CI_Controller
                         
                         $update_data = [
                             'ceo_total' => $sum,
-                            'ceo_percentage' => ($sum * 100) / $toatl,
+                            'ceo_percentage' => ($sum * 100) / (count($question_ids) * 5),
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
                         
                         $this->Report->update_report($update_data, $report_id);
                         
-                        $this->session->set_userdata('isSubmitted', 1);
                         $this->session->set_tempdata('add', 'Review Submitted!', 2);
                         redirect(base_url('admin-add-tl-review'));
                     } else {
@@ -248,7 +247,7 @@ class Admin_Report extends CI_Controller
 			
 			$where = [
 				'reports.users_group_id' => '4',
-				'reports.status IN ("inprogress", "completed")' => NULL,
+				'reports.status IN ("pending", "completed")' => NULL,
 			];
 
 			$data['filter'] = $filter;
@@ -256,5 +255,86 @@ class Admin_Report extends CI_Controller
 
 			$this->load->view('admin/admin_footer');
 			$this->load->view('admin_report/maanger_reports', $data);
+    }
+
+    public function managerReviewDetails()
+    {
+        $report_id = $this->input->post('report_id');
+        $report_status = $this->input->post('report_status');
+        $user_id = $this->input->post('user_id');
+        
+
+        if ($report_id && $report_status) {
+            $where = [
+                'sc.user_id' => $user_id,
+                'sc.users_group_id' => '4',
+                'sc.report_id' => $report_id
+            ];
+
+            $data['reviews'] = $this->Report->get_reviews($where);
+
+            if ($report_status == 'pending') {
+                $this->load->view('admin/admin_footer');
+                $this->load->view('admin_report/admin_manager_review', $data);
+            } elseif ($report_status == 'completed') {
+                $this->load->view('admin/admin_footer');
+                $this->load->view('admin_report/manager_report_details', $data);
+            }
+        } else {
+            $this->session->set_tempdata('failure', 'Retry!', 2);
+            redirect(base_url('admin-tl-report'));
+        }
+    }
+
+    public function AddManagerReview()
+    {
+        $review_id = $this->input->post('review_id');
+        $question_ids = $this->input->post('question_id');
+        $rating = $this->input->post('rating');
+        $comment = $this->input->post('comment');
+        $quarter_id = $this->input->post('quarter_id');
+        $report_id = $this->input->post('report_id');
+        // $toatl = count($question_ids) * 5;
+
+        if ($report_id && $review_id) {
+                if ($question_ids) {
+                    $sum = 0;
+                    foreach ($question_ids as $question_id) {
+                        $sum = $rating[$question_id] + $sum;
+                        $data = [
+                            'ceo_comment' => $comment[$question_id],
+                            'ceo_rating' => $rating[$question_id],
+                            'status' => 'completed',
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];	
+                        
+                        $update = $this->Report->update_review($data, $review_id[$question_id]);
+                    }
+
+                    if ($update) {
+                        
+                        $update_data = [
+                            'ceo_total' => $sum,
+                            'ceo_percentage' => ($sum * 100) / (count($question_ids) * 5),
+                            'status' => 'completed',
+                            'updated_at' => date('Y-m-d H:i:s')
+                        ];
+                        
+                        $this->Report->update_report($update_data, $report_id);
+                        
+                        $this->session->set_tempdata('add', 'Review Submitted!', 2);
+                        redirect(base_url('admin-add-manager-review'));
+                    } else {
+                        $this->session->set_tempdata('failure', 'Retry!', 2);
+                        redirect(base_url('admin-manager-report'));
+                    }
+                } else {
+                    $this->session->set_tempdata('failure', 'Retry!', 2);
+                    redirect(base_url('admin-manager-report'));
+                }
+        } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('admin-manager-report'));
+        }
     }
 }

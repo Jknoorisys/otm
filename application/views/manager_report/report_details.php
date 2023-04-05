@@ -93,7 +93,7 @@
                                                         if ($i <= $review['manager_rating']) {
                                                             echo '<i class="fas fa-star mr-1 text-noori"></i>';
                                                         } else {
-                                                            echo '<i class="far fa-star mr-1"></i>';
+                                                            echo '<i class="fas fa-star mr-1 text-grey"></i>';
                                                         }
                                                     } ?>
                                                 </div>
@@ -110,14 +110,13 @@
                                                         if ($i <= $review['ceo_rating']) {
                                                             echo '<i class="fas fa-star mr-1 text-noori"></i>';
                                                         } else {
-                                                            echo '<i class="far fa-star mr-1"></i>';
+                                                            echo '<i class="fas fa-star mr-1 text-grey"></i>';
                                                         }
                                                     } ?>
                                                 </div>
                                             </div>
                                         <?php } ?>
                                         
-
                                     </div>
                                 </div>
                             <?php } ?>

@@ -39,7 +39,7 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <button class="btn btn-success waves-effect waves-light" type="submit">Submit
+                                            <button class="btn btn-noori waves-effect waves-light block_confirm" type="submit">Submit
                                             </button>
                                         </div>
                                     </div>
@@ -74,39 +74,22 @@
 </script>
 
 <script>
-	$(function() {
-		$('.daterange').daterangepicker({
-		
-			minDate: new Date(),
-			
-			isInvalidDate: function(date) {
-			if (date.day() == 0 )
-			return true;
-				return false;
-			}
-		});
-		
-		$('.daterange').on('apply.daterangepicker', function(ev, picker) {
-		
-			$.ajax({
-				url: 'get-days',
-				method: 'POST',
-				dataType: 'json',
-				data: {
-				dates: $("#leave_date").val(),
-				},
-				error: function() { alert("An error occoured!!!!!"); },
-				success: function(response) {
-					$('#numberdays').val(response);
-					if(response != 0 && response > 0){
-						$("#add_leave").removeAttr('disabled');
-					}else{
-						$('#add_leave').attr("disabled","true");
-					}			
-				}
-			});     
-		});
-	});
+    $('.block_confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        let status = $(this).data('status');
+        let id = $(this).data('id');
+        event.preventDefault();
+        Swal.fire({
+		    icon: 'success',
+		    title: 'Question Added!',
+		})
+        .then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+        });
+    });
 </script>
 
 </html>

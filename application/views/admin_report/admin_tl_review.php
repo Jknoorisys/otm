@@ -126,11 +126,10 @@
                                         </div>
                                     </div>
                                 <?php } ?>
-                                <button type="submit" class="btn btn-noori" <?= $this->session->userdata('isSubmitted') ? 'disabled' : '' ;?> >Submit</button>
+                                <button type="submit" class="btn btn-noori" >Submit</button>
                             </form>
                         <?php } else { ?>
                             <h4 class="text-noori text-center v-middle">No TL Review Found</h4>
-                            <?php $this->session->set_userdata('isSubmitted', 0); ?>
                         <?php } ?>
                     </div>
                 </div>
