@@ -236,7 +236,7 @@ class Admin_Report extends CI_Controller
                         $update_data = [
                             'ceo_total' => $total - ($total * $wtg['weightage']) ,
                             'ceo_percentage' => $sum - ($sum * $wtg['weightage']),
-                            'score' => $score_percent,
+                            'score' => number_format((float)$score_percent, 2, '.', ''),
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
@@ -341,7 +341,7 @@ class Admin_Report extends CI_Controller
                         $update_data = [
                             'ceo_total' => $total - ($total * $wtg['weightage']) ,
                             'ceo_percentage' => $sum - ($sum * $wtg['weightage']),
-                            'score' => $score_percent,
+                            'score' => number_format((float)$score_percent, 2, '.', ''),
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];

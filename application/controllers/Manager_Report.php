@@ -40,7 +40,6 @@
            $rating = $this->input->post('rating');
            $comment = $this->input->post('comment');
            $quarter_id = $this->input->post('quarter_id');
-           $toatl = count($question_ids) * 5;
 
            $report_data = [
                 'quarter_id' => $quarter_id,
@@ -55,6 +54,7 @@
                 if ($question_ids) {
                     $sum = 0;
                     foreach ($question_ids as $question_id) {
+						$total = count($question_ids) * 5;
                         $sum = $rating[$question_id] + $sum;
 						if ($this->users_group_id == 13) {
 							$data = [
@@ -84,15 +84,20 @@
                     }
 
                     if ($insert) {
+
 						if ($this->users_group_id == 13) {
+							$wtg = $this->Report->get_tl_wtg();
+
 							$update_data = [
-								'tl_total' => $sum,
-								'tl_percentage' => ($sum * 100) / $toatl
+								'tl_total' => $total - ($total * $wtg['weightage']),
+								'tl_percentage' => $sum - ($sum * $wtg['weightage'])
 							];
 						} else {
+							$wtg = $this->Report->get_manager_wtg();
+
 							$update_data = [
-								'manager_total' => $sum,
-								'manager_percentage' => ($sum * 100) / $toatl
+								'manager_total' => $total - ($total * $wtg['weightage']),
+								'manager_percentage' => $sum - ($sum * $wtg['weightage'])
 							];
 						}
                         
@@ -334,7 +339,7 @@
 								$update_data = [
 									'manager_total' => $total - ($total * $wtg['weightage']),
 									'manager_percentage' => $sum - ($sum * $wtg['weightage']),
-									'score' => $score_percent,
+									'score' => number_format((float)$score_percent, 2, '.', ''),
 									'status' => 'completed',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
