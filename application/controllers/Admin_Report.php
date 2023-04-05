@@ -51,8 +51,8 @@ class Admin_Report extends CI_Controller
                 $ids = $this->Admin_Model->add_que_func($grp);//$Ids is array of returned id
                }
 
-            $this->load->view('admin/admin_footer');
-            $this->load->view('admin_report/admin_add_questions',$data);
+               $this->session->set_tempdata('add_question', 'Questions Added', 2);
+               redirect(base_url('admin-question_list'));
         }
         
     
@@ -81,7 +81,7 @@ class Admin_Report extends CI_Controller
 
         $update['question'] = $this->Admin_Model->update_question($id,$question);
         $data['question'] = $this->Admin_Model->get_questions();
-
+        $this->session->set_tempdata('update_question', 'Questions Updated', 2);
         redirect(base_url('admin-question_list'));
     }
 
@@ -130,9 +130,8 @@ class Admin_Report extends CI_Controller
 
     public function add_quarter()
     {
-        $this->load->view('admin/admin_header');
-        $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin-add-quarter');
+        
+        $this->load->view('admin_report/admin-add-quarter');
         $this->load->view('admin/admin_footer');
     }
     public function save_quarter()
@@ -140,18 +139,15 @@ class Admin_Report extends CI_Controller
         $quarter = $this->input->post();
         // echo json_encode($quarter);exit;
         $data = $this->Admin_Model->save_quarter($quarter);
-        $this->load->view('admin/admin_header');
-        $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin-add-quarter');
-        $this->load->view('admin/admin_footer');
+        $this->session->set_tempdata('add_quarter', 'Quarter Added', 2);
+        redirect(base_url('admin-list-quarter'));
     }
     public function list_quarter()
     {
         $quarter['month'] = $this->Admin_Model->list_quarter();
         // echo json_encode($quarter);exit;
-        $this->load->view('admin/admin_header');
-        $this->load->view('admin/admin_menubar');
-        $this->load->view('admin-report/admin-list-quarter',$quarter);
+        
+        $this->load->view('admin_report/admin-list-quarter',$quarter);
         $this->load->view('admin/admin_footer');
     }
 
@@ -376,5 +372,21 @@ class Admin_Report extends CI_Controller
             $this->session->set_tempdata('failure', 'Retry!', 2);
             redirect(base_url('admin-report-list'));
         }
+    }
+    public function change_quarter_status()
+    {
+        $status = $this->input->post('status');
+        $id = $this->input->post('id');
+        
+        $change = $this->Admin_Model->change_quarter_status($id,$status);
+      
+        redirect(base_url('admin-list-quarter'));
+    }public function report_publish()
+    {
+        $publish = $this->input->post('is_published');
+        $id = $this->input->post('id');
+        $change_key = $this->Admin_Model->change_publish_key($id,$publish);
+        redirect(base_url('admin-list-quarter'));
+
     }
 }

@@ -170,3 +170,19 @@
         });
     });
 </script>
+<script>
+<?php if($this->session->tempdata('add_question')){ ?> 
+	Swal.fire({
+	icon: 'success',
+	title: 'Questions Added Successfuly!',
+	})
+<?php } ?>
+</script>
+<script>
+<?php if($this->session->tempdata('update_question')){ ?> 
+	Swal.fire({
+	icon: 'success',
+	title: 'Question Updated Successfuly!',
+	})
+<?php } ?>
+</script>
