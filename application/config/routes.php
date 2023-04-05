@@ -82,7 +82,6 @@ $route['admin-edit_question'] = 'Admin_Report/edit_question';
 $route['admin-update_question/(:any)'] = 'Admin_Report/update_question/$1';
 $route['admin-change-status'] = 'Admin_Report/change_status';
 $route['admin-report-list'] = 'Admin_Report/report_list';
-$route['admin-search-report'] = 'Admin_Report/filter_report';
 $route['admin-add-quarter'] = 'Admin_Report/add_quarter';
 $route['admin-save-quarter'] = 'Admin_Report/save_quarter';
 $route['admin-list-quarter'] = 'Admin_Report/list_quarter';
