@@ -44,6 +44,8 @@
 
         public function get_report()
         {
+            
+
             return $this->db->select('r.*,q.month_start as smonth,q.month_end as emonth,q.year as qyear,u.name as uname')
                     ->join('quarters as q','q.id=r.quarter_id','left')
                     ->join('users as u','u.id=r.user_id','left')

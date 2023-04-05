@@ -29,31 +29,13 @@
                             <div class="col-3">
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search By Month Start</label>
-                                    <!-- <select class="custom-select mr-sm-2" name="by_project">
-													<option selected value="">Choose...</option>
-													<?php //foreach($projects as $project){ 
-                                                    ?>
-														<option value="<?= $project['id'] ?>" <?= ($filter['project'] == $project['id']) ? "Selected" : "" ?>><?= $project['name'] ?></option>
-													<?php //} 
-                                                    ?>
-												</select> -->
-                                    <input type="month" pattern="yyyy-MM"class="form-control" name="by_month-start" value="" placeholder="Enter Project Name">
-
+                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_start" value="<?php echo set_value('myMonthInput'); ?>">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search By Month End</label>
-                                    <!-- <select class="custom-select mr-sm-2" name="by_project">
-													<option selected value="">Choose...</option>
-													<?php //foreach($projects as $project){ 
-                                                    ?>
-														<option value="<?= $project['id'] ?>" <?= ($filter['project'] == $project['id']) ? "Selected" : "" ?>><?= $project['name'] ?></option>
-													<?php //} 
-                                                    ?>
-												</select> -->
-                                    <input type="month" class="form-control" name="by_month_end" value="" placeholder="Enter Project Name">
-
+                                    <input id="myMonthInput" type="month" class="form-control" name="by_month_end" value="<?php echo set_value('myMonthInput'); ?>">
                                 </div>
                             </div>
 
@@ -131,3 +113,4 @@
         $('#to').attr('min', date);
     });
 </script>
+

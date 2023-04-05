@@ -106,8 +106,10 @@ class Admin_Report extends CI_Controller
 
     public function filter_report()
     {
-        $date = $this->input->post();
-        // echo json_encode($date);exit;
+        $date = $this->input->post('by_month_start');
+        $explode = explode($date,'-');
+        echo json_encode($explode);exit;
+
     }
 
     public function tlReport()
