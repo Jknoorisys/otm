@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2023 at 09:58 AM
+-- Generation Time: Apr 05, 2023 at 01:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -309,16 +309,10 @@ CREATE TABLE `quarters` (
   `year` year(4) NOT NULL,
   `status` enum('active','inactive') NOT NULL DEFAULT 'active',
   `is_published` enum('0','1') NOT NULL DEFAULT '0',
+  `already_published` enum('yes','no') NOT NULL DEFAULT 'no',
   `created_at` varchar(100) NOT NULL,
   `updated_at` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `quarters`
---
-
-INSERT INTO `quarters` (`id`, `month_start`, `month_end`, `year`, `status`, `is_published`, `created_at`, `updated_at`) VALUES
-(1, 'January', 'March', 2023, 'active', '1', '', '');
 
 -- --------------------------------------------------------
 
@@ -1316,7 +1310,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `quarters`
 --
 ALTER TABLE `quarters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `questions`
