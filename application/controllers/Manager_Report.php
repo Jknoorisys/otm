@@ -159,7 +159,7 @@
 
 		public function developerReport()
 		{
-			$data['users'] = $this->Report->get_user_details($this->tl_id, $this->manager_email);
+			$data['users'] = $this->Report->get_user_details($this->tl_id, '2');
 
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
@@ -230,7 +230,7 @@
 
 		public function tlReport()
 		{
-			$data['users'] = $this->Report->get_user_details($this->tl_id, $this->manager_email);
+			$data['users'] = $this->Report->get_user_details($this->tl_id, '13');
 
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
