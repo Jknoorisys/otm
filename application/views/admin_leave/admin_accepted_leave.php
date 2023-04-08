@@ -78,7 +78,7 @@
 														<td><?=$leave['action_by']?></td>
 														<td>
 															<?php if($leave['user_id'] != $login_id ){ ?>
-																<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
+																<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('admin-reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
 															<?php }else{ ?> 
 																<h1>-</h1>
 															<?php } ?>
@@ -91,7 +91,7 @@
 																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 																		</div>
 																		<div class="modal-body">
-																			<form class="mt-4" action="<?=base_url('reject-user-leave/').$leave['id']?>" method="POST">
+																			<form class="mt-4" action="<?=base_url('admin-reject-user-leave/').$leave['id']?>" method="POST">
 																				<div class="form-group">
 																					<label class="card-title">Reason</label>
 																					<textarea class="form-control"  rows="4" placeholder="Text Here..." name="rejected_reason" required></textarea>

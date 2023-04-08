@@ -95,8 +95,8 @@ $route['admin-add-ot'] = 'admin/add_ot';
 $route['admin-requested-ot'] = 'admin/requested_ot';
 $route['admin-accepted-ot'] = 'admin/accepted_ot';
 $route['admin-rejected-ot'] = 'admin/rejected_ot';
-$route['accept-user-ot/(:any)'] = 'admin/accept_user_ot/$1';
-$route['reject-user-ot/(:any)'] = 'admin/reject_user_ot/$1';
+$route['admin-accept-user-ot/(:any)'] = 'admin/accept_user_ot/$1';
+$route['admin-reject-user-ot/(:any)'] = 'admin/reject_user_ot/$1';
 $route['admin-change-password'] = 'admin/change_password';
 $route['admin-delete-ot/(:any)'] = 'admin/delete_ot/$1';
 
@@ -106,8 +106,8 @@ $route['admin-add-leave'] = 'Admin_Leave/add_leave';
 $route['admin-requested-leave'] = 'Admin_Leave/requested_leave';
 $route['admin-accepted-leave'] = 'Admin_Leave/accepted_leave';
 $route['admin-rejected-leave'] = 'Admin_Leave/rejected_leave';
-$route['accept-user-leave/(:any)'] = 'Admin_Leave/accept_user_leave/$1';
-$route['reject-user-leave/(:any)'] = 'Admin_Leave/reject_user_leave/$1';
+$route['admin-accept-user-leave/(:any)'] = 'Admin_Leave/accept_user_leave/$1';
+$route['admin-reject-user-leave/(:any)'] = 'Admin_Leave/reject_user_leave/$1';
 $route['admin-delete-leave/(:any)'] = 'Admin_Leave/admin_delete_leave/$1';;
 $route['admin-leave-dashboard'] = 'Admin_Leave/admin_leave_dashboard';
 
