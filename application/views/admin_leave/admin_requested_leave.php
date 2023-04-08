@@ -83,8 +83,8 @@
 														<td>
 															<?php if($leave['user_id'] != $this->login_id){ ?>
 																<!-- <div class="row"> -->
-																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
-																	<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
+																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('admin-accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
+																	<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('admin-reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
 																<!-- </div> -->
 															<?php }else{ ?> 
 																<a id="delete" data-id="<?= $leave['id']?>" class="btn btn-secondary text-white btn-sm">Delete</a>
@@ -98,7 +98,7 @@
 																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 																		</div>
 																		<div class="modal-body">
-																			<form class="mt-4" action="<?=base_url('accept-user-leave/').$leave['id']?>" method="POST">
+																			<form class="mt-4" action="<?=base_url('admin-accept-user-leave/').$leave['id']?>" method="POST">
 																				<div class="form-group">
 																					<label class="card-title">Reason</label>
 																					<textarea class="form-control"  rows="4" placeholder="Text Here..." name="accepted_reason" required></textarea>
@@ -121,7 +121,7 @@
 																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 																		</div>
 																		<div class="modal-body">
-																			<form class="mt-4" action="<?=base_url('reject-user-leave/').$leave['id']?>" method="POST">
+																			<form class="mt-4" action="<?=base_url('admin-reject-user-leave/').$leave['id']?>" method="POST">
 																				<div class="form-group">
 																					<label class="card-title">Reason</label>
 																					<textarea class="form-control"  rows="4" placeholder="Text Here..." name="rejected_reason" required></textarea>

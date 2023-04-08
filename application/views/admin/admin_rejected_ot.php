@@ -159,7 +159,7 @@
 			if (result.isConfirmed) {
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url('accept-user-ot/') ?>"+id,
+					url: "<?= base_url('admin-accept-user-ot/') ?>"+id,
 					success: function (response) {
 						<?php if($this->session->tempdata('accepted')){ ?> 
 							Swal.fire({

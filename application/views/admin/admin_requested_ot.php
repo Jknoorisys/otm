@@ -99,7 +99,7 @@
 												<?php if($ot['user_id'] != $login_id ){ ?>
 													<div class="row">
 														<a data-id="<?= $ot['id']?>" class="btn btn-success text-white btn-sm"  id="accept"><b>Accept</b></a> &nbsp;
-														<a data-toggle="modal" data-target="#verticalcenter<?=$ot['id']?>" class="btn btn-danger btn-sm" href="<?= base_url('reject-user-ot/'.$ot['id']) ?>" ><b>Reject</b></a>
+														<a data-toggle="modal" data-target="#verticalcenter<?=$ot['id']?>" class="btn btn-danger btn-sm" href="<?= base_url('admin-reject-user-ot/'.$ot['id']) ?>" ><b>Reject</b></a>
 													</div>
 												<?php }else{ ?> 
 														<a id="delete" data-id="<?= $ot['id']?>" class="btn btn-danger text-white btn-sm">Delete</a>
@@ -116,7 +116,7 @@
 													</div>
 													<div class="modal-body">
 													
-														<form class="mt-4" action="<?=base_url('reject-user-ot/'.$ot['id'])?>" method="POST">
+														<form class="mt-4" action="<?=base_url('admin-reject-user-ot/'.$ot['id'])?>" method="POST">
 															<div class="form-group">
 																<label class="card-title">Reason</label>
 																<textarea class="form-control"  rows="4" placeholder="Text Here..." name="reason" required></textarea>
@@ -249,7 +249,7 @@
 			if (result.isConfirmed) {
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url('accept-user-ot/') ?>"+id,
+					url: "<?= base_url('admin-accept-user-ot/') ?>"+id,
 					success: function (response) {
 						<?php if($this->session->tempdata('accepted')){ ?> 
 							Swal.fire({
