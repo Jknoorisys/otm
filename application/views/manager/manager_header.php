@@ -83,7 +83,7 @@
                                 
 								<?php if ($this->session->userdata('users_group_id') == '13') { ?>
 									<a class="dropdown-item" data-toggle="modal" data-target="#veticaluser" href="<?= base_url('tl-add-user') ?>">
-									<i class="ti-user m-r-5 m-l-5"></i> Add User</a>
+									<i class="ti-user m-r-5 m-l-5"></i> Add Member</a>
 								<?php }?>
 								<a class="dropdown-item" data-toggle="modal" data-target="#verticalcenter" href="<?= base_url('manager-change-password') ?>">
                                     <i class="ti-settings m-r-5 m-l-5"></i> Change Password</a>
