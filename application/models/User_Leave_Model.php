@@ -20,7 +20,7 @@
 							->where('sc.leave_status','0')
 							->where('user_id', $login_id)
 							->join('users as users','users.id=sc.user_id','left')
-							->order_by("sc.from_date", "DESC")
+							->order_by("sc.leave_date", "DESC")
 							->get("user_leave as sc")
 							->result_array();
 		}
@@ -40,7 +40,7 @@
 							->where('sc.leave_status','1')
 							->where('user_id', $login_id)
 							->join('users as users','users.id=sc.user_id','left')
-							->order_by("sc.from_date", "DESC")
+							->order_by("sc.leave_date", "DESC")
 							->get("user_leave as sc")
 							->result_array();
 		}
@@ -60,7 +60,7 @@
 							->where('sc.leave_status','2')
 							->where('user_id', $login_id)
 							->join('users as users','users.id=sc.user_id','left')
-							->order_by("sc.from_date", "DESC")
+							->order_by("sc.leave_date", "DESC")
 							->get("user_leave as sc")
 							->result_array();
 		}
