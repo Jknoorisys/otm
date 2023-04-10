@@ -81,6 +81,10 @@
 								<a class="dropdown-item" data-toggle="modal" data-target="#veticalleave" href="<?= base_url('manager-add-leave') ?>">
                                     <i class="ti-notepad m-r-5 m-l-5"></i> Add Leave</a>
                                 
+								<?php if ($this->session->userdata('users_group_id') == '13') { ?>
+									<a class="dropdown-item" data-toggle="modal" data-target="#veticaluser" href="<?= base_url('tl-add-user') ?>">
+									<i class="ti-user m-r-5 m-l-5"></i> Add User</a>
+								<?php }?>
 								<a class="dropdown-item" data-toggle="modal" data-target="#verticalcenter" href="<?= base_url('manager-change-password') ?>">
                                     <i class="ti-settings m-r-5 m-l-5"></i> Change Password</a>
                                 
@@ -329,11 +333,51 @@
 			</div>
 		</div>
 
+		<!-- Add User -->
+		<div id="veticaluser" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title text-noori" id="vcenter">Add New User</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body">
+						<form class="mt-4" action="<?= base_url('tl-add-user') ?>" method="POST">
+							
+							<div class="row">
+								<div class="col-6 ">
+
+									<div class="form-group m-b-30">
+										<label class="card-title">User Name</label>
+										<input type="text" class="form-control" style="width:470px;margin-left:auto;" rows="4" placeholder="Enter User Name" name="name" required>
+									</div>
+									<div class="form-group m-b-30">
+									<label class="card-title">User Email</label>
+										<input type="email" class="form-control" style="width:470px;margin-left:auto;" rows="4" placeholder="Enter User Email" name="email" required>
+
+									</div>
+								</div>
+							</div>
+					</div>
+					<div class="modal-footer">
+						<a href="<?= base_url('admin-dashboard') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
+						<button type="submit" class="btn btn-noori" >Add</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script>
 			<?php if($this->session->tempdata('logout')){ ?> 
 				Swal.fire({
 				icon: 'success',
 				title: 'Logged Out!',
+				})
+			<?php } ?>
+			<?php if($this->session->tempdata('user')){ ?> 
+				Swal.fire({
+				icon: 'success',
+				title: 'User Added Successfully!',
 				})
 			<?php } ?>
 		</script>

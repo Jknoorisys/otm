@@ -8,7 +8,8 @@
                           <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Today's Report</span></li>
 												  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-leave-dashboard') ?>" aria-expanded="false"><i class="fa-solid fa-gauge"></i><span class="hide-menu">Today's Report</span></a></li>
 
-                          
+                          <!-- <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Add New User</span></li>
+												  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('admin-add-user') ?>" aria-expanded="false"><i class="fa-solid fa-gauge"></i><span class="hide-menu">Add New User</span></a></li> -->
 
                           <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Reports</span></li>
                           <li class="sidebar-item dropdown"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-list"></i><span class="hide-menu">Reports</span></a>
