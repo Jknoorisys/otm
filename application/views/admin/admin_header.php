@@ -81,7 +81,7 @@
 									<i class="ti-notepad m-r-5 m-l-5"></i> Add Leave</a>
 
 								<a class="dropdown-item" data-toggle="modal" data-target="#veticaluser" href="<?= base_url('admin-add-user') ?>">
-									<i class="ti-notepad m-r-5 m-l-5"></i> Add User</a>
+								<i class="ti-user m-r-5 m-l-5"></i> Add User</a>
 
 								<a class="dropdown-item" data-toggle="modal" data-target="#verticalcenter" href="<?= base_url('admin-change-password') ?>">
 									<i class="ti-settings m-r-5 m-l-5"></i> Change Password</a>
