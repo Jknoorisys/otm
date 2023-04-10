@@ -7,6 +7,7 @@
 			$this->load->model('manager_model');
 			$this->load->model('Manager_Leave_Model','Leave');
             $this->load->model('Admin_Model','Admin');
+			
 
 			if ($this->session->userdata('isLogin') == 1 && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') == 1) {
 				$this->login_id = $this->session->userdata('id');
@@ -17,6 +18,7 @@
 				$projects['login_id'] = $this->session->userdata('id');
 				$projects['fetch'] = $this->manager_model->get_project_details();
 				$projects['users'] = $this->manager_model->get_user_details($this->tl_id, $this->manager_email);
+				$projects['tls'] = $this->Admin->get_tl();
 				$this->load->view('admin/admin_header', $projects);
 				$this->load->view('admin/admin_menubar');
 			} else {
@@ -768,6 +770,14 @@
 			$this->manager_model->delete_ot($id);
 			$this->session->set_tempdata('admin_delete', 'Deleted!', 2);
 			echo "true"; die();
+		}
+		public function Add_User()
+		{
+			$user = $this->input->post();
+			// echo json_encode($user);exit;
+			$this->Admin->add_user($user);
+			$this->session->set_tempdata('user', 'User Added', 2);
+			redirect(base_url('admin-dashboard'));
 		}
     }
 ?>

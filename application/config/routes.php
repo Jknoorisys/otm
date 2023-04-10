@@ -88,6 +88,7 @@ $route['admin-save-quarter'] = 'Admin_Report/save_quarter';
 $route['admin-list-quarter'] = 'Admin_Report/list_quarter';
 $route['admin-change-quarter-status'] = 'Admin_Report/change_quarter_status';
 $route['admin-report-publish'] = 'Admin_Report/report_publish';
+$route['admin-add-user'] = 'Admin/Add_User';
 
 // Admin Manage OT
 $route['admin-dashboard'] = 'admin/dashboard';
@@ -123,3 +124,7 @@ $route['admin-manager-review-details'] = 'Admin_Report/managerReviewDetails';
 
 $route['admin-tl-report'] = 'Admin_Report/tlReport';
 $route['admin-tl-review-details'] = 'Admin_Report/tlReviewDetails';
+
+// TL Add User
+$route['tl-add-user'] = 'Manager/tl_add_user';
+

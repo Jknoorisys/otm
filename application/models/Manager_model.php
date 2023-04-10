@@ -716,5 +716,12 @@
 			return $this->db->where('id', $id)
 						->delete('user_ot');
 		}
+		public function tl_add_user($user)
+		{
+			$user['pass'] = md5('123456');
+            $user['users_group_id'] = '2';
+            $this->db->insert('users',$user);
+            return  $this->db->insert_id();
+		}
 
 	}

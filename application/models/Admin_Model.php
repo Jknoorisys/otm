@@ -111,6 +111,17 @@
         {
             return $this->db->where('already_published','yes')->where('id', $id)->get('quarters')->row_array();
         }
+        public function get_tl()
+        {
+            return $this->db->where('users_group_id','13')->get('users')->result_array();
+        }
+        public function add_user($data)
+        {
+            $data['pass'] = md5('123456');
+            $data['users_group_id'] = '2';
+            $this->db->insert('users',$data);
+            return  $this->db->insert_id();
+        }
     }
     
 ?>

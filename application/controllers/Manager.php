@@ -767,7 +767,21 @@
 			$this->manager_model->delete_ot($id);
 			$this->session->set_tempdata('manager_delete', 'Deleted!', 2);
 			echo "true"; die();
+		}
+		public function tl_add_user()
+		{
+			$user = $this->input->post();
+			// echo json_encode($user);exit;
+			if ($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') == 0) 
+			{
+				$user['tl_id'] = $this->group_id == 13 ? $this->login_id : '';
+				$this->manager_model->tl_add_user($user);
+				$this->session->set_tempdata('user', 'User Added', 2);
+				redirect(base_url('manager-dashboard'));
+				
+			}
 		}	
 		
 	}
 ?>
+
