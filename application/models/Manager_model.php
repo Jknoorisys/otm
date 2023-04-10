@@ -33,14 +33,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('*')
@@ -56,14 +54,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -79,14 +75,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -103,14 +97,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -127,14 +119,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -151,14 +141,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -172,14 +160,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -194,14 +180,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -216,14 +200,12 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 				$this->db->where_in("users.users_group_id",['13','4']);
-				// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 			}
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-				// $this->db->or_where("users.email",'imran@noorisys.com');
 			}
 
 			return $this->db->select('SUM(ot_hours)')
@@ -259,14 +241,12 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 						$this->db->where_in("users.users_group_id",['13','4']);
-						// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 					}
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-						// $this->db->or_where("users.email",'imran@noorisys.com');
 					}
 
 					$this->db->select('sc.*,users.name as user_name');
@@ -274,7 +254,6 @@
 					$this->db->join('users as users','users.id=sc.user_id','left');
 					$this->db->where('MONTH(ot_date) >=', date('m'));
 					$this->db->where('YEAR(ot_date) >=', date('Y'));
-					// $this->db->join('projects as projects','projects.id = sc.project_id','left');			
 					$this->db->select_sum('sc.ot_hours');
 					$this->db->where('sc.ot_status', '0');
 					
@@ -285,20 +264,17 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 					$this->db->where_in("users.users_group_id",['13','4']);
-					// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 				}
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-					// $this->db->or_where("users.email",'imran@noorisys.com');
 				}
 
 				$this->db->select('sc.*,users.name as user_name');
                 $this->db->from('user_ot as sc');
                 $this->db->join('users as users','users.id=sc.user_id','left');
-				// $this->db->join('projects as projects','projects.id = sc.project_id','left');			
 				$this->db->select_sum('sc.ot_hours');
 				$this->db->where('sc.ot_status', '0');
 				
@@ -331,14 +307,12 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 						$this->db->where_in("users.users_group_id",['13','4']);
-						// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 					}
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-						// $this->db->or_where("users.email",'imran@noorisys.com');
 					}
 
 					$this->db->select('sc.*,users.name as user_name');
@@ -358,14 +332,12 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 					$this->db->where_in("users.users_group_id",['13','4']);
-					// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 				}
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-					// $this->db->or_where("users.email",'imran@noorisys.com');
 				}
 
 				$this->db->select('sc.*,users.name as user_name');
@@ -403,14 +375,12 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 						$this->db->where_in("users.users_group_id",['13','4']);
-						// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 					}
 		
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-						// $this->db->or_where("users.email",'imran@noorisys.com');
 					}
 					
 					$this->db->select('sc.*,users.name as user_name');
@@ -429,14 +399,12 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 					$this->db->where_in("users.users_group_id",['13','4']);
-					// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 				}
 	
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-					// $this->db->or_where("users.email",'imran@noorisys.com');
 				}
 
 				$this->db->select('sc.*,users.name as user_name');
@@ -505,14 +473,12 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 						$this->db->where_in("users.users_group_id",['13','4']);
-						// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 					}
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-						// $this->db->or_where("users.email",'imran@noorisys.com');
 					}
 
 					$this->db->select('sc.*,users.name as user_name');
@@ -531,14 +497,12 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 					$this->db->where_in("users.users_group_id",['13','4']);
-					// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 				}
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-					// $this->db->or_where("users.email",'imran@noorisys.com');
 				}
 
 				$this->db->select('sc.*,users.name as user_name');
@@ -577,15 +541,13 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 						$this->db->where_in("users.users_group_id",['13','4']);
-						// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 					}
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 						$this->db->where("users.users_group_id !=",'11');
-						// $this->db->or_where("users.email",'imran@noorisys.com');
 					}
 
 					$this->db->select('sc.*,users.name as user_name');
@@ -604,14 +566,12 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 					$this->db->where_in("users.users_group_id",['13','4']);
-					// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 				}
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-					// $this->db->or_where("users.email",'imran@noorisys.com');
 				}
 
 				$this->db->select('sc.*,users.name as user_name');
@@ -650,14 +610,12 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 						$this->db->where_in("users.users_group_id",['13','4']);
-						// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 					}
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-						// $this->db->or_where("users.email",'imran@noorisys.com');
 					}
 
 					$this->db->select('sc.*,users.name as user_name');
@@ -676,14 +634,12 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'abrar@fasterchecks.org') {
+				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
 					$this->db->where_in("users.users_group_id",['13','4']);
-					// $this->db->or_where("users.email",'abrar@fasterchecks.org');
 				}
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
-					// $this->db->or_where("users.email",'imran@noorisys.com');
 				}
 
 				$this->db->select('sc.*,users.name as user_name');
