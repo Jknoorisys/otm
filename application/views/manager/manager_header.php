@@ -380,6 +380,12 @@
 				title: 'User Added Successfully!',
 				})
 			<?php } ?>
+			<?php if ($this->session->tempdata('email')) { ?>
+				Swal.fire({
+					icon: 'error',
+					title: 'Email must be unique',
+				})
+			<?php } ?>
 		</script>
 
 	<script src="<?= base_url('assets/libs/jquery/dist/jquery.min.js') ?>"></script>

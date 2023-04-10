@@ -774,10 +774,24 @@
 		public function Add_User()
 		{
 			$user = $this->input->post();
-			// echo json_encode($user);exit;
-			$this->Admin->add_user($user);
-			$this->session->set_tempdata('user', 'User Added', 2);
-			redirect(base_url('admin-dashboard'));
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+			if ($this->form_validation->run() == FALSE) {
+				$this->session->set_tempdata('email', 'Email must be unique', 1);
+				redirect(base_url('admin-dashboard'));
+			} else 
+			{
+				$addUser = $this->Admin->add_user($user);
+				if($addUser)
+				{
+					$this->session->set_tempdata('user', 'User Added', 2);
+					redirect(base_url('admin-dashboard'));
+				}
+				else
+				{
+					$this->session->set_tempdata('faileduser', 'Unable to Add User', 2);
+					redirect(base_url('admin-dashboard'));
+				}
+			}
 		}
     }
 ?>
