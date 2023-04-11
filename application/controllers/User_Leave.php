@@ -116,22 +116,62 @@
 		}	
 
 		public function requested_leave(){
-			$data['leave_details'] = $this->Leave->pending_leave($this->login_id);
-			$data['total_days'] = $this->Leave->total_pending_leave_days($this->login_id);
+
+			if ((is_array($_POST) && empty($_POST))) {
+				$filter = array(
+					"from_date" 	 => '',
+					"to_date"   	 => '',
+				);
+			} else {
+				$filter = array(
+					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
+					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
+				);
+			}
+
+			$data['filter'] = $filter;
+			$data['leave_details'] = $this->Leave->pending_leave($this->login_id, $filter);
+			$data['total_days'] = $this->Leave->total_pending_leave_days($this->login_id, $filter);
 			$this->load->view('user_leave/requested_leave', $data);
 			$this->load->view('users/footer');
 		}
 
 		public function accepted_leave(){
-			$data['leave_details'] = $this->Leave->accepted_leave($this->login_id);
-			$data['total_days'] = $this->Leave->total_accepted_leave_days($this->login_id);
+			if ((is_array($_POST) && empty($_POST))) {
+				$filter = array(
+					"from_date" 	 => '',
+					"to_date"   	 => '',
+				);
+			} else {
+				$filter = array(
+					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
+					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
+				);
+			}
+			
+			$data['filter'] = $filter;
+			$data['leave_details'] = $this->Leave->accepted_leave($this->login_id, $filter);
+			$data['total_days'] = $this->Leave->total_accepted_leave_days($this->login_id, $filter);
 			$this->load->view('user_leave/accepted_leave', $data);
 			$this->load->view('users/footer');
 		}
 
 		public function rejected_leave(){
-			$data['leave_details'] = $this->Leave->rejected_leave($this->login_id);
-			$data['total_days'] = $this->Leave->total_rejected_leave_days($this->login_id);
+			if ((is_array($_POST) && empty($_POST))) {
+				$filter = array(
+					"from_date" 	 => '',
+					"to_date"   	 => '',
+				);
+			} else {
+				$filter = array(
+					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
+					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
+				);
+			}
+			
+			$data['filter'] = $filter;
+			$data['leave_details'] = $this->Leave->rejected_leave($this->login_id, $filter);
+			$data['total_days'] = $this->Leave->total_rejected_leave_days($this->login_id, $filter);
 			$data['login_id'] = $this->session->userdata('id');
 			$this->load->view('user_leave/rejected_leave', $data);
 			$this->load->view('users/footer');

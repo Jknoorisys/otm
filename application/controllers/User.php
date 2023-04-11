@@ -20,10 +20,10 @@
 			$data['accepted_requests']=$this->user_model->accepted_ot($this->login_id);
 			$data['rejected_requests']=$this->user_model->rejected_ot($this->login_id);
 
-			$data['total_leave_requests'] = $this->Leave->total_requested_leave_days($this->login_id);
-			$data['pending_leave_requests'] = $this->Leave->total_pending_leave_days($this->login_id);
-			$data['accepted_leave_requests'] = $this->Leave->total_accepted_leave_days($this->login_id);
-			$data['rejected_leave_requests'] = $this->Leave->total_rejected_leave_days($this->login_id);
+			$data['total_leave_requests'] = $this->Leave->total_requested_leave_days($this->login_id, ['']);
+			$data['pending_leave_requests'] = $this->Leave->total_pending_leave_days($this->login_id, ['']);
+			$data['accepted_leave_requests'] = $this->Leave->total_accepted_leave_days($this->login_id, ['']);
+			$data['rejected_leave_requests'] = $this->Leave->total_rejected_leave_days($this->login_id, ['']);
 			$this->load->view('users/dashboard', $data);	
 			$this->load->view('users/footer');		
 		}
