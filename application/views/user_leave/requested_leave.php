@@ -9,6 +9,34 @@
                                     </div>
                                 </div>
                             </div>
+							<div class="col-12">
+								<form class="mt-4" action="<?=base_url('requested-leave') ?>" method="POST">
+									<div class="row">
+										
+										<div class="col-4" style="width: 300px;">
+											<div class="form-group m-b-30">
+											<label class="mr-sm-2" for="">From</label>
+												<input type="date" class="form-control" name="from_date" value="<?= $filter['from_date'] ?>">
+											</div>
+										</div>
+										
+										<div class="col-4">
+											<div class="form-group m-b-30">
+											<label class="mr-sm-2" for="">To</label>
+												<input type="date" class="form-control" name="to_date" value="<?= $filter['to_date'] ?>">
+											</div>
+										</div>
+
+										<div class="col-2">
+											<div class="form-group m-b-30" style="margin-top: 30px;">
+												<button type="submit" class="btn btn-noori">search</button>&nbsp;&nbsp;&nbsp;
+												<a href="<?=base_url('requested-leave') ?>" class="btn btn-secondary">Reset</a>
+											</div>
+										</div>
+
+									</div>
+                        		</form>
+                    		</div>
 							<div class="table-responsive">
                                 <div class="col-12">
 									<?php if(!empty($leave_details)){ ?> 
