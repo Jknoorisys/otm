@@ -185,4 +185,10 @@
 	title: 'Question Updated Successfuly!',
 	})
 <?php } ?>
+<?php if($this->session->tempdata('failure')){ ?> 
+	Swal.fire({
+	icon: 'success',
+	title: 'Retry!',
+	})
+<?php } ?>
 </script>
