@@ -1,6 +1,7 @@
 <?php
 class Admin_Report extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -24,6 +25,7 @@ class Admin_Report extends CI_Controller
         }
     }
 
+    // By Aaisha Shaikh
     public function add_questions()
     {
         $data['grp'] = $this->Admin_Model->group_id();
@@ -49,22 +51,24 @@ class Admin_Report extends CI_Controller
                     'created_at' => date('d-m-Y h:i:sa'),
                 );
                 $ids = $this->Admin_Model->add_que_func($grp);//$Ids is array of returned id
-               }
+            }
 
-               $this->session->set_tempdata('add_question', 'Questions Added', 2);
-               redirect(base_url('admin-question_list'));
+            if ($ids) {
+                $this->session->set_tempdata('add_question', 'Questions Added', 2);
+                redirect(base_url('admin-question_list'));
+            } else {
+                $this->session->set_tempdata('failure', 'Retry!', 2);
+                redirect(base_url('admin-add-quest'));
+            }
         }
-        
-    
-        
     }
 
     public function question_list()
     {
-            $data['question'] = $this->Admin_Model->get_questions();
-            
-            $this->load->view('admin_report/admin_question_list',$data);
-            $this->load->view('admin/admin_footer');
+        $data['question'] = $this->Admin_Model->get_questions();
+        
+        $this->load->view('admin_report/admin_question_list',$data);
+        $this->load->view('admin/admin_footer');
     }
 
     public function edit_question($id)
@@ -81,8 +85,13 @@ class Admin_Report extends CI_Controller
 
         $update['question'] = $this->Admin_Model->update_question($id,$question);
         $data['question'] = $this->Admin_Model->get_questions();
-        $this->session->set_tempdata('update_question', 'Questions Updated', 2);
-        redirect(base_url('admin-question_list'));
+        if ($update) {
+            $this->session->set_tempdata('update_question', 'Questions Updated', 2);
+            redirect(base_url('admin-question_list'));
+        } else {
+            $this->session->set_tempdata('failure', 'Retry!', 2);
+            redirect(base_url('admin-question_list'));
+        }
     }
 
     public function change_status()
@@ -95,6 +104,77 @@ class Admin_Report extends CI_Controller
         redirect(base_url('admin-question_list'));
     }
 
+    public function add_quarter()
+    {
+        $this->load->view('admin_report/admin-add-quarter');
+        $this->load->view('admin/admin_footer');
+    }
+
+    public function save_quarter()
+    {
+        $start_month = $this->input->post('month_start') ? explode('-',($this->input->post('month_start'))) : '';
+        $dateObj1   = $start_month ? DateTime::createFromFormat('!m', $start_month[1]) : '';
+        $month['month_start'] = $dateObj1 ? $dateObj1->format('F') : '';
+        // echo json_encode($mstart);exit;
+
+        $end_month = $this->input->post('month_end') ? explode('-',($this->input->post('month_end'))) : '';
+        $dateObj2   = $end_month ? DateTime::createFromFormat('!m', $end_month[1]) : '';
+        $month['month_end'] = $dateObj2 ? $dateObj2->format('F') : '';
+        $month['year'] = $this->input->post('year');
+        $data = $this->Admin_Model->save_quarter($month);
+        $this->session->set_tempdata('add_quarter', 'Quarter Added', 2);
+        redirect(base_url('admin-list-quarter'));
+    }
+
+    public function list_quarter()
+    {
+        $quarter['month'] = $this->Admin_Model->list_quarter();
+        $this->load->view('admin_report/admin-list-quarter',$quarter);
+        $this->load->view('admin/admin_footer');
+    }
+    
+    public function change_quarter_status()
+    {
+        $status = $this->input->post('status');
+        $id = $this->input->post('id');
+        
+        $change = $this->Admin_Model->change_quarter_status($id,$status);
+      
+        redirect(base_url('admin-list-quarter'));
+    }
+    
+    public function report_publish()
+    {
+        $publish = $this->input->post('is_published');
+        $id = $this->input->post('id');
+
+        $is_already_published = $this->Admin_Model->is_already_published($id);
+        if($publish == 1 && !empty($is_already_published))
+        {
+            $this->session->set_tempdata('failure', 'Retry!', 2);
+            redirect(base_url('admin-list-quarter'));
+        }
+
+        $is_published = $this->Admin_Model->is_published();
+        if($publish == 1 && !empty($is_published) && (count($is_published) >= 1))
+        {
+            $this->session->set_tempdata('failure', 'Retry!', 2);
+            redirect(base_url('admin-list-quarter'));
+        }
+
+        $change_key = $this->Admin_Model->change_publish_key($id,$publish);
+
+        if ($publish == 0) {
+            $this->session->set_tempdata('unpublish', 'Retry!', 2);
+        } else {
+            $this->session->set_tempdata('success', 'Retry!', 2);
+        }
+        
+        redirect(base_url('admin-list-quarter'));
+
+    }
+
+    // by Javeriya Kauser
     public function report_list()
     {
         if ((is_array($_POST) && empty($_POST))) {
@@ -125,34 +205,6 @@ class Admin_Report extends CI_Controller
         $data['user'] = $this->Admin_Model->get_username();
 
         $this->load->view('admin_report/admin-report-list',$data);
-        $this->load->view('admin/admin_footer');
-    }
-
-    public function add_quarter()
-    {
-        
-        $this->load->view('admin_report/admin-add-quarter');
-        $this->load->view('admin/admin_footer');
-    }
-    public function save_quarter()
-    {
-        $start_month = $this->input->post('month_start') ? explode('-',($this->input->post('month_start'))) : '';
-        $dateObj1   = $start_month ? DateTime::createFromFormat('!m', $start_month[1]) : '';
-        $month['month_start'] = $dateObj1 ? $dateObj1->format('F') : '';
-        // echo json_encode($mstart);exit;
-
-        $end_month = $this->input->post('month_end') ? explode('-',($this->input->post('month_end'))) : '';
-        $dateObj2   = $end_month ? DateTime::createFromFormat('!m', $end_month[1]) : '';
-        $month['month_end'] = $dateObj2 ? $dateObj2->format('F') : '';
-        $month['year'] = $this->input->post('year');
-        $data = $this->Admin_Model->save_quarter($month);
-        $this->session->set_tempdata('add_quarter', 'Quarter Added', 2);
-        redirect(base_url('admin-list-quarter'));
-    }
-    public function list_quarter()
-    {
-        $quarter['month'] = $this->Admin_Model->list_quarter();
-        $this->load->view('admin_report/admin-list-quarter',$quarter);
         $this->load->view('admin/admin_footer');
     }
 
@@ -391,45 +443,5 @@ class Admin_Report extends CI_Controller
             $this->session->set_tempdata('failure', 'Retry!', 2);
             redirect(base_url('admin-report-list'));
         }
-    }
-    public function change_quarter_status()
-    {
-        $status = $this->input->post('status');
-        $id = $this->input->post('id');
-        
-        $change = $this->Admin_Model->change_quarter_status($id,$status);
-      
-        redirect(base_url('admin-list-quarter'));
-    }
-    
-    public function report_publish()
-    {
-        $publish = $this->input->post('is_published');
-        $id = $this->input->post('id');
-
-        $is_already_published = $this->Admin_Model->is_already_published($id);
-        if($publish == 1 && !empty($is_already_published))
-        {
-            $this->session->set_tempdata('failure', 'Retry!', 2);
-            redirect(base_url('admin-list-quarter'));
-        }
-
-        $is_published = $this->Admin_Model->is_published();
-        if($publish == 1 && !empty($is_published) && (count($is_published) >= 1))
-        {
-            $this->session->set_tempdata('failure', 'Retry!', 2);
-            redirect(base_url('admin-list-quarter'));
-        }
-
-        $change_key = $this->Admin_Model->change_publish_key($id,$publish);
-
-        if ($publish == 0) {
-            $this->session->set_tempdata('unpublish', 'Retry!', 2);
-        } else {
-            $this->session->set_tempdata('success', 'Retry!', 2);
-        }
-        
-        redirect(base_url('admin-list-quarter'));
-
     }
 }

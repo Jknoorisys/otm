@@ -65,10 +65,10 @@
 </script>
 
 <script>
-<?php if($this->session->tempdata('add_leave')){ ?> 
+<?php if($this->session->tempdata('failure')){ ?> 
 	Swal.fire({
-	icon: 'success',
-	title: 'Leave Request Sent Successfully!',
+	icon: 'error',
+	title: 'Unable to Add Questions',
 	})
 <?php } ?>
 </script>
