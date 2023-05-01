@@ -77,7 +77,7 @@
 														<td><?=$leave['leave_accepted_reason']?></td>
 														<td><?=$leave['action_by']?></td>
 														<td>
-															<?php if($leave['user_id'] != $login_id ){ ?>
+															<?php if($this->session->userdata('email') == 'hr@noorisys.com'){ ?>
 																<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
 															<?php }else{ ?> 
 																<h1>-</h1>

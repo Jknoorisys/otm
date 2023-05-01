@@ -23,12 +23,10 @@
 			}
 		}
 
-
 		public function get_days(){
 			$dates = explode('-', $_POST['dates'], 2);
 			$from_date = $dates[0];
 			$to_date = $dates[1];
-
 
 			$s_month = date('M', strtotime($from_date));
 			$e_month = date('M', strtotime($to_date));
@@ -42,33 +40,32 @@
 			$total_days = $total_days - $total_sundays;
 
 			if($s_month == $e_month){
-			$first_sat = date('m/d/Y', strtotime('first sat of '.$s_month.' 2022'));          
-			$third_sat = date('m/d/Y', strtotime('third sat of '.$s_month.' 2022'));          
-			if(strtotime($from_date) <= strtotime($first_sat) && strtotime($to_date) >= strtotime($first_sat)){
-				$total_days = $total_days-1;            
-			}
-			if(strtotime($from_date) <= strtotime($third_sat) && strtotime($to_date) >= strtotime($third_sat)){
-				$total_days = $total_days-1;            
-			}
+				$first_sat = date('m/d/Y', strtotime('first sat of '.$s_month.' 2022'));          
+				$third_sat = date('m/d/Y', strtotime('third sat of '.$s_month.' 2022'));          
+				if(strtotime($from_date) <= strtotime($first_sat) && strtotime($to_date) >= strtotime($first_sat)){
+					$total_days = $total_days-1;            
+				}
+				if(strtotime($from_date) <= strtotime($third_sat) && strtotime($to_date) >= strtotime($third_sat)){
+					$total_days = $total_days-1;            
+				}
 			}else{
-			$first_sat = date('m/d/Y', strtotime('first sat of '.$s_month.' 2022'));          
-			$third_sat = date('m/d/Y', strtotime('third sat of '.$s_month.' 2022'));          
-			if(strtotime($from_date) <= strtotime($first_sat) && strtotime($to_date) >= strtotime($first_sat)){
-				$total_days = $total_days-1;            
-			}
-			if(strtotime($from_date) <= strtotime($third_sat) && strtotime($to_date) >= strtotime($third_sat)){
-				$total_days = $total_days-1;            
-			}
+				$first_sat = date('m/d/Y', strtotime('first sat of '.$s_month.' 2022'));          
+				$third_sat = date('m/d/Y', strtotime('third sat of '.$s_month.' 2022'));          
+				if(strtotime($from_date) <= strtotime($first_sat) && strtotime($to_date) >= strtotime($first_sat)){
+					$total_days = $total_days-1;            
+				}
+				if(strtotime($from_date) <= strtotime($third_sat) && strtotime($to_date) >= strtotime($third_sat)){
+					$total_days = $total_days-1;            
+				}
 
-
-			$first_sat = date('m/d/Y', strtotime('first sat of '.$e_month.' 2022'));          
-			$third_sat = date('m/d/Y', strtotime('third sat of '.$e_month.' 2022'));          
-			if(strtotime($from_date) <= strtotime($first_sat) && strtotime($to_date) >= strtotime($first_sat)){
-				$total_days = $total_days-1;            
-			}
-			if(strtotime($from_date) <= strtotime($third_sat) && strtotime($to_date) >= strtotime($third_sat)){
-				$total_days = $total_days-1;            
-			}
+				$first_sat = date('m/d/Y', strtotime('first sat of '.$e_month.' 2022'));          
+				$third_sat = date('m/d/Y', strtotime('third sat of '.$e_month.' 2022'));          
+				if(strtotime($from_date) <= strtotime($first_sat) && strtotime($to_date) >= strtotime($first_sat)){
+					$total_days = $total_days-1;            
+				}
+				if(strtotime($from_date) <= strtotime($third_sat) && strtotime($to_date) >= strtotime($third_sat)){
+					$total_days = $total_days-1;            
+				}
 			}
 			echo json_encode($total_days); die();
 		}
@@ -92,6 +89,7 @@
 			}else{
 				$first_half = 0;
 			}
+
 			if($half_day == 1){ $half_day = 1;} else{ $half_day = 0;}
 
 			$leave_type = $this->input->post('leave_type');
@@ -112,16 +110,17 @@
 				'first_half' => $first_half,
 				'leave_type' => $leave_type,
 				'created_datetime' => date('d-m-Y h:i:sa')
-				);
-				$leave = $this->Leave->add_leave($leave_data);
+			);
 			
-				if($leave){
-					$this->session->set_tempdata('add_leave', 'Leave Added', 2);
-					redirect(base_url('manager-requested-leave'));
-				}else{
-					$this->session->set_tempdata('failure', 'Retry!', 2);
-					redirect(base_url('manager-add-leave'));
-				}
+			$leave = $this->Leave->add_leave($leave_data);
+		
+			if($leave){
+				$this->session->set_tempdata('add_leave', 'Leave Added', 2);
+				redirect(base_url('manager-requested-leave'));
+			}else{
+				$this->session->set_tempdata('failure', 'Retry!', 2);
+				redirect(base_url('manager-add-leave'));
+			}
 		}
 
 		public function requested_leave()

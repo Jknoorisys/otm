@@ -779,13 +779,11 @@
 			if ($this->form_validation->run() == FALSE) {
 				$this->session->set_tempdata('email', 'Email must be unique', 1);
 				redirect(base_url('admin-dashboard'));
-			} else 
-			{
+			}else{
 				$addUser = $this->Admin->add_user($user);
 				$password = rand(0000,1111);
 
-				if($addUser)
-				{
+				if($addUser){
 					$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 						<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 						<head>
@@ -1023,9 +1021,7 @@
 					send_mail($email, "User Added Succesfuly", $body);
 					$this->session->set_tempdata('user', 'User Added', 2);
 					redirect(base_url('admin-dashboard'));
-				}
-				else
-				{
+				}else{
 					$this->session->set_tempdata('faileduser', 'Unable to Add User', 2);
 					redirect(base_url('admin-dashboard'));
 				}
