@@ -778,16 +778,12 @@
 			if ($this->form_validation->run() == FALSE) {
 				$this->session->set_tempdata('email', 'Email must be unique', 1);
 				redirect(base_url('admin-dashboard'));
-			} else 
-			{
+			}else{
 				$addUser = $this->Admin->add_user($user);
-				if($addUser)
-				{
+				if($addUser){
 					$this->session->set_tempdata('user', 'User Added', 2);
 					redirect(base_url('admin-dashboard'));
-				}
-				else
-				{
+				}else{
 					$this->session->set_tempdata('faileduser', 'Unable to Add User', 2);
 					redirect(base_url('admin-dashboard'));
 				}

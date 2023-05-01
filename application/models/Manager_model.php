@@ -33,9 +33,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -54,9 +54,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -75,9 +75,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -97,9 +97,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -119,9 +119,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -141,9 +141,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -160,9 +160,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -180,9 +180,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -200,9 +200,9 @@
 				$this->db->where("users.tl_id",$tl_id);
 			}
 
-			if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-				$this->db->where_in("users.users_group_id",['13','4']);
-			}
+			// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+			// 	$this->db->where_in("users.users_group_id",['13','4']);
+			// }
 
 			if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -241,9 +241,9 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-						$this->db->where_in("users.users_group_id",['13','4']);
-					}
+					// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+					// 	$this->db->where_in("users.users_group_id",['13','4']);
+					// }
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -264,9 +264,9 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-					$this->db->where_in("users.users_group_id",['13','4']);
-				}
+				// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+				// 	$this->db->where_in("users.users_group_id",['13','4']);
+				// }
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -307,9 +307,9 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-						$this->db->where_in("users.users_group_id",['13','4']);
-					}
+					// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+					// 	$this->db->where_in("users.users_group_id",['13','4']);
+					// }
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -332,9 +332,9 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-					$this->db->where_in("users.users_group_id",['13','4']);
-				}
+				// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+				// 	$this->db->where_in("users.users_group_id",['13','4']);
+				// }
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -375,9 +375,9 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-						$this->db->where_in("users.users_group_id",['13','4']);
-					}
+					// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+					// 	$this->db->where_in("users.users_group_id",['13','4']);
+					// }
 		
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -399,9 +399,9 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-					$this->db->where_in("users.users_group_id",['13','4']);
-				}
+				// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+				// 	$this->db->where_in("users.users_group_id",['13','4']);
+				// }
 	
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -473,9 +473,9 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-						$this->db->where_in("users.users_group_id",['13','4']);
-					}
+					// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+					// 	$this->db->where_in("users.users_group_id",['13','4']);
+					// }
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -497,9 +497,9 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-					$this->db->where_in("users.users_group_id",['13','4']);
-				}
+				// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+				// 	$this->db->where_in("users.users_group_id",['13','4']);
+				// }
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -541,9 +541,9 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-						$this->db->where_in("users.users_group_id",['13','4']);
-					}
+					// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+					// 	$this->db->where_in("users.users_group_id",['13','4']);
+					// }
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -566,9 +566,9 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-					$this->db->where_in("users.users_group_id",['13','4']);
-				}
+				// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+				// 	$this->db->where_in("users.users_group_id",['13','4']);
+				// }
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -610,9 +610,9 @@
 						$this->db->where("users.tl_id",$tl_id);
 					}
 
-					if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-						$this->db->where_in("users.users_group_id",['13','4']);
-					}
+					// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+					// 	$this->db->where_in("users.users_group_id",['13','4']);
+					// }
 
 					if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 						$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
@@ -634,9 +634,9 @@
 					$this->db->where("users.tl_id",$tl_id);
 				}
 
-				if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
-					$this->db->where_in("users.users_group_id",['13','4']);
-				}
+				// if(!empty($manager_email) && $manager_email == 'pm@noorisys.com') {
+				// 	$this->db->where_in("users.users_group_id",['13','4']);
+				// }
 
 				if(!empty($manager_email) && $manager_email == 'imran@noorisys.com') {
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
