@@ -672,9 +672,9 @@
 			return $this->db->where('id', $id)
 						->delete('user_ot');
 		}
-		public function tl_add_user($user)
+		public function tl_add_user($user,$password)
 		{
-			$user['pass'] = md5('123456');
+			$user['pass'] = md5($password);
             $user['users_group_id'] = '2';
             $this->db->insert('users',$user);
             return  $this->db->insert_id();

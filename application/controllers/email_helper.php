@@ -9,10 +9,10 @@ function send_mail($email,$subject,$body) {
     $mail->Host = 'smtp.mandrillapp.com'; // Specify main and backup SMTP servers
     $mail->SMTPAuth = true; // Enable SMTP authentication
     $mail->Username = 'Noorisys Technologies Pvt Ltd'; // SMTP username
-    $mail->Password = 'BhSm9RQr1LRpEhiwt_OsUg'; // SMTP password
+    $mail->Password = 'A@!04$#@79'; // SMTP password
     $mail->Port = 587; // TCP port to connect to
     $mail->SMTPSecure = 'tls';
-    $mail->From = 'info@nooridev.in'; 
+    $mail->From = 'aisha@nooridev.in'; 
     $mail->FromName = 'Noorisys OTM';
     $mail->addaddress($email); // Name is optional
     $mail->isHTML(true); // Set email format to HTML

@@ -332,7 +332,7 @@
 																					<td height="15" style="font-size: 15px; line-height: 15px;"></td>
 																					</tr>
 																					<tr>
-																					<td class="r15-i" style="font-size: 0px; line-height: 0px;"> <img src="https://img.mailinblue.com/3701401/images/content_library/original/622f1ae008eaf6212d612cde.png" width="100" border="0" class="" style="display: block; width: 100%;"></td>
+																					<td class="r15-i" style="font-size: 0px; line-height: 0px;"> <img src="https://nooridev.in/otm/assets/images/icon.png" width="100" border="0" class="" style="display: block; width: 100%;"></td>
 																					</tr>
 																					<tr class="nl2go-responsive-hide">
 																					<td height="15" style="font-size: 15px; line-height: 15px;"></td>
@@ -607,7 +607,7 @@
 																						<td height="15" style="font-size: 15px; line-height: 15px;"></td>
 																					</tr>
 																					<tr>
-																						<td class="r15-i" style="font-size: 0px; line-height: 0px;"> <img src="https://img.mailinblue.com/3701401/images/content_library/original/622f1ae008eaf6212d612cde.png" width="100" border="0" class="" style="display: block; width: 100%;"></td>
+																						<td class="r15-i" style="font-size: 0px; line-height: 0px;"> <img src="https://nooridev.in/otm/assets/images/icon.png" width="100" border="0" class="" style="display: block; width: 100%;"></td>
 																					</tr>
 																					<tr class="nl2go-responsive-hide">
 																						<td height="15" style="font-size: 15px; line-height: 15px;"></td>
