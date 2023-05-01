@@ -95,8 +95,19 @@
 											
 											<td><?=date('d-m-Y',strtotime($ot['created_datetime']))?><br><?=date('h:i:s A',strtotime($ot['created_datetime']))?></td>
 											
-											<td>
+											<!-- <td>
 												<?php if($ot['user_id'] != $login_id ){ ?>
+													<div class="row">
+														<a data-id="<?= $ot['id']?>" class="btn btn-success text-white btn-sm"  id="accept"><b>Accept</b></a> &nbsp;
+														<a data-toggle="modal" data-target="#verticalcenter<?=$ot['id']?>" class="btn btn-danger btn-sm" href="<?= base_url('reject-user-ot/'.$ot['id']) ?>" ><b>Reject</b></a>
+													</div>
+												<?php }else{ ?> 
+														<a id="delete" data-id="<?= $ot['id']?>" class="btn btn-danger text-white btn-sm">Delete</a>
+												<?php } ?>
+											</td> -->
+
+											<td>
+												<?php if($this->session->userdata('email') == 'pm@noorisys.com'){ ?>
 													<div class="row">
 														<a data-id="<?= $ot['id']?>" class="btn btn-success text-white btn-sm"  id="accept"><b>Accept</b></a> &nbsp;
 														<a data-toggle="modal" data-target="#verticalcenter<?=$ot['id']?>" class="btn btn-danger btn-sm" href="<?= base_url('reject-user-ot/'.$ot['id']) ?>" ><b>Reject</b></a>

@@ -23,7 +23,6 @@
 			}
 		}
 
-
 		public function get_days(){
 			$dates = explode('-', $_POST['dates'], 2);
 			$from_date = $dates[0];

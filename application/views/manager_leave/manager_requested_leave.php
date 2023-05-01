@@ -80,12 +80,18 @@
 														<td><?=$leave['leave_type'] == 0 ? 'Normal' : 'Flash'?></td>
 														<td><?=date('d-m-Y',strtotime($leave['created_datetime']))?><br><?=date('h:i:s A',strtotime($leave['created_datetime']))?></td>
 														<td><?=$leave['leave_reason']?></td>
-														<td>
+														<!-- <td>
 															<?php if($leave['user_id'] != $this->login_id){ ?>
-																<!-- <div class="row"> -->
 																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
 																	<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
-																<!-- </div> -->
+															<?php }else{ ?> 
+																<a id="delete" data-id="<?= $leave['id']?>" class="btn btn-secondary text-white btn-sm">Delete</a>
+															<?php } ?>
+														</td> -->
+														<td>
+															<?php if($this->session->userdata('email') == 'hr@noorisys.com'){ ?>
+																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
+																	<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
 															<?php }else{ ?> 
 																<a id="delete" data-id="<?= $leave['id']?>" class="btn btn-secondary text-white btn-sm">Delete</a>
 															<?php } ?>
