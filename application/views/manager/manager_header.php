@@ -380,6 +380,12 @@
 				title: 'User Added Successfully!',
 				})
 			<?php } ?>
+			<?php if($this->session->tempdata('failuser')){ ?> 
+				Swal.fire({
+				icon: 'error',
+				title: 'User Does Not Added!',
+				})
+			<?php } ?>
 			<?php if ($this->session->tempdata('email')) { ?>
 				Swal.fire({
 					icon: 'error',
