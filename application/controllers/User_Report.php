@@ -65,8 +65,8 @@
                     if ($insert) {
                         $wtg = $this->Report->get_dev_wtg();
                         $update_data = [
-                            'dev_total' => $total - ($total * $wtg['weightage']) ,
-                            'dev_percentage' => $sum - ($sum * $wtg['weightage'])
+                            'dev_total' => $sum ,
+                            'dev_percentage' =>( ($sum/$total) * $wtg['weightage']) * 100
                         ];
 
                         $this->Report->update_report($update_data, $report_id);

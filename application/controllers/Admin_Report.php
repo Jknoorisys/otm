@@ -287,13 +287,12 @@ class Admin_Report extends CI_Controller
                         $wtg = $this->Report->get_ceo_wtg();
                         
                         $report = $this->Report->get_report($report_id);
-                        $score = $report['tl_percentage'] + $report['manager_percentage'] + ($sum - ($sum * $wtg['weightage']));
-                        $score_percent = ( $score * 100 ) / ($report['tl_total'] + $report['manager_total'] + ($total - ($total * $wtg['weightage'])));
+                        $score = $report['tl_percentage'] + $report['manager_percentage'] + ((($sum/$total) * $wtg['weightage']) * 100);
                        
                         $update_data = [
-                            'ceo_total' => $total - ($total * $wtg['weightage']) ,
-                            'ceo_percentage' => $sum - ($sum * $wtg['weightage']),
-                            'score' => number_format((float)$score_percent, 2, '.', ''),
+                            'ceo_total' => $sum ,
+                            'ceo_percentage' => (($sum/$total) * $wtg['weightage']) * 100,
+                            'score' => number_format((float)$score, 2, '.', ''),
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
@@ -392,13 +391,12 @@ class Admin_Report extends CI_Controller
                         $wtg = $this->Report->get_ceo_wtg();
 
                         $report = $this->Report->get_report($report_id);
-                        $score = $report['manager_percentage'] + ($sum - ($sum * $wtg['weightage']));
-                        $score_percent = ( $score * 100 ) / ($report['manager_total'] + ($total - ($total * $wtg['weightage'])));
+                        $score = $report['manager_percentage'] + ((($sum/$total) * $wtg['weightage']) * 100);
                         
                         $update_data = [
-                            'ceo_total' => $total - ($total * $wtg['weightage']) ,
-                            'ceo_percentage' => $sum - ($sum * $wtg['weightage']),
-                            'score' => number_format((float)$score_percent, 2, '.', ''),
+                            'ceo_total' => $sum ,
+                            'ceo_percentage' => (($sum/$total) * $wtg['weightage']) * 100,
+                            'score' => number_format((float)$score, 2, '.', ''),
                             'status' => 'completed',
                             'updated_at' => date('Y-m-d H:i:s')
                         ];
