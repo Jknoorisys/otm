@@ -45,7 +45,7 @@
                                                 } ?>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row d-none">
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label>TL Ratings</label>
@@ -62,7 +62,7 @@
                                                 } ?>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row d-none">
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label>Manager/CTO Ratings</label>

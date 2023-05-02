@@ -89,15 +89,15 @@
 							$wtg = $this->Report->get_tl_wtg();
 
 							$update_data = [
-								'tl_total' => $total - ($total * $wtg['weightage']),
-								'tl_percentage' => $sum - ($sum * $wtg['weightage'])
+								'tl_total' => $sum,
+								'tl_percentage' => ( ($sum/$total) * $wtg['weightage']) * 100
 							];
 						} else {
 							$wtg = $this->Report->get_manager_wtg();
 
 							$update_data = [
-								'manager_total' => $total - ($total * $wtg['weightage']),
-								'manager_percentage' => $sum - ($sum * $wtg['weightage'])
+								'manager_total' => $sum,
+								'manager_percentage' => ( ($sum/$total) * $wtg['weightage']) * 100
 							];
 						}
                         
@@ -326,20 +326,20 @@
 								$wtg = $this->Report->get_tl_wtg();
 
 								$update_data = [
-									'tl_total' => $total - ($total * $wtg['weightage']),
-									'tl_percentage' => $sum - ($sum * $wtg['weightage']),
+									'tl_total' => $sum,
+									'tl_percentage' => ( ($sum/$total) * $wtg['weightage']) * 100,
 									'status' => 'inprogress',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
 							} else {
 								$wtg = $this->Report->get_manager_wtg();
 								$report = $this->Report->get_report($report_id);
-								$score = $report['dev_percentage'] + $report['tl_percentage'] + ($sum - ($sum * $wtg['weightage']));
-								$score_percent = ( $score * 100 ) / ($report['dev_total'] + $report['tl_total'] + ($total - ($total * $wtg['weightage'])));
+								$score = $report['dev_percentage'] + $report['tl_percentage'] + ((($sum/$total) * $wtg['weightage']) * 100);
+
 								$update_data = [
-									'manager_total' => $total - ($total * $wtg['weightage']),
-									'manager_percentage' => $sum - ($sum * $wtg['weightage']),
-									'score' => number_format((float)$score_percent, 2, '.', ''),
+									'manager_total' => $sum,
+									'manager_percentage' => ( ($sum/$total) * $wtg['weightage']) * 100,
+									'score' => number_format((float)$score, 2, '.', ''),
 									'status' => 'completed',
 									'updated_at' => date('Y-m-d H:i:s')
 								];
@@ -393,8 +393,8 @@
 							
 							$wtg = $this->Report->get_tl_wtg();
 							$update_data = [
-								'manager_total' => $total - ($total * $wtg['weightage']),
-								'manager_percentage' => $sum - ($sum * $wtg['weightage']),
+								'manager_total' => $sum,
+								'manager_percentage' => (($sum/$total) * $wtg['weightage']) * 100,
 								'status' => 'inprogress',
 								'updated_at' => date('Y-m-d H:i:s')
 							];

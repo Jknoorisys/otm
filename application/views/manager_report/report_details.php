@@ -46,7 +46,7 @@
                                                     } ?>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row d-none">
                                                 <div class="col-8">
                                                     <div class="form-group">
                                                         <label>Manager/CTO Ratings</label>
@@ -63,7 +63,7 @@
                                                     } ?>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row d-none">
                                                 <div class="col-8">
                                                     <div class="form-group">
                                                         <label>CEO Ratings</label>
@@ -82,7 +82,7 @@
                                             </div>
                                         <?php } else { ?>
                                             <div class="row">
-                                            <div class="col-8">
+                                                <div class="col-8">
                                                     <div class="form-group">
                                                         <label>Manager/CTO Ratings</label>
                                                         <p><?= $review['manager_comment'] ? $review['manager_comment'] : '' ?></p>
@@ -98,7 +98,7 @@
                                                     } ?>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row d-none">
                                                 <div class="col-8">
                                                     <div class="form-group">
                                                         <label>CEO Ratings</label>
