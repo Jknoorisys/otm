@@ -91,13 +91,15 @@
 			}else{
 				$first_half = 0;
 			}
+			
 			if($half_day == 1){ $half_day = 1;} else{ $half_day = 0;}
 
-			$leave_type = $this->input->post('leave_type');
-			if($leave_type == 1){ $leave_type = 1;} else{ $leave_type = 0;}
-
 			$leave_days = $this->input->post('leave_days');
+			$leave_type = $this->input->post('leave_type');
+			// if($leave_type == 1){ $leave_type = 1; $leave_days = $leave_days*2; } else{ $leave_type = 0; $leave_days = $leave_days;}
+
 			if($half_day==1){ $leave_days = $leave_days/2; }else{ $leave_days;}
+			if($leave_type == 1){ $leave_type = 1; $leave_days = $leave_days*2; } else{ $leave_type = 0; $leave_days = $leave_days;}
 
 			$leave_data = array (
 				'user_id' => $this->input->post('user_name'),
@@ -155,12 +157,14 @@
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
 					"name"           => '',
+					'leave_type'	 => '',
 					"from_date" 	 => '',
 					"to_date"   	 => '',
 				);
 			} else {
 				$filter = array(
 					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
 					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
 				);

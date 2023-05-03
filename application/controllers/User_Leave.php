@@ -139,11 +139,13 @@
 		public function accepted_leave(){
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
+					'leave_type'	 => '',
 					"from_date" 	 => '',
 					"to_date"   	 => '',
 				);
 			} else {
 				$filter = array(
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
 					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
 				);

@@ -80,14 +80,6 @@
 														<td><?=$leave['leave_type'] == 0 ? 'Normal' : 'Flash'?></td>
 														<td><?=date('d-m-Y',strtotime($leave['created_datetime']))?><br><?=date('h:i:s A',strtotime($leave['created_datetime']))?></td>
 														<td><?=$leave['leave_reason']?></td>
-														<!-- <td>
-															<?php if($leave['user_id'] != $this->login_id){ ?>
-																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
-																	<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>
-															<?php }else{ ?> 
-																<a id="delete" data-id="<?= $leave['id']?>" class="btn btn-secondary text-white btn-sm">Delete</a>
-															<?php } ?>
-														</td> -->
 														<td>
 															<?php if($this->session->userdata('email') == 'hr@noorisys.com'){ ?>
 																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
@@ -107,18 +99,45 @@
 																			<form class="mt-4" action="<?=base_url('accept-user-leave/').$leave['id']?>" method="POST">
 																				<div class="form-group">
 																					<label class="card-title">Reason</label>
-																					<textarea class="form-control"  rows="4" placeholder="Text Here..." name="accepted_reason" required></textarea>
+																					<textarea class="form-control" rows="4" placeholder="Text Here..." name="accepted_reason" required></textarea>
+																				</div>
+																				
+																				<div class="form-group">
+																					<label class="card-title">Leave Type</label>
+																					<div class="ml-4">
+																						<input type="radio" id="unpaid" name="is_paid" value="unpaid" class="control-input<?=$leave['id']?>" checked>
+																						<label class="" for="unpaid">Unaid</label>
+																					</div>
+																					<div class="ml-4">
+																						<input type="radio" id="paid" name="is_paid" value="paid" class="control-input<?=$leave['id']?>">
+																						<label class="" for="paid">Paid</label>
+																					</div>
+																					<div class="form-group mt-3" id="paid_days<?=$leave['id']?>" style="display:none;">
+																						<label class="card-title">Paid Days</label>
+																						<input type="number" min="0" value="0" max="12" class="form-control" name="paid_days" required>
+																					</div>
 																				</div>
 																		</div>
 																		<div class="modal-footer">
-																			<a href="<?= base_url('manager-requested-leave') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
-																			<button type="submit" name="accept" class="btn btn-noori" id="accept" ><b>Accept</b></button><br>
+																			<a href="<?= base_url('manager-requested-leave') ?>" class="btn btn-secondary"><b>Cancel</b></a>
+																			<button type="submit" class="btn btn-noori" id="accept" ><b>Accept</b></button><br>
 																			</form>
 																		</div>
 																	</div>
 																</div>
 															</div>
-																											
+															<script>
+																$(document).ready(function(){
+																	$(".control-input<?=$leave['id']?>").change(function(){
+																		if($(this).val()=="paid"){
+																			$("#paid_days<?=$leave['id']?>").show();
+																		}else{
+																			$("#paid_days<?=$leave['id']?>").hide();
+																		}
+																	});
+																});
+															</script>												
+
 															<div id="verticalcenterreject<?=$leave['id']?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
 																<div class="modal-dialog modal-dialog-centered">
 																	<div class="modal-content">
@@ -243,3 +262,4 @@
 			})
     	});
 </script>
+

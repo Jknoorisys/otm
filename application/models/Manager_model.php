@@ -28,6 +28,15 @@
 			return $this->db->insert_id();
 		}
 
+		// get all users 
+        public function get_all_users(){
+			return $this->db->select('*')
+							// ->order_by('name')
+							//->where('active', 1)
+							->get('users')
+							->result_array();
+		}
+
 		public function get_user_details($tl_id, $manager_email){
 			if(!empty($tl_id)) {
 				$this->db->where("users.tl_id",$tl_id);
