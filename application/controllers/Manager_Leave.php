@@ -504,23 +504,41 @@
 
 		public function reject_user_leave()
 		{
+			// echo json_encode($this->input->post());exit;
 			$id = $this->uri->segment(2);
+			$acceptEmail = $this->Leave->getUserEmail($id);
 			$action_by = $this->session->userdata('name');
 			$data = [
 				'leave_status' => '2',
+				'is_paid' => 'unpaid',
+				'paid_days' => '0' ,
+				'unpaid_days' => '0',
 				'leave_rejected_reason' => $this->input->post('rejected_reason'),
 				'action_by' => $action_by
 			];
 
 			$reject = $this->Leave->reject_user_ot($data, $id);
-			$acceptEmail = $this->Leave->getUserEmail($id);
+			// $acceptEmail = $this->Leave->getUserEmail($id);
 			$email = $acceptEmail['user_email'];
 			if($acceptEmail['half_day']==1 && $acceptEmail['first_half']==1){$day= 'First-Half';}elseif($acceptEmail['half_day']==1 && $acceptEmail['first_half']==2){$day= 'Second-Half';}else{$day= 'Full Day';}
 			$acceptEmail['half_day']==1 ? $date = date('d-m-Y', strtotime($acceptEmail['from_date'])).' To '.date('d-m-Y', strtotime($acceptEmail['to_date'])): $date =date('d-m-Y', strtotime($acceptEmail['from_date']));
 
 			if ($reject) {
 
-			$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+				// $leaveDeatils = $this->Leave->getUserEmail($id);
+			
+				$paid_leave = (!empty($acceptEmail) && $acceptEmail['paid_days'] != NULL) ? ($this->input->post('paid_leave') - $acceptEmail['paid_days']) : '0';
+				$unpaid_leave = (!empty($$acceptEmail) && $acceptEmail['unpaid_days'] != NULL) ? ($this->input->post('unpaid_leave') - $acceptEmail['unpaid_days']) : '0';
+				$leave_days = $acceptEmail['paid_days'];
+				$balace_leave_data = [
+					'paid_leave' => $paid_leave,
+					'unpaid_leave' => $unpaid_leave,
+					'updated_at' => date('Y-m-d H:i:s')
+				];
+
+				$update_balace_leave_details = $this->Leave->restore_balance_leave_details($balace_leave_data, $acceptEmail['user_id'], $leave_days);
+
+				$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 					<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 					<head>
 					<meta http-equiv="Content-Type" content="text/html; charset=utf-8">

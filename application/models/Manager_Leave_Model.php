@@ -58,7 +58,8 @@
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 				}
 
-				$this->db->select('sc.*,users.name as user_name');
+				$this->db->join('users_balance_leave as balance','balance.user_id=sc.user_id','left');
+				$this->db->select('sc.*,users.name as user_name, balance.balance_leave, balance.paid_leave, balance.unpaid_leave');
 				$this->db->from('user_leave as sc');
 				$this->db->join('users as users','users.id=sc.user_id','left');
 				$this->db->where('MONTH(leave_date) >=', date('m'));
@@ -80,7 +81,8 @@
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 			}
 
-			$this->db->select('sc.*,users.name as user_name');
+			$this->db->join('users_balance_leave as balance','balance.user_id=sc.user_id','left');
+			$this->db->select('sc.*,users.name as user_name, balance.balance_leave, balance.paid_leave, balance.unpaid_leave');
 			$this->db->from('user_leave as sc');
 			$this->db->join('users as users','users.id=sc.user_id','left');	
 			$this->db->where('sc.leave_status', '0');
@@ -206,7 +208,8 @@
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 				}
 
-				$this->db->select('sc.*,users.name as user_name');
+				$this->db->join('users_balance_leave as balance','balance.user_id=sc.user_id','left');
+				$this->db->select('sc.*,users.name as user_name, balance.balance_leave, balance.paid_leave, balance.unpaid_leave');
 				$this->db->from('user_leave as sc');
 				$this->db->order_by("sc.from_date", "DESC");
 				$this->db->where('MONTH(leave_date) >=', date('m'));
@@ -229,7 +232,8 @@
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 			}
 
-			$this->db->select('sc.*,users.name as user_name');
+			$this->db->join('users_balance_leave as balance','balance.user_id=sc.user_id','left');
+			$this->db->select('sc.*,users.name as user_name, balance.balance_leave, balance.paid_leave, balance.unpaid_leave');
 			$this->db->from('user_leave as sc');
 			$this->db->order_by("sc.from_date", "DESC");
 			$this->db->where('leave_status', '1');
@@ -358,7 +362,9 @@
 					$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 				}
 
-				$this->db->select('sc.*,users.name as user_name');
+				$this->db->join('users_balance_leave as balance','balance.user_id=sc.user_id','left');
+				$this->db->select('sc.*,users.name as user_name, balance.balance_leave, balance.paid_leave, balance.unpaid_leave');
+				// $this->db->select('sc.*,users.name as user_name');
 				$this->db->from('user_leave as sc');
 				$this->db->join('users as users','users.id=sc.user_id','left');
 				$this->db->where('MONTH(leave_date) >=', date('m'));
@@ -380,7 +386,9 @@
 				$this->db->where_not_in("users.users_group_id",['2','3','5','7','9','11']);
 			}
 
-			$this->db->select('sc.*,users.name as user_name');
+			$this->db->join('users_balance_leave as balance','balance.user_id=sc.user_id','left');
+			$this->db->select('sc.*,users.name as user_name, balance.balance_leave, balance.paid_leave, balance.unpaid_leave');
+			// $this->db->select('sc.*,users.name as user_name');
 			$this->db->from('user_leave as sc');
 			$this->db->join('users as users','users.id=sc.user_id','left');			
 			$this->db->where('sc.leave_status', '2');
@@ -697,6 +705,24 @@
 							->set('balance_leave', 'balance_leave-'. $user_paid_leave, FALSE)
 							->where('user_id' , $user_id)
 							->update('users_balance_leave');
+		}
+
+		// update user balnce leave details
+		public function restore_balance_leave_details($data, $user_id, $leave_days)
+		{
+			return $this->db->set($data)
+							->set('balance_leave', 'balance_leave+'. $leave_days, FALSE)
+							->where('user_id' , $user_id)
+							->update('users_balance_leave');
+		}
+
+		// update user balnce leave details
+		public function get_user_balance_leave($user_id)
+		{
+			$this->db->select('*');
+			$this->db->from('users_balance_leave');
+			$this->db->where('user_id', $user_id);
+			return $this->db->get()->row_array();
 		}
 		
 	}

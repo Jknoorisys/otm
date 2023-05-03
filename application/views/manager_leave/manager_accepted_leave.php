@@ -108,9 +108,12 @@
 																					<textarea class="form-control"  rows="4" placeholder="Text Here..." name="rejected_reason" required></textarea>
 																				</div>
 																		</div>
+																		<input type="hidden" name="balance_leave" value="<?=$leave['balance_leave']?>">
+																		<input type="hidden" name="paid_leave" value="<?=$leave['paid_leave']?>">
+																		<input type="hidden" name="unpaid_leave" value="<?=$leave['unpaid_leave']?>">
 																		<div class="modal-footer">
-																			<a href="<?= base_url('manager-requested-leave') ?>" name="cancel" class="btn btn-secondary"><b>Cancel</b></a>
-																			<button type="submit" name="reject" class="btn btn-noori" id="reject" ><b>Reject</b></button><br>
+																			<a href="<?= base_url('manager-requested-leave') ?>" class="btn btn-secondary"><b>Cancel</b></a>
+																			<button type="submit" class="btn btn-noori" id="reject" ><b>Reject</b></button><br>
 																			</form>
 																		</div>
 																	</div>
