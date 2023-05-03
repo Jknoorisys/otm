@@ -13,7 +13,7 @@
 								<form class="mt-4" action="<?=base_url('manager-accepted-leave') ?>" method="POST">
 									<div class="row">
 
-										<div class="col-4" >
+										<div class="col-3" >
 											<div class="form-group m-b-30">
 											<label class="mr-sm-2" for="">Search By User Name</label>
 												<select class="custom-select mr-sm-2" name="by_user">
@@ -24,15 +24,24 @@
 												</select>
 											</div>
 										</div>
-										
-										<div class="col-3" style="width: 300px;">
+										<div class="col-3">
+											<div class="form-group m-b-30">
+											<label class="mr-sm-2" for="">Search By Leave Type</label>
+												<select class="custom-select mr-sm-2" name="leave_type">
+													<option selected value="">Choose...</option>
+													<option value="unpaid" <?=($filter['leave_type']=='unpaid')?"Selected":""?>>Unpaid</option>
+													<option value="paid" <?=($filter['leave_type']=='paid')?"Selected":""?>>Paid</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-2" style="width: 300px;">
 											<div class="form-group m-b-30">
 											<label class="mr-sm-2" for="">From</label>
 												<input type="date" class="form-control" name="from_date" value="<?= $filter['from_date'] ?>">
 											</div>
 										</div>
 										
-										<div class="col-3">
+										<div class="col-2">
 											<div class="form-group m-b-30">
 											<label class="mr-sm-2" for="">To</label>
 												<input type="date" class="form-control" name="to_date" value="<?= $filter['to_date'] ?>">
@@ -60,6 +69,7 @@
 													<th class="border-top-0">Leave Days</th>
 													<th class="border-top-0">Full/Half Day</th>
 													<th class="border-top-0">Leave Type</th>
+													<th class="border-top-0">Paid Days</th>
 													<th class="border-top-0">Leave Reason</th>
 													<th class="border-top-0">Accept Reason</th>
 													<th class="border-top-0">Accepted By</th>
@@ -72,7 +82,8 @@
 														<td><?=$leave['user_name']?></td>
 														<td><?= $leave['from_date']==$leave['to_date'] ? date('d-m-Y', strtotime($leave['from_date'])) : date('d-m-Y', strtotime($leave['from_date'])).' To '. date('d-m-Y', strtotime($leave['to_date']))?></td>														<td><?=$leave['leave_days']?></td>
 														<td><?php if($leave['half_day']==1 && $leave['first_half']==1){echo 'First-Half';}elseif($leave['half_day']==1 && $leave['first_half']==2){echo 'Second-Half';}else{echo 'Full Day';}  ?></td>
-														<td><?=$leave['leave_type'] == 0 ? 'Normal' : 'Flash'?></td>
+														<td><?=$leave['leave_type'] == 0 ? 'Normal' : 'Flash'?><br><?= $leave['is_paid'] == 'unpaid' ? 'Unpaid' : 'Paid' ?></td>
+														<td><?= $leave['paid_days'] != '0' ? $leave['paid_days'] : '-' ?></td>
 														<td><?=$leave['leave_reason']?></td>
 														<td><?=$leave['leave_accepted_reason']?></td>
 														<td><?=$leave['action_by']?></td>

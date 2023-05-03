@@ -92,11 +92,12 @@
 
 			if($half_day == 1){ $half_day = 1;} else{ $half_day = 0;}
 
-			$leave_type = $this->input->post('leave_type');
-			if($leave_type == 1){ $leave_type = 1;} else{ $leave_type = 0;}
-
 			$leave_days = $this->input->post('leave_days');
+			$leave_type = $this->input->post('leave_type');
+			// if($leave_type == 1){ $leave_type = 1; $leave_days = $leave_days*2; } else{ $leave_type = 0; $leave_days = $leave_days;}
+
 			if($half_day==1){ $leave_days = $leave_days/2; }else{ $leave_days;}
+			if($leave_type == 1){ $leave_type = 1; $leave_days = $leave_days*2; } else{ $leave_type = 0; $leave_days = $leave_days;}
 
 			$leave_data = array (
 				'user_id' => $this->input->post('user_name'),
@@ -155,12 +156,14 @@
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
 					"name"           => '',
+					'leave_type'	 => '',
 					"from_date" 	 => '',
 					"to_date"   	 => '',
 				);
 			} else {
 				$filter = array(
 					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
 					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
 				);
@@ -207,20 +210,40 @@
 		public function accept_user_leave()
 		{
 			$id = $this->uri->segment(2);
+			$acceptEmail = $this->Leave->getUserEmail($id);
+			
 			$action_by = $this->session->userdata('name');
 			$data = [
 				'leave_status' => '1',
 				'leave_accepted_reason' => $this->input->post('accepted_reason'),
+				'is_paid' => $this->input->post('is_paid'),
+				'paid_days' => $this->input->post('paid_days'),
+				'unpaid_days' => $acceptEmail? $acceptEmail['leave_days'] - $this->input->post('paid_days') : '',
 				'action_by' => $action_by
 			];
+
 			$accept = $this->Leave->accept_user_ot($data, $id);
-			$acceptEmail = $this->Leave->getUserEmail($id);
 			$email = $acceptEmail['user_email'];
 
 			if($acceptEmail['half_day']==1 && $acceptEmail['first_half']==1){$day= 'First-Half';}elseif($acceptEmail['half_day']==1 && $acceptEmail['first_half']==2){$day= 'Second-Half';}else{$day= 'Full Day';}
 			$acceptEmail['half_day']==1 ? $date = date('d-m-Y', strtotime($acceptEmail['from_date'])).' To '.date('d-m-Y', strtotime($acceptEmail['to_date'])): $date =date('d-m-Y', strtotime($acceptEmail['from_date']));
 
 			if ($accept) {
+
+				$leaveDeatils = $this->Leave->getUserEmail($id);
+				$user_paid_leave = $this->Leave->user_paid_leave($leaveDeatils['user_id']);
+				$user_unpaid_leave = $this->Leave->user_unpaid_leave($leaveDeatils['user_id']);
+			
+				$paid_leave = (!empty($user_paid_leave) && $user_paid_leave['total_paid_leaves'] != NULL) ? $user_paid_leave['total_paid_leaves'] : '0';
+				$unpaid_leave = (!empty($user_unpaid_leave) && $user_unpaid_leave['total_unpaid_leaves'] != NULL) ? $user_unpaid_leave['total_unpaid_leaves'] : '0';
+				
+				$balace_leave_data = [
+					'paid_leave' => $paid_leave,
+					'unpaid_leave' => $unpaid_leave,
+					'updated_at' => date('Y-m-d H:i:s')
+				];
+
+				$update_balace_leave_details = $this->Leave->balance_leave_details($balace_leave_data, $leaveDeatils['user_id'], $paid_leave);
 
 				$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 					<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">

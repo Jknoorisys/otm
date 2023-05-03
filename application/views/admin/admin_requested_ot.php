@@ -96,7 +96,7 @@
 											<td><?=date('d-m-Y',strtotime($ot['created_datetime']))?><br><?=date('h:i:s A',strtotime($ot['created_datetime']))?></td>
 											
 											<td>
-												<?php if($ot['user_id'] != $login_id ){ ?>
+												<?php if($this->session->userdata('email') == 'pm@noorisys.com'){ ?>
 													<div class="row">
 														<a data-id="<?= $ot['id']?>" class="btn btn-success text-white btn-sm"  id="accept"><b>Accept</b></a> &nbsp;
 														<a data-toggle="modal" data-target="#verticalcenter<?=$ot['id']?>" class="btn btn-danger btn-sm" href="<?= base_url('admin-reject-user-ot/'.$ot['id']) ?>" ><b>Reject</b></a>

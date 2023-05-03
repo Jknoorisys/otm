@@ -81,7 +81,7 @@
 														<td><?=date('d-m-Y',strtotime($leave['created_datetime']))?><br><?=date('h:i:s A',strtotime($leave['created_datetime']))?></td>
 														<td><?=$leave['leave_reason']?></td>
 														<td>
-															<?php if($leave['user_id'] != $this->login_id){ ?>
+															<?php if($this->session->userdata('email') == 'hr@noorisys.com'){ ?>
 																<!-- <div class="row"> -->
 																	<a  data-toggle="modal" data-target="#verticalcenter<?=$leave['id']?>"   href="<?=base_url('admin-accept-user-leave/').$leave['id']?>" class="btn btn-success btn-sm" ><b>Accept</b></a>&nbsp;
 																	<a data-toggle="modal" data-target="#verticalcenterreject<?=$leave['id']?>" href = "<?=base_url('admin-reject-user-leave/').$leave['id']?>"  class="btn btn-danger btn-sm">Reject</a>

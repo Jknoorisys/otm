@@ -180,7 +180,14 @@
 					$this->db->where("users.id",$filter['name']);
 					$this->db->group_end();
 				}
+
+				if(!empty($filter['leave_type'])) {
+					$this->db->group_start();
+					$this->db->where("sc.is_paid",$filter['leave_type']);
+					$this->db->group_end();
+				}
 		    }
+
 			if(!empty($filter['from_date']) && !empty($filter['to_date'])) {
 				$min =  (date('Y-m-d', strtotime($filter['from_date'] )));
 				$max =  (date('Y-m-d', strtotime($filter['to_date'] )));
@@ -258,7 +265,14 @@
 					$this->db->where("sc.user_id",$filter['name']);
 					$this->db->group_end();
 				}
+
+				if(!empty($filter['leave_type'])) {
+					$this->db->group_start();
+					$this->db->where("sc.is_paid",$filter['leave_type']);
+					$this->db->group_end();
+				}
 		    }
+
 			if(!empty($filter['from_date']) && !empty($filter['to_date'])) {
 				$min =  (date('Y-m-d', strtotime($filter['from_date'] )));
 				$max =  (date('Y-m-d', strtotime($filter['to_date'] )));
@@ -452,7 +466,7 @@
 
 		// email
 		public function getUserEmail($id){
-				$this->db->select('sc.*,users.name as user_name, users.email as user_email');
+				$this->db->select('sc.*,users.name as user_name, users.email as user_email, users.id as user_id');
 				$this->db->from('user_leave as sc');
 				$this->db->where('sc.id', $id);
 				$this->db->join('users as users','users.id=sc.user_id','left');
@@ -651,6 +665,38 @@
 			return $this->db->set($data)
 							->where('id' , $id)
 							->update('user_leave');
+		}
+
+		// count user paid leaves
+		public function user_paid_leave($user_id)
+		{
+			$this->db->select('SUM(paid_days) as total_paid_leaves');
+			$this->db->from('user_leave');
+			$this->db->where('leave_status', '1');
+			$this->db->where('is_paid', 'paid');
+			$this->db->where('YEAR(leave_date)', date('Y'));
+			$this->db->where('user_id', $user_id);
+			return $this->db->get()->row_array();
+		}
+
+		// count user unpaid leaves
+		public function user_unpaid_leave($user_id)
+		{
+			$this->db->select('SUM(unpaid_days) as total_unpaid_leaves');
+			$this->db->from('user_leave');
+			$this->db->where('leave_status', '1');
+			$this->db->where('YEAR(leave_date)', date('Y'));
+			$this->db->where('user_id', $user_id);
+			return $this->db->get()->row_array();
+		}
+
+		// update user balnce leave details
+		public function balance_leave_details($data, $user_id, $user_paid_leave)
+		{
+			return $this->db->set($data)
+							->set('balance_leave', 'balance_leave-'. $user_paid_leave, FALSE)
+							->where('user_id' , $user_id)
+							->update('users_balance_leave');
 		}
 		
 	}

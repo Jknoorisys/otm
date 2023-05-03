@@ -92,7 +92,7 @@
 												<td><?= $ot['action_by'] ?></td>
 												<td><?= $ot['rejected_description'] ?></td>
 												<td>
-												<?php if($ot['user_id'] != $login_id ){ ?>
+												<?php if($this->session->userdata('email') == 'pm@noorisys.com'){ ?>
 													<a data-id="<?= $ot['id']?>" class="btn btn-success text-white btn-sm"  id="accept"><b>Accept</b></a> &nbsp;
 												<?php }else{ ?> 
 													<h1>-</h1>
