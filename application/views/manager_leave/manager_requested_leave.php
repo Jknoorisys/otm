@@ -96,7 +96,8 @@
 																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 																		</div>
 																		<div class="modal-body">
-																			<form class="mt-4" action="<?=base_url('accept-user-leave/').$leave['id']?>" method="POST">
+																			<!-- <label class="card-title">Balance Leave: <?=$leave['balance_leave']?></label> -->
+																			<form class="mt-2" action="<?=base_url('accept-user-leave/').$leave['id']?>" method="POST">
 																				<div class="form-group">
 																					<label class="card-title">Reason</label>
 																					<textarea class="form-control" rows="4" placeholder="Text Here..." name="accepted_reason" required></textarea>
@@ -113,8 +114,8 @@
 																						<label class="" for="paid">Paid</label>
 																					</div>
 																					<div class="form-group mt-3" id="paid_days<?=$leave['id']?>" style="display:none;">
-																						<label class="card-title">Paid Days</label>
-																						<input type="number" min="0" value="0" max="12" class="form-control" name="paid_days" required>
+																						<label class="card-title">Paid Days</label>&nbsp;(<label class="card-title">Balance Leave: <?=$leave['balance_leave']?></label>)
+																						<input type="number" min="0" value="0" max="<?=$leave['balance_leave']?>" class="form-control" name="paid_days" required>
 																					</div>
 																				</div>
 																		</div>
