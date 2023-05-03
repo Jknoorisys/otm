@@ -699,5 +699,25 @@
 							->update('users_balance_leave');
 		}
 		
+		public function get_leave_history($month)
+		{
+			return  $this->db->select('ul.*,u.name as uname,ul.paid_days as paid_leave,SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
+                    ->join('users as u','u.id=ul.user_id','left')
+					->where('MONTH(leave_date)',$month)  
+					->where('YEAR(leave_date)', date('Y'))
+					->get('user_leave as ul')
+                    ->result_array();
+			
+
+		}
+		public function leave()
+		{
+			return $this->db->select('l.*,u.name as uname')
+                    ->join('users_groups as sc','sc.id=l.users_group_id','left')
+                    ->join('users as u','u.id=l.user_id','left')  
+					->get('users_balance_leave as l')
+                    ->result_array();
+			
+		}
 	}
 ?>
