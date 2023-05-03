@@ -72,6 +72,8 @@ $route['manager-developer-review-details'] = 'Manager_Report/developerReviewDeta
 $route['manager-tl-report'] = 'Manager_Report/tlReport';
 $route['manager-tl-review-details'] = 'Manager_Report/tlReviewDetails';
 
+$route['manager-leave-history'] = 'Manager/leaveHistory';
+
 
 // Admin panel
 $route['admin-add-quest'] = 'Admin_Report/add_questions';

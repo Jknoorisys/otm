@@ -8,6 +8,12 @@
                           <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Today's Report</span></li>
 												  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('manager-leave-dashboard') ?>" aria-expanded="false"><i class="fa-solid fa-gauge"></i><span class="hide-menu">Today's Report</span></a></li>                          
                            
+                          <?php if ($this->session->userdata('email') == 'hr@noorisys.com') { ?>
+
+                          <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Leave History</span></li>
+												  <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('manager-leave-history') ?>" aria-expanded="false"><i class="fa-solid fa-gauge"></i><span class="hide-menu">Leave History</span></a></li>
+                          <?php } ?>
+                          
                           <?php if ($this->session->userdata('email') != 'hr@noorisys.com') { ?>
                               <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Reports</span></li>
                               <li class="sidebar-item dropdown"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-file"></i><span class="hide-menu">Reports</span></a>
@@ -54,6 +60,7 @@
 						                   <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Leave</span></li>
                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('manager-rejected-leave') ?>" aria-expanded="false"><i class="icon-File-HorizontalText"></i><span class="hide-menu">Leave</span></a></li>
                            </ul> 
+                          
                     </ul>
                 </nav>
             </div>

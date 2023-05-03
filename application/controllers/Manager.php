@@ -1035,7 +1035,32 @@
 				}
 			}
 		}	
+		public function leaveHistory()
+		{
+			if ((is_array($_POST) && empty($_POST)))
+			{
+				$filter = array(
+					"leave_month" 	 => '',
+				);
+				$data['leave'] = $this->Leave->leave();
+				$this->load->view('manager/manager_leave_history',$data);
+				$this->load->view('manager/manager_footer');	
+			} 
+			else {
+			
+				
+				$by_month = $this->input->post('leave_month') ? explode('-',($this->input->post('leave_month'))) : '';
+				$dateObj1   = $by_month ? DateTime::createFromFormat('!m', $by_month[1]) : '';
+				$month = $dateObj1 ? $dateObj1->format('m') : '';	
+				$data['leave'] = $this->Leave->get_leave_history($month);
+				$this->load->view('manager/manager_leave_history',$data);
+				$this->load->view('manager/manager_footer');	
+			}
+			
+				
 		
+			
+		}
 	}
 ?>
 
