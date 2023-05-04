@@ -1041,25 +1041,25 @@
 		{
 			if ((is_array($_POST) && empty($_POST)))
 			{
-				$filter = array(
+				$month = array(
 					"leave_month" 	 => '',
 				);
-					
-			} 
-			else {
-				$by_month = $this->input->post('leave_month') ? explode('-',($this->input->post('leave_month'))) : '';
-				$dateObj1   = $by_month ? DateTime::createFromFormat('!m', $by_month[1]) : '';
-				$month = $dateObj1 ? $dateObj1->format('m') : '';	
+				// echo json_encode($month);exit;
 
+			} 
+			else 
+			{
+				$by_month = $this->input->post('leave_month') ? explode('-',($this->input->post('leave_month'))) : '';
+				$dateObj1 = $by_month ? DateTime::createFromFormat('!m', $by_month[1]) : '';
+				$month = $dateObj1 ? $dateObj1->format('F') : '';	
 				$filter = array(
-					"leave_month" 	 => $month,
+					'leave_month'      => $month ? $month : ''
 				);
 			}
-			
-				$data['leave'] = $this->Leave->leave($filter);
-				// echo $this->db->last_query();exit;
-				$this->load->view('manager/manager_leave_history',$data);
-				$this->load->view('manager/manager_footer');
+				$data['leave'] = $this->Leave->leave($month);
+				$this->load->view('manager/manager_leave_history');
+				$this->load->view('manager/manager_footer');	
+				
 		}
 	}
 ?>
