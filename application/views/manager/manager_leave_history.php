@@ -13,32 +13,22 @@
                     <form class="mt-4" action="<?= base_url('manager-leave-history') ?>" method="POST">
                         <div class="row">
 
-                            <!-- <div class="col-4" >
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">Search By Month</label>
-												<select class="custom-select mr-sm-2" name="by_user">
-													<option selected value="">Choose...</option> -->
-                            <!-- <?php foreach ($users as $user) { ?>
-														<option value="<?= $user['id'] ?>" <?= ($filter['name'] == $user['id']) ? "Selected" : "" ?>  ><?= $user['name'] ?></option>
-													<?php } ?> -->
-                            <!-- </select>
-											</div>
-										</div> -->
-
-                            <!-- <div class="col-3" style="width: 300px;">
-											<div class="form-group m-b-30">
-											<label class="mr-sm-2" for="">From</label>
-												<input type="month" class="form-control" name="from_date" value="">
-											</div>
-										</div> -->
-                            <!-- <div class="col-2">
-                                        <div id="file_export_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="file_export"></label></div>
-                                                    </div> -->
+                            <div class="col-4" >
+                                <div class="form-group m-b-30">
+                                        <label class="mr-sm-2" for="">Search By Name</label>
+                                        <select class="custom-select mr-sm-2" name="by_user">
+                                            <option selected value="">Choose...</option>
+                                            <?php foreach ($users as $user) { ?>
+                                                <option value="<?= $user['id'] ?>" <?= ($filter['name'] == $user['id']) ? "Selected" : "" ?>  ><?= $user['name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                </div>
+                            </div>
+                           
                             <div class="col-3">
-
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search by Month</label>
-                                    <input type="month" class="form-control" name="leave_month" value="" required>
+                                    <input type="month" class="form-control" name="leave_month" value="<?= $filter['year'].'-'.$filter['leave_month'] ?>">
                                 </div>
                             </div>
 
