@@ -1039,28 +1039,7 @@
 
 		public function leaveHistory()
 		{
-			if ((is_array($_POST) && empty($_POST)))
-			{
-				$filter = array(
-					"leave_month" 	 => '',
-				);
-					
-			} 
-			else {
-				$by_month = $this->input->post('leave_month') ? explode('-',($this->input->post('leave_month'))) : '';
-				$dateObj1   = $by_month ? DateTime::createFromFormat('!m', $by_month[1]) : '';
-				$month = $dateObj1 ? $dateObj1->format('m') : '';	
-
-				$filter = array(
-					"leave_month" 	 => $month,
-				);
-			}
 			
-			$data['leave'] = $this->Leave->leave($filter);
-			// echo json_encode($data['leave']);exit;
-			// echo $this->db->last_query();exit;
-			$this->load->view('manager/manager_leave_history',$data);
-			$this->load->view('manager/manager_footer');
 		}
 	}
 ?>
