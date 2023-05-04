@@ -1057,7 +1057,7 @@
 				);
 			}
 				$data['leave'] = $this->Leave->leave($month);
-				$this->load->view('manager/manager_leave_history');
+				$this->load->view('manager/manager_leave_history',$data);
 				$this->load->view('manager/manager_footer');	
 				
 		}

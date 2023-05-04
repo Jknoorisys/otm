@@ -122,7 +122,7 @@
                                                             <form action="<?= base_url('admin-report-publish') ?>" method="POST">
                                                                 <input type="hidden" name="id" value="<?= $quarter['id'] ?>">
                                                                 <input type="hidden" name="is_published" value="<?= $quarter['is_published'] == '0' ? '1' : '0' ?>">
-                                                                <button type="submit" data-publish="<?= $quarter['is_published'] == '0' ? '0' : '1' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn btn-<?= $quarter['is_published'] == '1' ? 'noori' : 'warning' ?> btn-circle"><i class="fa fa-<?= $quarter['is_published']== '1' ? 'check' : 'times'?>"></i></button>
+                                                                <button type="submit" data-publish="<?= $quarter['is_published'] == '0' ? '0' : '1' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn btn-<?= $quarter['is_published'] == '1' ? 'noori' : 'warning' ?> btn-circle"><i class="fa fa-<?= $quarter['is_published']== '1' ? 'check' : 'times'?>"  data-toggle="tooltip" data-placement="top" title="Publish"></i></button>
                                                             </form>
                                                     </div>
                                                
@@ -130,7 +130,7 @@
                                                     <form action="<?= base_url('admin-change-quarter-status') ?>" method="POST">
                                                         <input type="hidden" name="id" value="<?= $quarter['id'] ?>">
                                                         <input type="hidden" name="status" value="<?= $quarter['status'] == 'active' ? 'inactive' : 'active' ?>">
-                                                        <button type="submit" data-status="<?= $quarter['status'] == 'active' ? 'active' : 'inactive' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn block_confirm btn-sm"><input type="checkbox" id="switch" <?= $quarter['status'] == 'active' ? 'checked' : '' ?> /><label class="noori-lable" for="switch">Toggle</label></button>
+                                                        <button type="submit" data-status="<?= $quarter['status'] == 'active' ? 'active' : 'inactive' ?>" data-id="<?= $quarter['id'] ?>" data-name="<?= $quarter['month_start'] ?>.'-'.<?= $quarter['month_end'] ?>" class="btn block_confirm btn-sm"  data-toggle="tooltip" data-placement="top" title="Active"><input type="checkbox" id="switch" <?= $quarter['status'] == 'active' ? 'checked' : '' ?> /><label class="noori-lable" for="switch">Toggle</label></button>
                                                     </form>
                                                 </div>
                                                 </div>
