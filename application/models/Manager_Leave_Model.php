@@ -739,17 +739,23 @@
 		public function leave($filter)
 		{
 
-			if (!empty($filter['leave_month'])) {
-				$this->db->where('MONTH(leave.leave_date)',$filter['leave_month'])->where('balance.user_id', 'user_leave.user_id')->select('balance.balance_leave,user.name as uname,SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave');
-			}else{
-				$this->db->select('balance.*,user.name as uname');
-			}
+			// if (!empty($filter['leave_month'])) {
+			// 	$this->db->where('MONTH(leave.leave_date)',$filter['leave_month'])->select('balance.balance_leave,user.name as uname,SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave');
+			// }
 
-			return $this->db->join('users as user','user.id=balance.user_id','left')  
+			$blanace_leave = $this->db->select('balance.*,user.name as uname')
+							->join('users as user','user.id=balance.user_id','left')  
 							->join('user_leave as leave','leave.user_id=user.id','left')
 							->order_by('user.id')
 							->get('users_balance_leave as balance')
 							->result_array();
+
+							foreach ($balance_leave as $leave) {
+								# code...
+							}
+							return $blanace_leave;
+
+
 		}
 	}
 ?>
