@@ -724,20 +724,13 @@
 			$this->db->where('user_id', $user_id);
 			return $this->db->get()->row_array();
 		}
-		
-		// public function get_leave_history($month)
-		// {
-		// 	return  $this->db->select('ul.*,u.name as uname,ul.paid_days as paid_leave,SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
-        //             ->join('users as u','u.id=ul.user_id','left')
-		// 			->where('MONTH(leave_date)',$month)  
-		// 			->where('YEAR(leave_date)', date('Y'))
-		// 			->get('user_leave as ul')
-        //             ->result_array();
-			
 
-		// }
 		public function leave($filter)
 		{
+			if (!empty($filter['name'])) {
+				$this->db->where('user.id', $filter['name']);
+			}
+
 			$balance_leave = $this->db->select('balance.*,user.name as uname')
 							->join('users as user','user.id=balance.user_id','left') 
 							->order_by('user.id')
@@ -783,19 +776,23 @@
 			// echo json_encode($result);exit;
 				if ($filter && $filter['leave_month']) {
 					foreach ($balance_leave as $leave ) {
-						$balance_leave = $this->db->select('balance.balance_leave,user.name as uname,SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave')
+						$new_balance_leave = $this->db->select('SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave')
 								->join('users as user','user.id=balance.user_id','left') 		
 								->join('user_leave as leave','leave.user_id=user.id','left')
-								->where(['MONTH(leave_date)' => $filter['leave_month'], 'leave.user_id' => $leave['user_id']])
-								// ->where('YEAR(leave_date)', date('Y'))
+								->where('leave.user_id', $leave['user_id'])
+								->where('MONTH(leave_date)', $filter['leave_month'])
+								->where('YEAR(leave_date)', date('Y'))
 								->order_by('user.id')
 								->get('users_balance_leave as balance')
-								->result_array();
-						echo json_encode($balance_leave);exit;
+								->row_array();
+
+						$leave['paid_leave'] = $new_balance_leave['paid_leave'] == null ?  '0' : $new_balance_leave['paid_leave'];
+						$leave['unpaid_leave'] = $new_balance_leave['unpaid_leave'] == null ?  '0' : $new_balance_leave['unpaid_leave'];
 					}
 				}
-					
+
 			return $balance_leave;
 		}
+
 	}
 ?>

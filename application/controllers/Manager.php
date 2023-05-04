@@ -1042,23 +1042,33 @@
 			if ((is_array($_POST) && empty($_POST)))
 			{
 				$filter = array(
+					"name"           => '',
 					"leave_month" 	 => '',
+					"year" 	 => '',
 				);
 					
 			} 
 			else {
+				// Get the value of the month input field and split it into an array of year and month
 				$by_month = $this->input->post('leave_month') ? explode('-',($this->input->post('leave_month'))) : '';
-				$dateObj1   = $by_month ? DateTime::createFromFormat('!m', $by_month[1]) : '';
-				$month = $dateObj1 ? $dateObj1->format('m') : '';	
+
+				// Create a DateTime object based on the month value
+				$dateObj1 = $by_month ? DateTime::createFromFormat('!m-Y', $by_month[1].'-'.$by_month[0]) : '';
+
+				// Extract the year and month from the DateTime object
+				$year = $dateObj1 ? $dateObj1->format('Y') : '';
+				$month = $dateObj1 ? $dateObj1->format('m') : '';
 
 				$filter = array(
+					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
 					"leave_month" 	 => $month,
+					"year" 	 => $year,
 				);
 			}
 			
+			$data['filter'] = $filter;
 			$data['leave'] = $this->Leave->leave($filter);
-			// echo json_encode($data['leave']);exit;
-			// echo $this->db->last_query();exit;
+			$data['users'] =$this->manager_model->get_user_details($this->tl_id, $this->manager_email);
 			$this->load->view('manager/manager_leave_history',$data);
 			$this->load->view('manager/manager_footer');
 		}
