@@ -725,25 +725,31 @@
 			return $this->db->get()->row_array();
 		}
 		
-		public function get_leave_history($month)
-		{
-			return  $this->db->select('ul.*,u.name as uname,ul.paid_days as paid_leave,SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
-                    ->join('users as u','u.id=ul.user_id','left')
-					->where('MONTH(leave_date)',$month)  
-					->where('YEAR(leave_date)', date('Y'))
-					->get('user_leave as ul')
-                    ->result_array();
+		// public function get_leave_history($month)
+		// {
+		// 	return  $this->db->select('ul.*,u.name as uname,ul.paid_days as paid_leave,SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
+        //             ->join('users as u','u.id=ul.user_id','left')
+		// 			->where('MONTH(leave_date)',$month)  
+		// 			->where('YEAR(leave_date)', date('Y'))
+		// 			->get('user_leave as ul')
+        //             ->result_array();
 			
 
-		}
-		public function leave()
+		// }
+		public function leave($filter)
 		{
-			return $this->db->select('l.*,u.name as uname')
-                    ->join('users_groups as sc','sc.id=l.users_group_id','left')
-                    ->join('users as u','u.id=l.user_id','left')  
-					->get('users_balance_leave as l')
-                    ->result_array();
-			
+
+			if (!empty($filter['leave_month'])) {
+				$this->db->where('MONTH(leave.leave_date)',$filter['leave_month'])->where('balance.user_id', 'user_leave.user_id')->select('balance.balance_leave,user.name as uname,SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave');
+			}else{
+				$this->db->select('balance.*,user.name as uname');
+			}
+
+			return $this->db->join('users as user','user.id=balance.user_id','left')  
+							->join('user_leave as leave','leave.user_id=user.id','left')
+							->order_by('user.id')
+							->get('users_balance_leave as balance')
+							->result_array();
 		}
 	}
 ?>

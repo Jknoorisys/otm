@@ -16,6 +16,7 @@
 				$projects['login_id'] = $this->session->userdata('id');
 				$projects['fetch'] = $this->manager_model->get_project_details();
 				$projects['users'] = $this->manager_model->get_user_details($this->tl_id, $this->manager_email);
+				$projects['balance_leave'] = $this->Leave->get_user_balance_leave($this->login_id);
 				$this->load->view('manager/manager_header', $projects);
 				$this->load->view('manager/manager_menubar');
 			} else {
@@ -1034,7 +1035,8 @@
 					
 				}
 			}
-		}	
+		}
+
 		public function leaveHistory()
 		{
 			if ((is_array($_POST) && empty($_POST)))
@@ -1042,24 +1044,22 @@
 				$filter = array(
 					"leave_month" 	 => '',
 				);
-				$data['leave'] = $this->Leave->leave();
-				$this->load->view('manager/manager_leave_history',$data);
-				$this->load->view('manager/manager_footer');	
+					
 			} 
 			else {
-			
-				
 				$by_month = $this->input->post('leave_month') ? explode('-',($this->input->post('leave_month'))) : '';
 				$dateObj1   = $by_month ? DateTime::createFromFormat('!m', $by_month[1]) : '';
 				$month = $dateObj1 ? $dateObj1->format('m') : '';	
-				$data['leave'] = $this->Leave->get_leave_history($month);
-				$this->load->view('manager/manager_leave_history',$data);
-				$this->load->view('manager/manager_footer');	
+
+				$filter = array(
+					"leave_month" 	 => $month,
+				);
 			}
 			
-				
-		
-			
+				$data['leave'] = $this->Leave->leave($filter);
+				// echo $this->db->last_query();exit;
+				$this->load->view('manager/manager_leave_history',$data);
+				$this->load->view('manager/manager_footer');
 		}
 	}
 ?>

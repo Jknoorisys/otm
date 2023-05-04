@@ -73,6 +73,7 @@
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?= $this->session->userdata('name') ?></h4>
                                         <p class=" m-b-0"><?= $this->session->userdata('email') ?></p>
+										<p class=" m-b-0">Balance Leave: <?= $balance_leave ? $balance_leave['balance_leave'] : '0' ?></p>
                                     </div>
                                 </div>
 								<a class="dropdown-item" data-toggle="modal" data-target=".bs-example-modal-lg" href="<?= base_url('manager-add-ot') ?>">

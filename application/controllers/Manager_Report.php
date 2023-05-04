@@ -18,6 +18,7 @@
 				$projects['login_id'] = $this->session->userdata('id');
 				$projects['fetch'] = $this->manager_model->get_project_details();
 				$projects['users'] = $this->manager_model->get_user_details($this->tl_id, $this->manager_email);
+				$projects['balance_leave'] = $this->Leave->get_user_balance_leave($this->login_id);
 				$this->load->view('manager/manager_header', $projects);
 				$this->load->view('manager/manager_menubar');
 			} else {
@@ -87,6 +88,7 @@
 
 						if ($this->users_group_id == 13) {
 							$wtg = $this->Report->get_tl_wtg();
+							$this->Report->get_where_wtg(['name' => 'tl_self']);
 
 							$update_data = [
 								'tl_total' => $sum,
@@ -94,6 +96,7 @@
 							];
 						} else {
 							$wtg = $this->Report->get_manager_wtg();
+							$this->Report->get_where_wtg(['name' => 'manager_self']);
 
 							$update_data = [
 								'manager_total' => $sum,
@@ -323,7 +326,7 @@
 
 						if ($update) {
 							if ($this->users_group_id == 13) {
-								$wtg = $this->Report->get_tl_wtg();
+								$wtg = $this->Report->get_where_wtg(['name' => 'tl_developer']);
 
 								$update_data = [
 									'tl_total' => $sum,
@@ -332,7 +335,7 @@
 									'updated_at' => date('Y-m-d H:i:s')
 								];
 							} else {
-								$wtg = $this->Report->get_manager_wtg();
+								$wtg = $this->Report->get_where_wtg(['name' => 'manager_developer']);
 								$report = $this->Report->get_report($report_id);
 								$score = $report['dev_percentage'] + $report['tl_percentage'] + ((($sum/$total) * $wtg['weightage']) * 100);
 
@@ -391,7 +394,7 @@
 
 						if ($update) {
 							
-							$wtg = $this->Report->get_tl_wtg();
+							$wtg = $this->Report->get_where_wtg(['name' => 'manager_tl']);
 							$update_data = [
 								'manager_total' => $sum,
 								'manager_percentage' => (($sum/$total) * $wtg['weightage']) * 100,
