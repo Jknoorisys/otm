@@ -99,7 +99,7 @@
         // get wtgs
         public function get_where_wtg($where)
         {
-            return $this->db->where('name', $where)
+            return $this->db->where($where)
                             ->get('weightage')
                             ->row_array();
         }
