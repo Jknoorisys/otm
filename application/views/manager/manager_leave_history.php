@@ -38,7 +38,7 @@
 
                                 <div class="form-group m-b-30">
                                     <label class="mr-sm-2" for="">Search by Month</label>
-                                    <input type="month" class="form-control" name="leave_month" value="">
+                                    <input type="month" class="form-control" name="leave_month" value="" required>
                                 </div>
                             </div>
 
