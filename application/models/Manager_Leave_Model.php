@@ -727,31 +727,38 @@
 		
 		// public function get_leave_history($month)
 		// {
-		// 	return  $this->db->select('ul.*,u.id as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
-        //             ->join('users_balance_leave as u','u.user_id=ul.user_id','left')
+		// 	return  $this->db->select('ul.*,u.name as uname,ul.paid_days as paid_leave,SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
+        //             ->join('users as u','u.id=ul.user_id','left')
 		// 			->where('MONTH(leave_date)',$month)  
 		// 			->where('YEAR(leave_date)', date('Y'))
 		// 			->get('user_leave as ul')
         //             ->result_array();
-		// }
-		public function leave($month)
-		{
+			
 
-			// echo json_encode($month);exit;
-			 $this->db->select('b.*,u.name as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
-                    ->join('users as u','u.id=l.user_id','left') 
-                    ->join('users_balance_leave as b','u.id=b.user_id','left')
-					->where('YEAR(created_at)', date('Y'));
+		// }
+		public function leave($filter)
+		{
+			$balance_leave = $this->db->select('balance.*,user.name as uname')
+							->join('users as user','user.id=balance.user_id','left') 
+							->order_by('user.id')
+							->get('users_balance_leave as balance')
+							->result_array();
+
+				if ($filter && $filter['leave_month']) {
+					foreach ($balance_leave as $leave ) {
+						$balance_leave = $this->db->select('balance.balance_leave,user.name as uname,SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave')
+								->join('users as user','user.id=balance.user_id','left') 		
+								->join('user_leave as leave','leave.user_id=user.id','left')
+								->where(['MONTH(leave_date)' => $filter['leave_month'], 'leave.user_id' => $leave['user_id']])
+								// ->where('YEAR(leave_date)', date('Y'))
+								->order_by('user.id')
+								->get('users_balance_leave as balance')
+								->result_array();
+						echo json_encode($balance_leave);exit;
+					}
+				}
 					
-			if(!empty($month)) {
-				$this->db->join('user_leave as ul','ul.user_id=b.user_id','left');
-				$this->db->where('MONTH(leave_date)',$month); 
-				$this->db->from('ul'); 
-			}
-			$data =	$this->db->get();
-			return $data->result_array();
-					// echo json_encode($data);exit;
-		
+			return $balance_leave;
 		}
 	}
 ?>
