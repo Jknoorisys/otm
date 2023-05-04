@@ -1057,6 +1057,7 @@
 			}
 			
 				$data['leave'] = $this->Leave->leave($filter);
+				echo json_encode($data['leave']);exit;
 				// echo $this->db->last_query();exit;
 				$this->load->view('manager/manager_leave_history',$data);
 				$this->load->view('manager/manager_footer');
