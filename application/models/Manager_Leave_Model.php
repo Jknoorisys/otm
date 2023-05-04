@@ -736,6 +736,7 @@
 		// }
 		public function leave($month)
 		{
+
 			// echo json_encode($month);exit;
 			 $this->db->select('b.*,u.name as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
                     ->join('users as u','u.id=l.user_id','left') 
@@ -750,7 +751,7 @@
 			$data =	$this->db->get();
 			return $data->result_array();
 					// echo json_encode($data);exit;
-			
+		
 		}
 	}
 ?>
