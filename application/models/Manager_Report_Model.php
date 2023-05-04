@@ -97,30 +97,9 @@
         }
 
         // get wtgs
-        public function get_dev_wtg()
+        public function get_where_wtg($where)
         {
-            return $this->db->where('users_group_id', '2')
-                            ->get('weightage')
-                            ->row_array();
-        }
-
-        public function get_tl_wtg()
-        {
-            return $this->db->where('users_group_id', '13')
-                            ->get('weightage')
-                            ->row_array();
-        }
-
-        public function get_manager_wtg()
-        {
-            return $this->db->where('users_group_id', '4')
-                            ->get('weightage')
-                            ->row_array();
-        }
-
-        public function get_ceo_wtg()
-        {
-            return $this->db->where('users_group_id', '1')
+            return $this->db->where('name', $where)
                             ->get('weightage')
                             ->row_array();
         }

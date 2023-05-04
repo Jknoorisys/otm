@@ -6,11 +6,13 @@
             $this->load->model('user_model');
 			$this->load->model('User_Leave_Model','Leave');
             $this->load->model('User_Report_Model','Report');
+            $this->load->model('Manager_Leave_Model','managerLeave');
 
             if($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 0 && $this->session->userdata('isAdmin') == 0){
             	$this->login_id=$this->session->userdata('id');
                 $this->users_group_id=$this->session->userdata('users_group_id');
-            	$this->load->view('users/header');
+                $leave['balance_leave'] = $this->managerLeave->get_user_balance_leave($this->login_id);
+            	$this->load->view('users/header', $leave);
 				$this->load->view('users/menubar');
             }else{
                 redirect(base_url());
@@ -63,7 +65,7 @@
                     }
 
                     if ($insert) {
-                        $wtg = $this->Report->get_dev_wtg();
+                        $wtg = $this->Report->get_where_wtg(['name' => 'developer_self']);
                         $update_data = [
                             'dev_total' => $sum ,
                             'dev_percentage' =>( ($sum/$total) * $wtg['weightage']) * 100
