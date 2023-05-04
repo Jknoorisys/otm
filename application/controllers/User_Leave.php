@@ -5,6 +5,7 @@
 		public function __construct(){
 			parent::__construct();
 			$this->load->model('User_Leave_Model','Leave');
+			$this->load->model('User_model');
 			if($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 0 && $this->session->userdata('isAdmin') == 0){
 				$this->login_id=$this->session->userdata('id');
 				$this->load->view('users/header');

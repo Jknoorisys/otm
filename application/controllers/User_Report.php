@@ -6,11 +6,9 @@
             $this->load->model('user_model');
 			$this->load->model('User_Leave_Model','Leave');
             $this->load->model('User_Report_Model','Report');
-
             if($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 0 && $this->session->userdata('isAdmin') == 0){
             	$this->login_id=$this->session->userdata('id');
                 $this->users_group_id=$this->session->userdata('users_group_id');
-            	$this->load->view('users/header');
 				$this->load->view('users/menubar');
             }else{
                 redirect(base_url());

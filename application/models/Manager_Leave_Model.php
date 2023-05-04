@@ -725,25 +725,31 @@
 			return $this->db->get()->row_array();
 		}
 		
-		public function get_leave_history($month)
+		// public function get_leave_history($month)
+		// {
+		// 	return  $this->db->select('ul.*,u.id as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
+        //             ->join('users_balance_leave as u','u.user_id=ul.user_id','left')
+		// 			->where('MONTH(leave_date)',$month)  
+		// 			->where('YEAR(leave_date)', date('Y'))
+		// 			->get('user_leave as ul')
+        //             ->result_array();
+		// }
+		public function leave($month)
 		{
-			return  $this->db->select('ul.*,u.name as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
-                    ->join('users as u','u.id=ul.user_id','left')
-					->where('MONTH(leave_date)',$month)  
-					->where('YEAR(leave_date)', date('Y'))
-					->get('user_leave as ul')
-                    ->result_array();
-			
-
-		}
-		public function leave()
-		{
-			return $this->db->select('l.*,u.name as uname')
-                    ->join('users_groups as sc','sc.id=l.users_group_id','left')
-                    ->join('users as u','u.id=l.user_id','left')  
-					->where('YEAR(created_at)', date('Y'))
-					->get('users_balance_leave as l')
-                    ->result_array();
+			// echo json_encode($month);exit;
+			 $this->db->select('b.*,u.name as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave')
+                    ->join('users as u','u.id=l.user_id','left') 
+                    ->join('users_balance_leave as b','u.id=b.user_id','left')
+					->where('YEAR(created_at)', date('Y'));
+					
+			if(!empty($month)) {
+				$this->db->join('user_leave as ul','ul.user_id=b.user_id','left');
+				$this->db->where('MONTH(leave_date)',$month); 
+				$this->db->from('ul'); 
+			}
+			$data =	$this->db->get();
+			return $data->result_array();
+					// echo json_encode($data);exit;
 			
 		}
 	}

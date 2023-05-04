@@ -10,6 +10,7 @@
             	$this->load->view('users/header');
 				$this->load->view('users/menubar');
             }else{
+			
                 redirect(base_url());
             }
         }
