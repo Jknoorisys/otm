@@ -87,16 +87,14 @@
                     if ($insert) {
 
 						if ($this->users_group_id == 13) {
-							$wtg = $this->Report->get_tl_wtg();
-							$this->Report->get_where_wtg(['name' => 'tl_self']);
+							$wtg = $this->Report->get_where_wtg(['name' => 'tl_self']);
 
 							$update_data = [
 								'tl_total' => $sum,
 								'tl_percentage' => ( ($sum/$total) * $wtg['weightage']) * 100
 							];
 						} else {
-							$wtg = $this->Report->get_manager_wtg();
-							$this->Report->get_where_wtg(['name' => 'manager_self']);
+							$wtg = $this->Report->get_where_wtg(['name' => 'manager_self']);
 
 							$update_data = [
 								'manager_total' => $sum,
