@@ -284,7 +284,7 @@ class Admin_Report extends CI_Controller
                     }
 
                     if ($update) {
-                        $wtg = $this->Report->get_ceo_wtg();
+                        $wtg = $this->Report->get_where_wtg(['name' => 'ceo_tl']);
                         
                         $report = $this->Report->get_report($report_id);
                         $score = $report['tl_percentage'] + $report['manager_percentage'] + ((($sum/$total) * $wtg['weightage']) * 100);
@@ -388,7 +388,7 @@ class Admin_Report extends CI_Controller
                     }
 
                     if ($update) {
-                        $wtg = $this->Report->get_ceo_wtg();
+                        $wtg = $this->Report->get_where_wtg(['name' => 'ceo_manager']);
 
                         $report = $this->Report->get_report($report_id);
                         $score = $report['manager_percentage'] + ((($sum/$total) * $wtg['weightage']) * 100);

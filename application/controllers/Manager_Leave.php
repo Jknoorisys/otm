@@ -16,6 +16,7 @@
 				$projects['login_id'] = $this->session->userdata('id');
 				$projects['fetch'] = $this->manager_model->get_project_details();
 				$projects['users'] = $this->manager_model->get_user_details($this->tl_id, $this->manager_email);
+				$projects['balance_leave'] = $this->Leave->get_user_balance_leave($this->login_id);
 				$this->load->view('manager/manager_header', $projects);
 				$this->load->view('manager/manager_menubar');
 			} else {
