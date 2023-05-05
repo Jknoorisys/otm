@@ -782,7 +782,6 @@
 								->where('leave.user_id', $leave['user_id'])
 								->where('MONTH(leave_date)', $filter['leave_month'])
 								->where('YEAR(leave_date)', date('Y'))
-								->order_by('user.id')
 								->get('users_balance_leave as balance')
 								->row_array();
 
@@ -790,7 +789,7 @@
 						$leave['unpaid_leave'] = $new_balance_leave['unpaid_leave'] == null ?  '0' : $new_balance_leave['unpaid_leave'];
 					}
 				}
-
+				
 			return $balance_leave;
 		}
 
