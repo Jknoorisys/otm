@@ -38,7 +38,6 @@
                                     <a href="<?= base_url('manager-leave-history') ?>" class="btn btn-secondary">Reset</a>
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -77,7 +76,7 @@
                                     </tr>
                                 </thead>
                             </table>
-                            <h4 class="text-noori" align="center">No Leave Found!</h4>
+                            <h4 class="text-noori" align="center">Record Not Found!</h4>
                         <?php } ?>
                     </div>
                 </div>

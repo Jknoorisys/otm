@@ -729,6 +729,7 @@
 		{
 			if (!empty($filter['name'])) {
 				$this->db->where('user.id', $filter['name']);
+				// die("rh");
 			}
 
 			$balance_leave = $this->db->select('balance.*,user.name as uname')
@@ -737,57 +738,24 @@
 							->get('users_balance_leave as balance')
 							->result_array();
 
-			// echo json_encode($month);exit;
-			//  $this->db->select('b.*,u.name as uname,ul.paid_days as paid_leave,12-SUM(paid_days) as balance_leave,unpaid_days as unpaid_leave');
-			//  $this->db->join('users as u','u.id=b.user_id','left') ;
-			//  $this->db->join('users_balance_leave as b','b.user_id=u.id','left');
-			//  $this->db->join('user_leave as ul','ul.user_id=b.user_id','left');
-			//  $this->db->where('YEAR(created_at)', date('Y'));
-			// $data =	$this->db->get();
-			// return $data->result_array();
-			// if(!empty($month)) {
-			// 	$this->db->join('user_leave as ul','ul.user_id=b.user_id','left');
-			// 	$this->db->where('MONTH(leave_date)',$month); 
-			// 	$this->db->from('ul'); 
-			// }
-			// $data =	$this->db->get();
-			// return $data->result_array();
-					// echo json_encode($data);exit;
-					// $this->db->select('t1.*, t2.*, t3.*');
-					// $this->db->from('table1 t1');
-					// $this->db->join('table2 t2', 't1.id = t2.table1_id');
-					// if($filter) {
-					// 	$this->db->join('table3 t3', 't2.user_id = t3.id');
-					// }
-					// $query = $this->db->get();
-					// $result = $query->result();
-			$this->db->select('b.*,u.name as uname,12-SUM(balance_leave)');
-			$this->db->join('users u','b.user_id = u.id');
-			// $this->db->from('users_balance_leave b');
-			// $this->db->where('YEAR(created_at)', date('Y'));
-			// if($month)
-			// {
-			// 	$this->db->join('user_leave ul','u.id = ul.user_id');
-			// 	// $this->db->from('user_leave ul');
-			// 	$this->db->where('MONTH(leave_date)',$month['leave_month']);
-			// }			
-			$query = $this->db->get('users_balance_leave b');
-			return $query->result_array();
-			// echo json_encode($result);exit;
+
 				if ($filter && $filter['leave_month']) {
+					// echo json_encode($filter['year']);exit;
+
+					$i =0;
 					foreach ($balance_leave as $leave ) {
 						$new_balance_leave = $this->db->select('SUM(paid_days) as paid_leave,SUM(unpaid_days) as unpaid_leave')
-								->join('users as user','user.id=balance.user_id','left') 		
-								->join('user_leave as leave','leave.user_id=user.id','left')
-								->where('leave.user_id', $leave['user_id'])
-								->where('MONTH(leave_date)', $filter['leave_month'])
-								->where('YEAR(leave_date)', date('Y'))
-								->order_by('user.id')
-								->get('users_balance_leave as balance')
-								->row_array();
+							->where('user_id', $leave['user_id'])
+							->where('leave_month', $filter['leave_month'])
+							->where('leave_year', $filter['year'])
+							->get('user_leave')
+							->row_array();
 
-						$leave['paid_leave'] = $new_balance_leave['paid_leave'] == null ?  '0' : $new_balance_leave['paid_leave'];
-						$leave['unpaid_leave'] = $new_balance_leave['unpaid_leave'] == null ?  '0' : $new_balance_leave['unpaid_leave'];
+						$balance_leave[$i]['paid_leave'] = $new_balance_leave['paid_leave'] == null ?  '0' : $new_balance_leave['paid_leave'];
+						$balance_leave[$i]['unpaid_leave'] = $new_balance_leave['unpaid_leave'] == null ?  '0' : $new_balance_leave['unpaid_leave'];
+						
+					
+						$i++;
 					}
 				}
 

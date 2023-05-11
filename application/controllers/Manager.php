@@ -1059,6 +1059,9 @@
 				$year = $dateObj1 ? $dateObj1->format('Y') : '';
 				$month = $dateObj1 ? $dateObj1->format('m') : '';
 
+				
+
+
 				$filter = array(
 					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
 					"leave_month" 	 => $month,
@@ -1067,7 +1070,11 @@
 			}
 			
 			$data['filter'] = $filter;
+			
+			// echo json_encode($filter); die();
 			$data['leave'] = $this->Leave->leave($filter);
+			//echo $this->db->last_query(); die();
+			
 			$data['users'] =$this->manager_model->get_user_details($this->tl_id, $this->manager_email);
 			$this->load->view('manager/manager_leave_history',$data);
 			$this->load->view('manager/manager_footer');

@@ -75,7 +75,8 @@
 			$dates = explode('-', $_POST['leave_date'], 2);
 			$from_date = trim($dates[0]);
 			$to_date =  trim($dates[1]);
-
+			$explode = explode('/', $to_date, 3);
+			// echo json_encode($explode[0]);exit;
 			if($from_date == $to_date){
 				$leave_d  = date('Y-m-d', strtotime($from_date));
 			}else{
@@ -96,6 +97,8 @@
 			$leave_data = array (
 				'user_id' => $this->session->userdata('id'),
 				'leave_date'=>$leave_d,
+				'leave_month' => $explode[0],
+				'leave_year' => $explode[2],
 				'from_date'=>$from_date,
 				'to_date'=>$to_date,
 				'leave_days'=>$leave_days,
