@@ -758,7 +758,7 @@
 						$i++;
 					}
 				}
-
+				
 			return $balance_leave;
 		}
 
