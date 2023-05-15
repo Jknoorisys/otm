@@ -25,8 +25,7 @@
 		}
 
 		public function dashboard()
-		{
-			
+		{	
 			$tl_id = $this->group_id == 13 ? $this->login_id : '';
 			$manager_email = $this->session->userdata('email');
 
@@ -780,7 +779,7 @@
 				redirect(base_url('manager-dashboard'));
 			}else{
 				if ($this->session->userdata('isLogin') == 1  && $this->session->userdata('isManager') == 1 && $this->session->userdata('isAdmin') == 0) {
-					$user['tl_id'] = $this->group_id == 13 ? $this->login_id : '';
+					$user['tl_id'] = $this->login_id ;
 					$this->manager_model->tl_add_user($user);
 					$password = rand(00000,11111);
 					$add_user = $this->manager_model->tl_add_user($user,$password);
@@ -1022,6 +1021,18 @@
 						</html>';
 			
 						send_mail($email, "User Added Succesfuly", $body);
+
+						$leave_data = [
+							'user_id' => $add_user,
+							'users_group_id' => '2',
+							'balance_leave' => 12,
+							'paid_leave' => 0,
+							'unpaid_leave' => 12,
+							'created_at' => date('Y-m-d H:i:s'),
+							'updated_at' => date('Y-m-d H:i:s')
+						];
+						$this->db->insert('users_balance_leave', $leave_data);
+
 						$this->session->set_tempdata('user', 'User Added', 2);
 						redirect(base_url('manager-dashboard'));
 					

@@ -1019,6 +1019,18 @@
 						</html>';
 			
 					send_mail($email, "User Added Succesfuly", $body);
+
+					$leave_data = [
+						'user_id' => $addUser,
+						'users_group_id' => '2',
+						'balance_leave' => 12,
+						'paid_leave' => 0,
+						'unpaid_leave' => 12,
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s')
+					];
+					$this->db->insert('users_balance_leave', $leave_data);
+
 					$this->session->set_tempdata('user', 'User Added', 2);
 					redirect(base_url('admin-dashboard'));
 				}else{
