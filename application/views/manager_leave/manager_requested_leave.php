@@ -115,7 +115,7 @@
 																					</div>
 																					<div class="form-group mt-3" id="paid_days<?=$leave['id']?>" style="display:none;">
 																						<label class="card-title">Paid Days</label>&nbsp;(<label class="card-title">Balance Leave: <?=$leave['balance_leave']?></label>)
-																						<input type="number" min="0" value="0" max="<?=$leave['balance_leave']?>" class="form-control" name="paid_days" required>
+																						<input type="float" min="0" value="0" max="<?=$leave['balance_leave']?>" class="form-control" name="paid_days" required>
 																					</div>
 																				</div>
 																		</div>
