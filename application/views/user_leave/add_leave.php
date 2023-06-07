@@ -28,6 +28,23 @@
 								</div>
 							</div>
 							<div class="row">
+								<div class="form-group">
+									<label class="card-title">Leave Type</label>
+									<div class="ml-4">
+										<input type="radio" id="unpaid" name="is_paid" value="unpaid" class="control-input" checked>
+										<label class="" for="unpaid">Unaid</label>
+									</div>
+									<div class="ml-4">
+										<input type="radio" id="paid" name="is_paid" value="paid" class="control-input">
+										<label class="" for="paid">Paid</label>
+									</div>
+									<div class="form-group mt-3" id="paid_days" style="display:none;">
+										<label class="card-title">Paid Days</label>&nbsp;(<label class="card-title">Balance Leave: <?=$balance_leave['balance_leave']?></label>)
+										<input type="number" step="0.5" min="0" value="0" max="<?=$balance_leave['balance_leave']?>" class="form-control" name="paid_days" required>
+									</div>
+								</div>
+							</div>
+							<div class="row">
 								<div class="col-6 ">		
 									<div class="form-group m-b-30">
 										<label class="card-title">Leave Reason</label>
@@ -126,4 +143,15 @@
 	});
 </script>
 
+<script>
+	$(document).ready(function(){
+		$(".control-input").change(function(){
+			if($(this).val()=="paid"){
+				$("#paid_days").show();
+			}else{
+				$("#paid_days").hide();
+			}
+		});
+	});
+</script>	
 </html>

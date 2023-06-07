@@ -72,6 +72,14 @@
 			echo json_encode($total_days); die();
 		}
 		
+		public function getuserbalanceleave()
+		{
+			$user_id = $this->input->post('user_id');		
+			$leave_details = $this->Leave->get_user_balance_leave($user_id);
+
+			echo json_encode($leave_details); die();
+		}
+		
 		public function add_leave(){
 			date_default_timezone_set('Asia/Kolkata');
 
@@ -101,6 +109,7 @@
 			if($half_day==1){ $leave_days = $leave_days/2; }else{ $leave_days;}
 			if($leave_type == 1){ $leave_type = 1; $leave_days = $leave_days*2; } else{ $leave_type = 0; $leave_days = $leave_days;}
 
+			$paid_days = $this->input->post('paid_days');
 			$leave_data = array (
 				'user_id' => $this->input->post('user_name'),
 				'leave_date'=>$leave_d,
@@ -112,6 +121,9 @@
 				'half_day'=> $half_day,
 				'first_half' => $first_half,
 				'leave_type' => $leave_type,
+				'is_paid' => $this->input->post('is_paid'),
+				'paid_days' => $paid_days,
+				'unpaid_days' => $leave_days - $paid_days,
 				'created_datetime' => date('d-m-Y h:i:sa')
 				);
 				$leave = $this->Leave->add_leave($leave_data);
@@ -129,12 +141,14 @@
 		{
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
+					"leave_type"     => '',
 					"name"           => '',
 					"from_date" 	 => '',
 					"to_date"   	 => '',
 				);
 			} else {
 				$filter = array(
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
 					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
@@ -156,6 +170,7 @@
 		{
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
+					"leave_type"     => '',
 					"name"           => '',
 					'leave_type'	 => '',
 					"from_date" 	 => '',
@@ -163,6 +178,7 @@
 				);
 			} else {
 				$filter = array(
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
 					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',

@@ -259,7 +259,7 @@
 							<div class="row">
 								<div class="col-12">
 									<label class="mr-sm-2" for="">Select User</label>
-									<select class="custom-select mr-sm-2" name="user_name">
+									<select class="custom-select mr-sm-2" name="user_name" onchange="changeController(this)">
 										<option selected value="">Choose...</option>
 										<?php foreach($users as $user){ ?>
 											<option value="<?=$user['id']?>" <?=($user['id']== $login_id)?"Selected":""?>  ><?= $user['name'] ?></option>
@@ -288,6 +288,23 @@
 											<input type ="text" name ="leave_days"   class="form-control" id ="numberdays" readonly> 
 										</div>
 
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<label class="card-title">Leave Type</label>
+										<div class="ml-4">
+											<input type="radio" id="unpaid" name="is_paid" value="unpaid" class="control-input" checked>
+											<label class="" for="unpaid">Unaid</label>
+										</div>
+										<div class="ml-4">
+											<input type="radio" id="paid" name="is_paid" value="paid" class="control-input">
+											<label class="" for="paid">Paid</label>
+										</div>
+										<div class="form-group mt-3" id="paid_days" style="display:none;">
+											<label class="card-title">Paid Days</label>&nbsp;(<label class="card-title balance-leave">Balance Leave: </label>)
+											<input type="number" step="0.5" min="0" value="0" max="" class="form-control" name="paid_days" required>
+										</div>
 									</div>
 								</div>
 								<div class="row">
@@ -446,3 +463,39 @@
 			}
 		}
 	</script>
+
+<script>
+	$(document).ready(function(){
+		$(".control-input").change(function(){
+			if($(this).val()=="paid"){
+				$("#paid_days").show();
+			}else{
+				$("#paid_days").hide();
+			}
+		});
+	});
+</script>	
+
+<script>
+	function changeController(selectObject) {
+		var user_id = selectObject.value; 
+		$.ajax({
+			type: "POST",
+			url: "<?= base_url('get-user-balance-leave') ?>",
+			data: {user_id: user_id},
+			dataType: "json",
+			success: function (response) {
+				var balanceLeave = response.balance_leave;
+
+				// Set the value of 'balance_leave' in the 'label' element
+				$('label.balance-leave', '#paid_days').text('Balance Leave: ' + balanceLeave);
+
+				// Set the 'max' attribute of the 'input' element
+				$('input[name="paid_days"]').attr('max', balanceLeave);
+
+				// Show the 'paid_days' div if it was hidden
+				$('#paid_days').show();
+			}
+		});
+	}
+</script>
