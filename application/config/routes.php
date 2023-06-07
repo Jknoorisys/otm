@@ -48,8 +48,9 @@ $route['manager-accepted-leave'] = 'Manager_Leave/accepted_leave';
 $route['manager-rejected-leave'] = 'Manager_Leave/rejected_leave';
 $route['accept-user-leave/(:any)'] = 'Manager_Leave/accept_user_leave/$1';
 $route['reject-user-leave/(:any)'] = 'Manager_Leave/reject_user_leave/$1';
-$route['manager-delete-leave/(:any)'] = 'Manager_Leave/manager_delete_leave/$1';;
+$route['manager-delete-leave/(:any)'] = 'Manager_Leave/manager_delete_leave/$1';
 $route['manager-leave-dashboard'] = 'Manager_Leave/manager_leave_dashboard';
+$route['get-user-balance-leave'] = 'Manager_Leave/getuserbalanceleave';
 
 // User Manage Reports
 $route['latest-report'] = 'User_Report/latestReport';
@@ -113,6 +114,7 @@ $route['admin-accept-user-leave/(:any)'] = 'Admin_Leave/accept_user_leave/$1';
 $route['admin-reject-user-leave/(:any)'] = 'Admin_Leave/reject_user_leave/$1';
 $route['admin-delete-leave/(:any)'] = 'Admin_Leave/admin_delete_leave/$1';;
 $route['admin-leave-dashboard'] = 'Admin_Leave/admin_leave_dashboard';
+$route['admin-get-user-balance-leave'] = 'Admin_Leave/getuserbalanceleave';
 
 // Admin panel
 $route['admin-question'] = 'Admin_Report/add_questions';

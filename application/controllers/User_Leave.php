@@ -65,6 +65,7 @@
 		}
 
 		public function add_leave(){
+			$data['balance_leave'] = $this->Leave->get_user_balance_leave($this->login_id);
 			$this->load->view('users/footer');
 			$this->load->view('user_leave/add_leave');
 		}	
@@ -94,6 +95,7 @@
 			
 			if($half_day==1){ $leave_days = $leave_days/2; }
 			
+			$paid_days = $this->input->post('paid_days');
 			$leave_data = array (
 				'user_id' => $this->session->userdata('id'),
 				'leave_date'=>$leave_d,
@@ -103,12 +105,16 @@
 				'to_date'=>$to_date,
 				'leave_days'=>$leave_days,
 				'str_leave_date' => strtotime($from_date) . '-' . strtotime($to_date),
-				'leave_reason'=>$this->input->post('leave_reason'),
+				'leave_reason'=> $this->input->post('leave_reason'),
 				'half_day'=> $half_day,
 				'leave_type' => 0,
 				'first_half' => $first_half,
+				'is_paid' => $this->input->post('is_paid'),
+				'paid_days' => $paid_days,
+				'unpaid_days' => $leave_days - $paid_days,
 				'created_datetime' => date('d-m-Y h:i:sa')
 			);
+
 			$leave_details = $this->Leave->add_leave($leave_data);
 				
 			if($leave_details){
@@ -124,11 +130,13 @@
 
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
+					'leave_type'	 => '',
 					"from_date" 	 => '',
 					"to_date"   	 => '',
 				);
 			} else {
 				$filter = array(
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
 					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
 				);

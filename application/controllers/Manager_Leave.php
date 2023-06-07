@@ -24,6 +24,14 @@
 			}
 		}
 
+		public function getuserbalanceleave()
+		{
+			$user_id = $this->input->post('user_id');		
+			$leave_details = $this->Leave->get_user_balance_leave($user_id);
+
+			echo json_encode($leave_details); die();
+		}
+
 		public function get_days(){
 			$dates = explode('-', $_POST['dates'], 2);
 			$from_date = $dates[0];
@@ -100,6 +108,8 @@
 			if($half_day==1){ $leave_days = $leave_days/2; }else{ $leave_days;}
 			if($leave_type == 1){ $leave_type = 1; $leave_days = $leave_days*2; } else{ $leave_type = 0; $leave_days = $leave_days;}
 
+			$paid_days = $this->input->post('paid_days');
+
 			$leave_data = array (
 				'user_id' => $this->input->post('user_name'),
 				'leave_date'=>$leave_d,
@@ -111,6 +121,9 @@
 				'half_day'=> $half_day,
 				'first_half' => $first_half,
 				'leave_type' => $leave_type,
+				'is_paid' => $this->input->post('is_paid'),
+				'paid_days' => $paid_days,
+				'unpaid_days' => $leave_days - $paid_days,
 				'created_datetime' => date('d-m-Y h:i:sa')
 			);
 			
@@ -129,12 +142,14 @@
 		{
 			if ((is_array($_POST) && empty($_POST))) {
 				$filter = array(
+					"leave_type"     => '',
 					"name"           => '',
 					"from_date" 	 => '',
 					"to_date"   	 => '',
 				);
 			} else {
 				$filter = array(
+					"leave_type"     => (!empty($_POST["leave_type"]) && $_POST["leave_type"] != 'NULL') ? $_POST["leave_type"] : '',
 					"name"           => (!empty($_POST["by_user"]) && $_POST["by_user"] != 'NULL') ? $_POST["by_user"] : '',
 					"from_date" 	 => (!empty($_POST["from_date"]) && $_POST["from_date"] != 'NULL') ? $_POST["from_date"] : '',
 					"to_date"   	 => (!empty($_POST["to_date"]) && $_POST["to_date"] != 'NULL') ? $_POST["to_date"] : '',
@@ -217,9 +232,9 @@
 			$data = [
 				'leave_status' => '1',
 				'leave_accepted_reason' => $this->input->post('accepted_reason'),
-				'is_paid' => $this->input->post('is_paid'),
-				'paid_days' => $this->input->post('paid_days'),
-				'unpaid_days' => $acceptEmail? $acceptEmail['leave_days'] - $this->input->post('paid_days') : '',
+				// 'is_paid' => $this->input->post('is_paid'),
+				// 'paid_days' => $this->input->post('paid_days'),
+				// 'unpaid_days' => $acceptEmail? $acceptEmail['leave_days'] - $this->input->post('paid_days') : '',
 				'action_by' => $action_by
 			];
 

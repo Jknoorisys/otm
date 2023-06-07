@@ -7,6 +7,14 @@
 				return  $this->db->insert_id();
 		}
 
+		public function get_user_balance_leave($user_id)
+		{
+			$this->db->select('*');
+			$this->db->from('users_balance_leave');
+			$this->db->where('user_id', $user_id);
+			return $this->db->get()->row_array();
+		}
+
 		public function total_requested_leave_days($login_id, $filter){
 			$this->db->select('SUM(leave_days) as total_days');
 			$this->db->from('user_leave as sc');
@@ -16,6 +24,12 @@
 		}
 
 		public function pending_leave($login_id, $filter){
+			if(!empty($filter['leave_type'])) {
+				$this->db->group_start();
+				$this->db->where("sc.is_paid",$filter['leave_type']);
+				$this->db->group_end();
+			}
+
 			if(!empty($filter['from_date']) && !empty($filter['to_date'])) {
 				$min =  (date('Y-m-d', strtotime($filter['from_date'] )));
 				$max =  (date('Y-m-d', strtotime($filter['to_date'] )));
@@ -40,10 +54,15 @@
 							->get("user_leave as sc")
 							->result_array();
 		}
-
 			
 		public function total_pending_leave_days($login_id, $filter){
 
+			if(!empty($filter['leave_type'])) {
+				$this->db->group_start();
+				$this->db->where("sc.is_paid",$filter['leave_type']);
+				$this->db->group_end();
+			}
+			
 			if(!empty($filter['from_date']) && !empty($filter['to_date'])) {
 				$min =  (date('Y-m-d', strtotime($filter['from_date'] )));
 				$max =  (date('Y-m-d', strtotime($filter['to_date'] )));

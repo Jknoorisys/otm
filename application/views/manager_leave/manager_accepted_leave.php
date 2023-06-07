@@ -132,6 +132,7 @@
 													<th class="border-top-0">Leave Days</th>
 													<th class="border-top-0">Full/Half Day</th>
 													<th class="border-top-0">Leave Type</th>
+													<th class="border-top-0">Paid Days</th>
 													<th class="border-top-0">Leave Reason</th>
 													<th class="border-top-0">Accept Reason</th>
 													<th class="border-top-0">Accepted By</th>
